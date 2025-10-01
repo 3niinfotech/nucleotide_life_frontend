@@ -20,7 +20,7 @@ const ContentRenderer: React.FC = () => {
   const renderContent = () => {
     switch (activeSection) {
       case "/":
-        return <CheckoutDetailsScreen />; //<CheckoutScreen />; //<ProductDetailsScreen />; //<HomeScreen />; //<LoginScreen />;
+        return <LoginScreen />; // <CheckoutDetailsScreen />; //<CheckoutScreen />; //<ProductDetailsScreen />; //<HomeScreen />; //<LoginScreen />;
       case "home":
         return <HomeScreen />;
       case "products":
