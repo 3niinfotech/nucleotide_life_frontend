@@ -1,5 +1,5 @@
-import { NavigatorScreenParams } from '@react-navigation/native';
-import { StackScreenProps } from '@react-navigation/stack';
+import { NavigatorScreenParams } from "@react-navigation/native";
+import { StackScreenProps } from "@react-navigation/stack";
 
 // Root Stack Navigator Types
 export type RootStackParamList = {
@@ -16,6 +16,8 @@ export type MainTabParamList = {
   Home: undefined;
   Products: undefined;
   ProductDetails: { productId?: string };
+  Checkout: undefined;
+  CheckoutDetails: undefined;
   Upload: undefined;
   Track: undefined;
   Profile: undefined;
@@ -52,23 +54,25 @@ export interface NavigationState {
 // Route Names Constants
 export const ROUTES = {
   // Root Routes
-  MAIN: 'Main',
-  AUTH: 'Auth',
-  MODAL: 'Modal',
+  MAIN: "Main",
+  AUTH: "Auth",
+  MODAL: "Modal",
 
   // Main Tab Routes
-  HOME: 'Home',
-  PRODUCTS: 'Products',
-  PRODUCT_DETAILS: 'ProductDetails',
-  UPLOAD: 'Upload',
-  TRACK: 'Track',
-  PROFILE: 'Profile',
+  HOME: "Home",
+  PRODUCTS: "Products",
+  PRODUCT_DETAILS: "ProductDetails",
+  CHECKOUT: "Checkout",
+  CHECKOUT_DETAILS: "CheckoutDetails",
+  UPLOAD: "Upload",
+  TRACK: "Track",
+  PROFILE: "Profile",
 
   // Auth Routes
-  LOGIN: 'Login',
-  REGISTER: 'Register',
-  FORGOT_PASSWORD: 'ForgotPassword',
-  VERIFY_OTP: 'VerifyOTP',
+  LOGIN: "Login",
+  REGISTER: "Register",
+  FORGOT_PASSWORD: "ForgotPassword",
+  VERIFY_OTP: "VerifyOTP",
 } as const;
 
 // Navigation Actions

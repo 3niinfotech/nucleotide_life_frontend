@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo } from "react";
 import {
   TouchableOpacity,
   Text,
@@ -7,15 +7,15 @@ import {
   TextStyle,
   Pressable,
   Platform,
-} from 'react-native';
-import { semantic } from '../../utils/colors';
-import { poppinsWeights } from '../../utils/fonts';
+} from "react-native";
+import { semantic } from "../../utils/colors";
+import { poppinsWeights } from "../../utils/fonts";
 
 type Props = {
   label: string;
   onPress?: () => void;
   style?: ViewStyle;
-  variant?: 'primary' | 'secondary';
+  variant?: "primary" | "secondary";
   labelStyle?: TextStyle;
   labelTextColor?: string;
   disabled?: boolean;
@@ -28,7 +28,7 @@ const PrimaryButton: React.FC<Props> = React.memo(
     label,
     onPress,
     style,
-    variant = 'primary',
+    variant = "primary",
     labelStyle,
     labelTextColor,
     disabled = false,
@@ -37,7 +37,7 @@ const PrimaryButton: React.FC<Props> = React.memo(
   }) => {
     const textStyle = useMemo(() => {
       const baseStyle =
-        variant === 'primary' ? styles.primaryText : styles.secondaryText;
+        variant === "primary" ? styles.primaryText : styles.secondaryText;
       const colorStyle = labelTextColor ? { color: labelTextColor } : {};
       const disabledStyle = disabled ? { opacity: 0.6 } : {};
       return [baseStyle, colorStyle, disabledStyle, labelStyle];
@@ -46,11 +46,11 @@ const PrimaryButton: React.FC<Props> = React.memo(
     const containerStyle = useMemo(
       () => [
         styles.base,
-        variant === 'primary' ? styles.primary : styles.secondary,
+        variant === "primary" ? styles.primary : styles.secondary,
         disabled && styles.disabled,
         style,
       ],
-      [variant, disabled, style],
+      [variant, disabled, style]
     );
 
     const handlePress = useCallback(() => {
@@ -60,7 +60,7 @@ const PrimaryButton: React.FC<Props> = React.memo(
     }, [disabled, loading, onPress]);
 
     const ButtonComponent =
-      Platform.OS === 'ios' ? Pressable : TouchableOpacity;
+      Platform.OS === "ios" ? Pressable : TouchableOpacity;
 
     return (
       <ButtonComponent
@@ -71,10 +71,10 @@ const PrimaryButton: React.FC<Props> = React.memo(
         accessibilityRole="button"
         accessibilityState={{ disabled: disabled || loading }}
       >
-        <Text style={textStyle}>{loading ? 'Loading...' : label}</Text>
+        <Text style={textStyle}>{loading ? "Loading..." : label}</Text>
       </ButtonComponent>
     );
-  },
+  }
 );
 
 const styles = StyleSheet.create({
@@ -82,18 +82,18 @@ const styles = StyleSheet.create({
     paddingHorizontal: 25,
     paddingVertical: 10,
     borderRadius: 8,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     minHeight: 44,
   },
   primary: {
     backgroundColor: semantic.interactive.primary,
     borderColor: semantic.interactive.primary,
-    shadowColor: semantic.shadow.light,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
+    // shadowColor: semantic.shadow.light,
+    // shadowOffset: { width: 0, height: 2 },
+    // shadowOpacity: 0.1,
+    // shadowRadius: 4,
+    // elevation: 2,
   },
   primaryText: {
     color: semantic.text.inverse,

@@ -1,14 +1,17 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Section, PrimaryButton } from '..';
-import { semantic } from '../../utils/colors';
-import { poppinsWeights } from '../../utils/fonts';
+import React from "react";
+import { View, Text, StyleSheet } from "react-native";
+import { Section, PrimaryButton } from "..";
+import { semantic, special } from "../../utils/colors";
+import { poppinsWeights } from "../../utils/fonts";
 
-const HowItWorksSection: React.FC = () => {
+const HowItWorksSection: React.FC<{ isBackground?: boolean }> = ({
+  isBackground = false,
+}) => {
   return (
     <Section
       title="How It Works?"
       subtitle="From Saliva Sample to Interactive Health Insights"
+      style={isBackground ? styles.sectionBg : undefined}
     >
       <View style={styles.hiwGrid}>
         <View style={styles.hiwRow}>
@@ -101,13 +104,16 @@ const HowItWorksSection: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
+  sectionBg: {
+    backgroundColor: special.purpleBg,
+  },
   hiwGrid: {
-    width: '70%',
-    alignSelf: 'center',
+    width: "70%",
+    alignSelf: "center",
     gap: 16,
   },
   hiwRow: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: 16,
   },
   hiwRowSingle: {
@@ -115,24 +121,24 @@ const styles = StyleSheet.create({
   },
   hiwCard: {
     flex: 1,
-    backgroundColor: 'rgba(136,107,249,0.04)',
+    backgroundColor: "rgba(136,107,249,0.04)",
     borderColor: semantic.border.light,
     borderRadius: 12,
   },
   hiwCardRow: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
+    flexDirection: "row",
+    alignItems: "flex-start",
     gap: 16,
   },
   hiwHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: 10,
     marginBottom: 8,
     padding: 16,
   },
   hiwStepBadge: {
-    backgroundColor: 'rgba(136,107,249,0.12)',
+    backgroundColor: "rgba(136,107,249,0.12)",
     borderRadius: 10,
     paddingHorizontal: 20,
     paddingVertical: 5,
@@ -165,23 +171,23 @@ const styles = StyleSheet.create({
     borderColor: semantic.border.light,
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
-    marginTop: 'auto',
+    marginTop: "auto",
   },
   hiwTextCol: {
     flexShrink: 1,
-    maxWidth: '58%',
+    maxWidth: "58%",
   },
   hiwImageCol: {
     flex: 1,
-    minWidth: '35%',
-    marginTop: 'auto',
+    minWidth: "35%",
+    marginTop: "auto",
   },
   centerCta: {
     marginTop: 30,
     marginBottom: 16,
   },
   inlineButton: {
-    alignSelf: 'flex-start',
+    alignSelf: "flex-start",
     marginLeft: 16,
   },
 });

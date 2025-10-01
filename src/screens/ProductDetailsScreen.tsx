@@ -1,75 +1,124 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   View,
   Text,
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-} from 'react-native';
-import { useAppSelector } from '../hooks';
-import { semantic, primary } from '../utils/colors';
-import { poppinsWeights } from '../utils/fonts';
-import PrimaryButton from '../components/shared/PrimaryButton';
-import { NavigationHeader } from '../components';
+  Image,
+} from "react-native";
+import { useAppSelector, useAppDispatch } from "../hooks";
+import { semantic, primary } from "../utils/colors";
+import { navigateToCheckout } from "../store/slices/navigationSlice";
+import { poppinsWeights } from "../utils/fonts";
+import PrimaryButton from "../components/shared/PrimaryButton";
+import {
+  HowItWorksSection,
+  HealthJourneysSection,
+  NavigationHeader,
+} from "../components";
+import {
+  ProductImg,
+  ProductDetail1,
+  ProductDetail2,
+  ProductDetail3,
+  ProductDetail4,
+} from "../utils/imageUtil";
+import NucleotideSelectionSection from "../components/HomeScreem/NucleotideSelectionSection";
 
 // Mock data for the product
 const productData = {
-  title: '1 Genetic One – Personal Plan',
-  originalPrice: '₹32,000',
-  price: '₹22,000',
-  perTest: '/Per Test',
+  title: "1 Genetic One – Personal Plan",
+  originalPrice: "₹32,000",
+  price: "₹22,000",
+  perTest: "/Per Test",
   description:
-    'Unlock the secrets of your DNA with our Personal Plan. Get clear, science-backed insights into your health, traits, and wellness tailored just for you',
+    "Unlock the secrets of your DNA with our Personal Plan. Get clear, science-backed insights into your health, traits, and wellness tailored just for you",
   features: [
-    'Discover your unique genetic profile',
-    'Get personalized health and lifestyle insights',
-    'Learn about nutrition and fitness compatibility',
-    'Explore your ancestry and heritage',
+    "Discover your unique genetic profile",
+    "Get personalized health and lifestyle insights",
+    "Learn about nutrition and fitness compatibility",
+    "Explore your ancestry and heritage",
   ],
-  shippingBanner: 'Free Shipping & Easy Returns',
+  shippingBanner: "Free Shipping & Easy Returns",
+  bloodCollection: "Blood samples are requied",
 };
 
 // Mock app interface data
 const appSections = [
   {
-    title: 'Diet & Lifestyle',
-    color: '#E3F2FD',
+    title: "Diet & Lifestyle",
+    color: "#E3F2FD",
     items: [
-      { label: 'NEW Diet', icon: '👤', isNew: true },
-      { label: 'NEW Nutrient', icon: '🍃', isNew: true },
-      { label: 'Well-Being', icon: '🧘', isNew: false },
-      { label: 'Stress & Sleep', icon: '😴', isNew: false },
-      { label: 'Pollution', icon: '🏭', isNew: false },
-      { label: 'NEW Skin', icon: '👤', isNew: true },
+      { label: "NEW Diet", icon: "👤", isNew: true },
+      { label: "NEW Nutrient", icon: "🍃", isNew: true },
+      { label: "Well-Being", icon: "🧘", isNew: false },
+      { label: "Stress & Sleep", icon: "😴", isNew: false },
+      { label: "Pollution", icon: "🏭", isNew: false },
+      { label: "NEW Skin", icon: "👤", isNew: true },
     ],
   },
   {
-    title: 'Talents & Sports Performance',
-    color: '#FFF9C4',
+    title: "Talents & Sports Performance",
+    color: "#FFF9C4",
     items: [
-      { label: 'Sports & Fitness', icon: '🏃', isNew: false },
-      { label: 'Success Traits', icon: '🏆', isNew: false },
-      { label: 'Music & Dance', icon: '🎵', isNew: false },
+      { label: "Sports & Fitness", icon: "🏃", isNew: false },
+      { label: "Success Traits", icon: "🏆", isNew: false },
+      { label: "Music & Dance", icon: "🎵", isNew: false },
     ],
   },
   {
-    title: 'Discover Your Origins',
-    color: '#F3E5F5',
+    title: "Discover Your Origins",
+    color: "#F3E5F5",
     items: [],
   },
 ];
 
 // Thumbnail data
 const thumbnails = [
-  { id: 1, type: 'phone', label: 'App Interface' },
-  { id: 2, type: 'document', label: 'Report' },
-  { id: 3, type: 'product', label: 'Product' },
-  { id: 4, type: 'collection', label: 'Collection' },
+  { id: 1, type: "product", label: "Product View 1", image: ProductDetail1 },
+  { id: 2, type: "product", label: "Product View 2", image: ProductDetail2 },
+  { id: 3, type: "product", label: "Product View 3", image: ProductDetail3 },
+  { id: 4, type: "product", label: "Product View 4", image: ProductDetail4 },
 ];
 
 const ProductDetailsScreen: React.FC = () => {
   const [selectedThumbnail, setSelectedThumbnail] = useState(1);
   const { productId } = useAppSelector((state: any) => state.navigation);
+  const dispatch = useAppDispatch();
+  const scrollViewRef = React.useRef<ScrollView>(null);
+
+  // Navigation functions for next/previous buttons
+  const goToNextImage = () => {
+    const nextId =
+      selectedThumbnail >= thumbnails.length ? 1 : selectedThumbnail + 1;
+    setSelectedThumbnail(nextId);
+    // Scroll to the selected thumbnail
+    scrollToThumbnail(nextId);
+  };
+
+  const goToPreviousImage = () => {
+    const prevId =
+      selectedThumbnail <= 1 ? thumbnails.length : selectedThumbnail - 1;
+    setSelectedThumbnail(prevId);
+    // Scroll to the selected thumbnail
+    scrollToThumbnail(prevId);
+  };
+
+  const scrollToThumbnail = (thumbnailId: number) => {
+    if (scrollViewRef.current) {
+      const thumbnailWidth = 70 + 12; // thumbnail width + margin
+      const scrollPosition = (thumbnailId - 1) * thumbnailWidth;
+      scrollViewRef.current.scrollTo({
+        x: scrollPosition,
+        animated: true,
+      });
+    }
+  };
+
+  const handleBuyNow = () => {
+    dispatch(navigateToCheckout());
+  };
 
   const renderAppInterface = () => (
     <View style={styles.phoneContainer}>
@@ -78,46 +127,7 @@ const ProductDetailsScreen: React.FC = () => {
           <ScrollView
             style={styles.appContent}
             showsVerticalScrollIndicator={false}
-          >
-            {appSections.map((section, sectionIndex) => (
-              <View key={sectionIndex} style={styles.appSection}>
-                <Text style={styles.appSectionTitle}>{section.title}</Text>
-                <View style={styles.appButtonsGrid}>
-                  {section.items.map((item, itemIndex) => (
-                    <View
-                      key={itemIndex}
-                      style={[
-                        styles.appButton,
-                        { backgroundColor: section.color },
-                      ]}
-                    >
-                      <Text style={styles.appButtonIcon}>{item.icon}</Text>
-                      <Text style={styles.appButtonText}>{item.label}</Text>
-                      {item.isNew && (
-                        <View style={styles.newBadge}>
-                          <Text style={styles.newBadgeText}>NEW</Text>
-                        </View>
-                      )}
-                    </View>
-                  ))}
-                </View>
-              </View>
-            ))}
-          </ScrollView>
-        </View>
-      </View>
-    </View>
-  );
-
-  const renderProductBox = () => (
-    <View style={styles.productBoxContainer}>
-      <View style={styles.productBox}>
-        <View style={styles.productBoxHeader}>
-          <Text style={styles.productBoxTitle}>Circle PREMIUM</Text>
-          <Text style={styles.productBoxSubtitle}>DNA COLLECTION KIT</Text>
-        </View>
-        <View style={styles.productBoxDesign}>
-          <View style={styles.circularDesign} />
+          ></ScrollView>
         </View>
       </View>
     </View>
@@ -125,16 +135,21 @@ const ProductDetailsScreen: React.FC = () => {
 
   const renderThumbnails = () => (
     <View style={styles.thumbnailsContainer}>
-      <TouchableOpacity style={styles.thumbnailArrow}>
-        <Text style={styles.thumbnailArrowText}>‹</Text>
+      <TouchableOpacity
+        accessibilityRole="button"
+        onPress={goToPreviousImage}
+        style={[styles.arrowButton]}
+      >
+        <Text style={[styles.arrowText]}>←</Text>
       </TouchableOpacity>
 
       <ScrollView
+        ref={scrollViewRef}
         horizontal
         showsHorizontalScrollIndicator={false}
         style={styles.thumbnailsScroll}
       >
-        {thumbnails.map(thumb => (
+        {thumbnails.map((thumb) => (
           <TouchableOpacity
             key={thumb.id}
             style={[
@@ -144,37 +159,28 @@ const ProductDetailsScreen: React.FC = () => {
             onPress={() => setSelectedThumbnail(thumb.id)}
           >
             <View style={styles.thumbnailContent}>
-              {thumb.type === 'phone' && renderAppInterface()}
-              {thumb.type === 'document' && (
-                <View style={styles.documentThumbnail}>
-                  <Text style={styles.documentText}>📄</Text>
-                </View>
-              )}
-              {thumb.type === 'product' && (
-                <View style={styles.productThumbnail}>
-                  <View style={styles.miniProductBox} />
-                </View>
-              )}
-              {thumb.type === 'collection' && (
-                <View style={styles.collectionThumbnail}>
-                  <Text style={styles.collectionText}>🧬</Text>
-                </View>
-              )}
+              <Image
+                source={thumb.image}
+                style={styles.thumbnailImage}
+                resizeMode="cover"
+              />
             </View>
           </TouchableOpacity>
         ))}
       </ScrollView>
 
-      <TouchableOpacity style={styles.thumbnailArrow}>
-        <Text style={styles.thumbnailArrowText}>›</Text>
+      <TouchableOpacity
+        accessibilityRole="button"
+        onPress={goToNextImage}
+        style={[styles.arrowButton]}
+      >
+        <Text style={[styles.arrowText]}>→</Text>
       </TouchableOpacity>
     </View>
   );
 
   return (
     <View style={styles.container}>
-      <NavigationHeader title="Product Details" />
-
       <ScrollView
         style={styles.scrollContainer}
         showsVerticalScrollIndicator={false}
@@ -182,8 +188,22 @@ const ProductDetailsScreen: React.FC = () => {
         <View style={styles.content}>
           {/* Left Section - Product Visualization */}
           <View style={styles.leftSection}>
-            {renderProductBox()}
-            {renderAppInterface()}
+            {/* Main Product Image - displays selected thumbnail */}
+            <View style={styles.mainImageContainer}>
+              <Image
+                source={
+                  thumbnails.find((thumb) => thumb.id === selectedThumbnail)
+                    ?.image || ProductImg
+                }
+                style={styles.productImage}
+              />
+              {/* Image counter */}
+              {/* <View style={styles.imageCounter}>
+                <Text style={styles.imageCounterText}>
+                  {selectedThumbnail} of {thumbnails.length}
+                </Text>
+              </View> */}
+            </View>
             {renderThumbnails()}
           </View>
 
@@ -209,6 +229,12 @@ const ProductDetailsScreen: React.FC = () => {
               </View>
             </View>
 
+            <View style={styles.bloodCollectionBanner}>
+              <Text style={styles.bloodCollectionBannerText}>
+                {productData.bloodCollection}
+              </Text>
+            </View>
+
             <Text style={styles.description}>{productData.description}</Text>
 
             <View style={styles.featuresContainer}>
@@ -227,11 +253,20 @@ const ProductDetailsScreen: React.FC = () => {
               <PrimaryButton
                 label="Add to Cart"
                 style={styles.addToCartButton}
+                labelTextColor={semantic.interactive.primary}
               />
-              <PrimaryButton label="Buy Now" style={styles.buyNowButton} />
+              <PrimaryButton
+                label="Order Now"
+                style={styles.buyNowButton}
+                onPress={handleBuyNow}
+              />
             </View>
           </View>
         </View>
+
+        <HowItWorksSection isBackground={true} />
+        <HealthJourneysSection isBackground={false} />
+        <NucleotideSelectionSection isBackground={true} />
       </ScrollView>
     </View>
   );
@@ -244,21 +279,56 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     flex: 1,
+    paddingTop: 50,
   },
   content: {
-    flexDirection: 'row',
+    flexDirection: "row",
     padding: 20,
     gap: 40,
   },
   leftSection: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: "center",
+    justifyContent: "flex-start",
+  },
+  mainImageContainer: {
+    width: 500,
+    height: 400,
+    marginBottom: 20,
+    borderRadius: 12,
+    overflow: "hidden",
+    // shadowColor: "#000",
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 2,
+    // },
+    // shadowOpacity: 0.1,
+    // shadowRadius: 4,
+    // elevation: 3,
   },
   rightSection: {
     flex: 1,
     paddingTop: 20,
   },
-
+  productImage: {
+    width: "100%",
+    height: "100%",
+    resizeMode: "contain",
+  },
+  imageCounter: {
+    position: "absolute",
+    top: 12,
+    right: 12,
+    backgroundColor: "rgba(0, 0, 0, 0.7)",
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 12,
+  },
+  imageCounterText: {
+    color: "#fff",
+    fontSize: 12,
+    fontFamily: poppinsWeights.medium,
+  },
   // Product Box Styles
   productBoxContainer: {
     marginBottom: 20,
@@ -266,38 +336,38 @@ const styles = StyleSheet.create({
   productBox: {
     width: 200,
     height: 280,
-    backgroundColor: '#2C2C2C',
+    backgroundColor: "#2C2C2C",
     borderRadius: 12,
     padding: 20,
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   productBoxHeader: {
-    alignItems: 'center',
+    alignItems: "center",
   },
   productBoxTitle: {
     fontSize: 18,
     fontFamily: poppinsWeights.bold,
-    color: '#FFD700',
-    textAlign: 'center',
+    color: "#FFD700",
+    textAlign: "center",
   },
   productBoxSubtitle: {
     fontSize: 12,
     fontFamily: poppinsWeights.regular,
-    color: '#FFD700',
-    textAlign: 'center',
+    color: "#FFD700",
+    textAlign: "center",
     marginTop: 4,
   },
   productBoxDesign: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   circularDesign: {
     width: 80,
     height: 80,
     borderRadius: 40,
-    backgroundColor: '#FFD700',
+    backgroundColor: "#FFD700",
     opacity: 0.3,
   },
 
@@ -308,15 +378,15 @@ const styles = StyleSheet.create({
   phone: {
     width: 180,
     height: 320,
-    backgroundColor: '#000',
+    backgroundColor: "#000",
     borderRadius: 20,
     padding: 8,
   },
   phoneScreen: {
     flex: 1,
-    backgroundColor: '#FFF',
+    backgroundColor: "#FFF",
     borderRadius: 16,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   appContent: {
     flex: 1,
@@ -332,18 +402,18 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   appButtonsGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexDirection: "row",
+    flexWrap: "wrap",
     gap: 8,
   },
   appButton: {
-    width: '48%',
+    width: "48%",
     aspectRatio: 1,
     borderRadius: 8,
     padding: 8,
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'relative',
+    alignItems: "center",
+    justifyContent: "center",
+    position: "relative",
   },
   appButtonIcon: {
     fontSize: 20,
@@ -353,13 +423,13 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: poppinsWeights.medium,
     color: semantic.text.primary,
-    textAlign: 'center',
+    textAlign: "center",
   },
   newBadge: {
-    position: 'absolute',
+    position: "absolute",
     top: 4,
     right: 4,
-    backgroundColor: '#1976D2',
+    backgroundColor: "#1976D2",
     paddingHorizontal: 4,
     paddingVertical: 2,
     borderRadius: 4,
@@ -367,22 +437,33 @@ const styles = StyleSheet.create({
   newBadgeText: {
     fontSize: 8,
     fontFamily: poppinsWeights.bold,
-    color: '#FFF',
+    color: "#FFF",
   },
 
   // Thumbnails Styles
   thumbnailsContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: 12,
+    marginTop: 10,
   },
   thumbnailArrow: {
-    width: 32,
-    height: 32,
-    backgroundColor: '#E0E0E0',
-    borderRadius: 4,
-    alignItems: 'center',
-    justifyContent: 'center',
+    width: 36,
+    height: 36,
+    backgroundColor: "#f8f9fa",
+    borderRadius: 18,
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 1,
+    borderColor: "#E0E0E0",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 2,
   },
   thumbnailArrowText: {
     fontSize: 18,
@@ -393,142 +474,178 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   thumbnail: {
-    width: 60,
-    height: 60,
-    marginRight: 8,
+    width: 70,
+    height: 70,
+    marginRight: 12,
     borderRadius: 8,
     borderWidth: 2,
-    borderColor: '#E0E0E0',
-    overflow: 'hidden',
+    borderColor: "#E0E0E0",
+    overflow: "hidden",
+    backgroundColor: "#f8f9fa",
   },
   selectedThumbnail: {
     borderColor: primary.purple,
+    borderWidth: 3,
+    shadowColor: primary.purple,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 4,
   },
   thumbnailContent: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
-  documentThumbnail: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#F5F5F5',
+  thumbnailImage: {
+    width: "100%",
+    height: "100%",
   },
-  documentText: {
-    fontSize: 24,
-  },
-  productThumbnail: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#2C2C2C',
-  },
-  miniProductBox: {
-    width: 20,
-    height: 20,
-    backgroundColor: '#FFD700',
-    borderRadius: 4,
-  },
-  collectionThumbnail: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#E8F5E8',
-  },
-  collectionText: {
-    fontSize: 24,
+  selectedIndicator: {
+    position: "absolute",
+    bottom: 2,
+    right: 2,
+    width: 12,
+    height: 12,
+    borderRadius: 6,
+    backgroundColor: primary.purple,
+    borderWidth: 2,
+    borderColor: "#fff",
   },
 
   // Product Details Styles
   productTitle: {
-    fontSize: 28,
-    fontFamily: poppinsWeights.bold,
+    fontSize: 32,
+    fontFamily: poppinsWeights.semiBold,
     color: semantic.text.primary,
     marginBottom: 16,
   },
   shippingBanner: {
-    backgroundColor: '#E8F5E8',
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    borderRadius: 8,
+    backgroundColor: "#E8F5E8",
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 6,
     marginBottom: 20,
+    alignSelf: "flex-start",
   },
   shippingBannerText: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: poppinsWeights.medium,
-    color: '#2E7D32',
-    textAlign: 'center',
+    color: "#2E7D32",
+    textAlign: "center",
+  },
+  bloodCollectionBanner: {
+    backgroundColor: "#EBE6FF",
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 6,
+    marginBottom: 20,
+    alignSelf: "flex-start",
+  },
+  bloodCollectionBannerText: {
+    fontSize: 12,
+    fontFamily: poppinsWeights.medium,
+    color: semantic.interactive.primary,
+    textAlign: "center",
   },
   pricingContainer: {
-    marginBottom: 20,
+    marginBottom: 10,
   },
   originalPrice: {
-    fontSize: 16,
+    fontSize: 12,
     fontFamily: poppinsWeights.regular,
     color: semantic.text.light,
-    textDecorationLine: 'line-through',
+    textDecorationLine: "line-through",
     marginBottom: 4,
   },
   priceRow: {
-    flexDirection: 'row',
-    alignItems: 'baseline',
+    flexDirection: "row",
+    alignItems: "baseline",
     gap: 8,
   },
   currentPrice: {
-    fontSize: 32,
-    fontFamily: poppinsWeights.bold,
+    fontSize: 24,
+    fontFamily: poppinsWeights.semiBold,
     color: semantic.text.primary,
   },
   perTestText: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: poppinsWeights.regular,
     color: semantic.text.secondary,
   },
   description: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: poppinsWeights.regular,
     color: semantic.text.primary,
     lineHeight: 24,
-    marginBottom: 24,
+    marginBottom: 10,
   },
   featuresContainer: {
     marginBottom: 32,
   },
   featuresTitle: {
-    fontSize: 18,
-    fontFamily: poppinsWeights.semiBold,
+    fontSize: 16,
+    fontFamily: poppinsWeights.regular,
     color: semantic.text.primary,
     marginBottom: 16,
   },
   featureItem: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
+    flexDirection: "row",
+    alignItems: "center",
     marginBottom: 8,
   },
   bulletPoint: {
-    fontSize: 16,
+    fontSize: 20,
+    fontFamily: poppinsWeights.bold,
     color: semantic.text.primary,
     marginRight: 8,
-    marginTop: 2,
+    lineHeight: 20,
   },
   featureText: {
     flex: 1,
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: poppinsWeights.regular,
     color: semantic.text.primary,
-    lineHeight: 22,
+    lineHeight: 20,
   },
   buttonContainer: {
     gap: 12,
+    flexDirection: "row",
+    alignItems: "center",
   },
   addToCartButton: {
-    backgroundColor: semantic.background.primary,
-    borderWidth: 2,
-    borderColor: primary.purple,
+    backgroundColor: "#EBE6FF",
+    color: primary.purple,
+    alignSelf: "flex-start",
   },
   buyNowButton: {
-    backgroundColor: primary.purple,
+    backgroundColor: semantic.interactive.primary,
+    color: semantic.text.inverse,
+    alignSelf: "flex-start",
+  },
+
+  arrowButton: {
+    width: 36,
+    height: 36,
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: semantic.background.overlay,
+  },
+  arrowText: {
+    color: semantic.text.inverse,
+    fontFamily: poppinsWeights.semiBold,
+    fontSize: 16,
+  },
+  arrowButtonDisabled: {
+    backgroundColor: semantic.background.secondary,
+    opacity: 0.5,
+  },
+  arrowTextDisabled: {
+    color: semantic.text.secondary,
   },
 });
 
