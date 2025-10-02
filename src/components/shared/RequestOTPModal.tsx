@@ -171,6 +171,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: poppinsWeights.regular,
     color: semantic.text.primary,
+    outlineWidth: 0,
   },
   requestOTPDescriptionContainer: {
     marginBottom: 20,

@@ -87,6 +87,15 @@ const ProductDetailsScreen: React.FC = () => {
   const { productId } = useAppSelector((state: any) => state.navigation);
   const dispatch = useAppDispatch();
   const scrollViewRef = React.useRef<ScrollView>(null);
+  const mainScrollViewRef = React.useRef<ScrollView>(null);
+
+  // Scroll to top when productId changes (when navigating to different products)
+  React.useEffect(() => {
+    if (mainScrollViewRef.current) {
+      mainScrollViewRef.current.scrollTo({ y: 0, animated: false });
+    }
+    setSelectedThumbnail(1); // Reset thumbnail selection
+  }, [productId]);
 
   // Navigation functions for next/previous buttons
   const goToNextImage = () => {
@@ -182,6 +191,7 @@ const ProductDetailsScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <ScrollView
+        ref={mainScrollViewRef}
         style={styles.scrollContainer}
         showsVerticalScrollIndicator={false}
       >

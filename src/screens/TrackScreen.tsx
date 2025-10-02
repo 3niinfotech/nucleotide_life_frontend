@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -6,68 +6,68 @@ import {
   ScrollView,
   TouchableOpacity,
   TextInput,
-} from 'react-native';
-import { MainTabScreenProps } from '../navigation/types';
-import { semantic } from '../utils/colors';
-import { typography } from '../utils/fonts';
-import { NavigationHeader } from '../components';
+} from "react-native";
+import { MainTabScreenProps } from "../navigation/types";
+import { semantic } from "../utils/colors";
+import { typography } from "../utils/fonts";
+import { NavigationHeader } from "../components";
 
-type Props = MainTabScreenProps<'Track'>;
+type Props = MainTabScreenProps<"Track">;
 
 interface Order {
   id: string;
-  status: 'processing' | 'shipped' | 'delivered' | 'analyzing' | 'completed';
+  status: "processing" | "shipped" | "delivered" | "analyzing" | "completed";
   orderDate: string;
   estimatedDelivery?: string;
   trackingNumber?: string;
 }
 
 const TrackScreen: React.FC<Props> = ({ navigation }) => {
-  const [orderId, setOrderId] = useState('');
+  const [orderId, setOrderId] = useState("");
   const [orders, setOrders] = useState<Order[]>([
     {
-      id: 'NT-2024-001',
-      status: 'analyzing',
-      orderDate: '2024-01-15',
-      estimatedDelivery: '2024-02-15',
+      id: "NT-2024-001",
+      status: "analyzing",
+      orderDate: "2024-01-15",
+      estimatedDelivery: "2024-02-15",
     },
     {
-      id: 'NT-2024-002',
-      status: 'completed',
-      orderDate: '2024-01-10',
-      trackingNumber: '1Z999AA1234567890',
+      id: "NT-2024-002",
+      status: "completed",
+      orderDate: "2024-01-10",
+      trackingNumber: "1Z999AA1234567890",
     },
   ]);
 
-  const getStatusColor = (status: Order['status']) => {
+  const getStatusColor = (status: Order["status"]) => {
     switch (status) {
-      case 'processing':
+      case "processing":
         return semantic.text.tertiary;
-      case 'shipped':
+      case "shipped":
         return semantic.interactive.primary;
-      case 'delivered':
+      case "delivered":
         return semantic.text.secondary;
-      case 'analyzing':
+      case "analyzing":
         return semantic.interactive.primary;
-      case 'completed':
-        return '#10b981'; // Green
+      case "completed":
+        return "#10b981"; // Green
       default:
         return semantic.text.secondary;
     }
   };
 
-  const getStatusText = (status: Order['status']) => {
+  const getStatusText = (status: Order["status"]) => {
     switch (status) {
-      case 'processing':
-        return 'Processing Order';
-      case 'shipped':
-        return 'Shipped';
-      case 'delivered':
-        return 'Delivered';
-      case 'analyzing':
-        return 'Analyzing Sample';
-      case 'completed':
-        return 'Analysis Complete';
+      case "processing":
+        return "Processing Order";
+      case "shipped":
+        return "Shipped";
+      case "delivered":
+        return "Delivered";
+      case "analyzing":
+        return "Analyzing Sample";
+      case "completed":
+        return "Analysis Complete";
       default:
         return status;
     }
@@ -79,7 +79,7 @@ const TrackScreen: React.FC<Props> = ({ navigation }) => {
     }
 
     // In a real app, this would make an API call
-    console.log('Tracking order:', orderId);
+    console.log("Tracking order:", orderId);
   };
 
   return (
@@ -117,7 +117,7 @@ const TrackScreen: React.FC<Props> = ({ navigation }) => {
         <View style={styles.ordersSection}>
           <Text style={styles.sectionTitle}>Recent Orders</Text>
 
-          {orders.map(order => (
+          {orders.map((order) => (
             <View key={order.id} style={styles.orderCard}>
               <View style={styles.orderHeader}>
                 <Text style={styles.orderId}>{order.id}</Text>
@@ -146,7 +146,7 @@ const TrackScreen: React.FC<Props> = ({ navigation }) => {
 
                 {order.estimatedDelivery && (
                   <Text style={styles.estimatedDelivery}>
-                    Estimated Results:{' '}
+                    Estimated Results:{" "}
                     {new Date(order.estimatedDelivery).toLocaleDateString()}
                   </Text>
                 )}
@@ -192,25 +192,25 @@ const styles = StyleSheet.create({
     padding: 24,
   },
   header: {
-    alignItems: 'center',
+    alignItems: "center",
     marginBottom: 32,
   },
   title: {
     ...typography.h1,
     color: semantic.text.primary,
-    textAlign: 'center',
+    textAlign: "center",
     marginBottom: 8,
   },
   subtitle: {
     ...typography.body,
     color: semantic.text.secondary,
-    textAlign: 'center',
+    textAlign: "center",
   },
   trackSection: {
     marginBottom: 32,
   },
   inputContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: 12,
   },
   input: {
@@ -229,7 +229,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingVertical: 12,
     borderRadius: 8,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   trackButtonText: {
     ...typography.button,
@@ -252,9 +252,9 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   orderHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     marginBottom: 12,
   },
   orderId: {
@@ -262,8 +262,8 @@ const styles = StyleSheet.create({
     color: semantic.text.primary,
   },
   statusContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: 8,
   },
   statusDot: {
@@ -273,7 +273,7 @@ const styles = StyleSheet.create({
   },
   statusText: {
     ...typography.caption,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   orderDetails: {
     marginBottom: 16,
@@ -292,7 +292,7 @@ const styles = StyleSheet.create({
     color: semantic.text.secondary,
   },
   viewDetailsButton: {
-    alignSelf: 'flex-start',
+    alignSelf: "flex-start",
   },
   viewDetailsText: {
     ...typography.button,
@@ -304,7 +304,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderWidth: 1,
     borderColor: semantic.border.light,
-    alignItems: 'center',
+    alignItems: "center",
   },
   helpTitle: {
     ...typography.h3,
@@ -314,7 +314,7 @@ const styles = StyleSheet.create({
   helpText: {
     ...typography.body,
     color: semantic.text.secondary,
-    textAlign: 'center',
+    textAlign: "center",
     marginBottom: 16,
     lineHeight: 20,
   },

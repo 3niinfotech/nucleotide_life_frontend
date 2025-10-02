@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -6,13 +6,13 @@ import {
   ScrollView,
   TouchableOpacity,
   Alert,
-} from 'react-native';
-import { MainTabScreenProps } from '../navigation/types';
-import { semantic } from '../utils/colors';
-import { typography } from '../utils/fonts';
-import { NavigationHeader } from '../components';
+} from "react-native";
+import { MainTabScreenProps } from "../navigation/types";
+import { semantic } from "../utils/colors";
+import { typography } from "../utils/fonts";
+import { NavigationHeader } from "../components";
 
-type Props = MainTabScreenProps<'Upload'>;
+type Props = MainTabScreenProps<"Upload">;
 
 const UploadScreen: React.FC<Props> = ({ navigation: _navigation }) => {
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
@@ -21,27 +21,27 @@ const UploadScreen: React.FC<Props> = ({ navigation: _navigation }) => {
   const handleFileSelect = () => {
     // In a real app, this would open a file picker
     Alert.alert(
-      'File Selection',
+      "File Selection",
       "File picker would open here. For demo purposes, we'll simulate a file selection.",
       [
         {
-          text: 'Cancel',
-          style: 'cancel',
+          text: "Cancel",
+          style: "cancel",
         },
         {
-          text: 'Select File',
+          text: "Select File",
           onPress: () => {
-            setSelectedFile('sample_dna_data.txt');
+            setSelectedFile("sample_dna_data.txt");
             setUploadProgress(0);
           },
         },
-      ],
+      ]
     );
   };
 
   const handleUpload = () => {
     if (!selectedFile) {
-      Alert.alert('No File Selected', 'Please select a DNA file to upload.');
+      Alert.alert("No File Selected", "Please select a DNA file to upload.");
       return;
     }
 
@@ -54,9 +54,9 @@ const UploadScreen: React.FC<Props> = ({ navigation: _navigation }) => {
       if (progress >= 100) {
         clearInterval(interval);
         Alert.alert(
-          'Upload Complete',
-          'Your DNA data has been successfully uploaded and is being processed.',
-          [{ text: 'OK', onPress: () => setUploadProgress(0) }],
+          "Upload Complete",
+          "Your DNA data has been successfully uploaded and is being processed.",
+          [{ text: "OK", onPress: () => setUploadProgress(0) }]
         );
       }
     }, 200);
@@ -94,7 +94,7 @@ const UploadScreen: React.FC<Props> = ({ navigation: _navigation }) => {
               onPress={handleFileSelect}
             >
               <Text style={styles.selectButtonText}>
-                {selectedFile ? 'Change File' : 'Select DNA File'}
+                {selectedFile ? "Change File" : "Select DNA File"}
               </Text>
             </TouchableOpacity>
 
@@ -129,7 +129,7 @@ const UploadScreen: React.FC<Props> = ({ navigation: _navigation }) => {
               disabled={!selectedFile || uploadProgress > 0}
             >
               <Text style={styles.uploadButtonText}>
-                {uploadProgress > 0 ? 'Uploading...' : 'Upload & Analyze'}
+                {uploadProgress > 0 ? "Uploading..." : "Upload & Analyze"}
               </Text>
             </TouchableOpacity>
           </View>
@@ -160,19 +160,19 @@ const styles = StyleSheet.create({
     padding: 24,
   },
   header: {
-    alignItems: 'center',
+    alignItems: "center",
     marginBottom: 32,
   },
   title: {
     ...typography.h1,
     color: semantic.text.primary,
-    textAlign: 'center',
+    textAlign: "center",
     marginBottom: 8,
   },
   subtitle: {
     ...typography.body,
     color: semantic.text.secondary,
-    textAlign: 'center',
+    textAlign: "center",
   },
   uploadSection: {
     gap: 24,
@@ -202,8 +202,8 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderWidth: 2,
     borderColor: semantic.border.medium,
-    borderStyle: 'dashed',
-    alignItems: 'center',
+    borderStyle: "dashed",
+    alignItems: "center",
   },
   selectButton: {
     backgroundColor: semantic.interactive.secondary,
@@ -219,37 +219,37 @@ const styles = StyleSheet.create({
     color: semantic.text.secondary,
   },
   fileInfo: {
-    alignItems: 'center',
+    alignItems: "center",
     marginBottom: 16,
   },
   fileName: {
     ...typography.body,
     color: semantic.text.primary,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   fileSize: {
     ...typography.caption,
     color: semantic.text.tertiary,
   },
   progressContainer: {
-    width: '100%',
+    width: "100%",
     marginBottom: 16,
   },
   progressBar: {
     height: 8,
     backgroundColor: semantic.background.tertiary,
     borderRadius: 4,
-    overflow: 'hidden',
+    overflow: "hidden",
     marginBottom: 8,
   },
   progressFill: {
-    height: '100%',
+    height: "100%",
     backgroundColor: semantic.interactive.primary,
   },
   progressText: {
     ...typography.caption,
     color: semantic.text.secondary,
-    textAlign: 'center',
+    textAlign: "center",
   },
   uploadButton: {
     backgroundColor: semantic.interactive.primary,
@@ -257,7 +257,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 32,
     borderRadius: 8,
     minWidth: 200,
-    alignItems: 'center',
+    alignItems: "center",
   },
   uploadButtonDisabled: {
     backgroundColor: semantic.background.tertiary,

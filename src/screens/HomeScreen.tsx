@@ -1,28 +1,28 @@
-import React from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
-import FAQSection from '../components/HomeScreem/FAQSection';
-import { MainTabScreenProps } from '../navigation/types';
-import { semantic, primary } from '../utils/colors';
-import { typography } from '../utils/fonts';
-import {} from '../components';
+import React from "react";
+import { View, StyleSheet, ScrollView } from "react-native";
+import FAQSection from "../components/HomeScreem/FAQSection";
+import { MainTabScreenProps } from "../navigation/types";
+import { semantic, primary } from "../utils/colors";
+import { typography } from "../utils/fonts";
+import {} from "../components";
 import {
   HeroCarousel,
   WhyChooseGeneticOneSection,
   WhatYouGetSection,
   HowItWorksSection,
-} from '../components';
+} from "../components";
 import {
   WhyDNATestingSection,
   TestimonialsSection,
   TrustedMindsSection,
   WhyChooseNucleotideSection,
-} from '../components';
-import DataSecuritySection from '../components/HomeScreem/DataSecuritySection';
+} from "../components";
+import DataSecuritySection from "../components/HomeScreem/DataSecuritySection";
 // icons used by extracted components only
-import NucleotideSelectionSection from '../components/HomeScreem/NucleotideSelectionSection';
-import UnlockFutureHealthSection from '../components/HomeScreem/UnlockFutureHealthSection';
+import NucleotideSelectionSection from "../components/HomeScreem/NucleotideSelectionSection";
+import UnlockFutureHealthSection from "../components/HomeScreem/UnlockFutureHealthSection";
 
-type Props = MainTabScreenProps<'Home'>;
+type Props = MainTabScreenProps<"Home">;
 
 const HomeScreen: React.FC<Props> = ({ navigation: _navigation }) => {
   return (
@@ -84,32 +84,32 @@ const styles = StyleSheet.create({
   },
   heroContainer: {
     paddingVertical: 24,
-    width: '70%',
-    alignSelf: 'center',
+    width: "70%",
+    alignSelf: "center",
   },
   heroContent: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: 24,
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   heroTextBlock: {
     flex: 1,
   },
   heroMedia: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: "center",
   },
   mediaPlaceholder: {
     height: 300,
-    width: '80%',
+    width: "80%",
     borderRadius: 20,
     backgroundColor: semantic.background.tertiary,
     borderWidth: 1,
     borderColor: semantic.border.light,
   },
   heroSlide: {
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   heroHeadingLine: {
     ...typography.h1,
@@ -126,16 +126,16 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   heroActions: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: 12,
     marginTop: 25,
     marginBottom: 25,
   },
   heroBadge: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    alignSelf: 'flex-start',
-    backgroundColor: 'rgba(34,197,94,0.10)',
+    flexDirection: "row",
+    alignItems: "center",
+    alignSelf: "flex-start",
+    backgroundColor: "rgba(34,197,94,0.10)",
     paddingHorizontal: 10,
     paddingVertical: 6,
     borderRadius: 999,
@@ -145,16 +145,16 @@ const styles = StyleSheet.create({
     width: 8,
     height: 8,
     borderRadius: 4,
-    backgroundColor: '#22c55e',
+    backgroundColor: "#22c55e",
     marginRight: 8,
   },
   heroBadgeText: {
     ...typography.caption,
-    color: '#22c55e',
-    fontWeight: '600',
+    color: "#22c55e",
+    fontWeight: "600",
   },
   bulletRow: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: 16,
     marginTop: 12,
   },
@@ -163,14 +163,14 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   bulletItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   bulletDot: {
     width: 6,
     height: 6,
     borderRadius: 3,
-    backgroundColor: 'rgba(0,0,0,0.4)',
+    backgroundColor: "rgba(0,0,0,0.4)",
     marginRight: 8,
   },
   bulletText: {
@@ -178,43 +178,43 @@ const styles = StyleSheet.create({
     color: semantic.text.secondary,
   },
   badgesRow: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: 8,
     marginBottom: 8,
   },
   grid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexDirection: "row",
+    flexWrap: "wrap",
     gap: 16,
   },
   tileGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
     gap: 16,
-    width: '70%',
-    alignSelf: 'center',
+    width: "70%",
+    alignSelf: "center",
   },
   whatYouGetSection: {
-    backgroundColor: 'rgba(136,107,249,0.04)',
+    backgroundColor: "rgba(136,107,249,0.04)",
   },
   // What You Get section
   featuresShowcase: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "flex-start",
+    justifyContent: "space-between",
     gap: 24,
-    width: '70%',
-    alignSelf: 'center',
+    width: "70%",
+    alignSelf: "center",
   },
   // How It Works layout
   hiwGrid: {
-    width: '70%',
-    alignSelf: 'center',
+    width: "70%",
+    alignSelf: "center",
     gap: 16,
   },
   hiwRow: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: 16,
   },
   hiwRowSingle: {
@@ -222,24 +222,24 @@ const styles = StyleSheet.create({
   },
   hiwCard: {
     flex: 1,
-    backgroundColor: 'rgba(136,107,249,0.04)',
+    backgroundColor: "rgba(136,107,249,0.04)",
     borderColor: semantic.border.light,
     borderRadius: 12,
   },
   hiwCardRow: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
+    flexDirection: "row",
+    alignItems: "flex-start",
     gap: 16,
   },
   hiwHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: 10,
     marginBottom: 8,
     padding: 16,
   },
   hiwStepBadge: {
-    backgroundColor: 'rgba(136,107,249,0.12)',
+    backgroundColor: "rgba(136,107,249,0.12)",
     borderRadius: 10,
     paddingHorizontal: 20,
     paddingVertical: 15,
@@ -247,12 +247,12 @@ const styles = StyleSheet.create({
   hiwStepText: {
     ...typography.caption,
     color: semantic.interactive.primary,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontSize: 20,
   },
   hiwTitle: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     color: semantic.text.primary,
   },
   hiwBullets: {
@@ -277,18 +277,18 @@ const styles = StyleSheet.create({
   },
   hiwTextCol: {
     flexShrink: 1,
-    maxWidth: '58%',
+    maxWidth: "58%",
   },
   hiwImageCol: {
     flex: 1,
-    minWidth: '35%',
+    minWidth: "35%",
   },
   featuresCol: {
     flex: 1,
   },
   featuresCenter: {
     width: 380,
-    alignItems: 'center',
+    alignItems: "center",
     // paddingTop: 20,
   },
   mobilePreview: {
@@ -298,9 +298,9 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     borderWidth: 1,
     borderColor: semantic.border.light,
-    alignItems: 'center',
-    justifyContent: 'center',
-    overflow: 'hidden',
+    alignItems: "center",
+    justifyContent: "center",
+    overflow: "hidden",
   },
   mobilePreviewText: {
     ...typography.h5,
@@ -310,7 +310,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   inlineButton: {
-    alignSelf: 'flex-start',
+    alignSelf: "flex-start",
     marginLeft: 16,
   },
   featureRowDivider: {
@@ -323,15 +323,15 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   featureRow: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: 12,
-    alignItems: 'flex-start',
+    alignItems: "flex-start",
   },
   featureIcon: {
     width: 36,
     height: 36,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     marginTop: 2,
   },
   featureTextBlock: {
@@ -339,28 +339,28 @@ const styles = StyleSheet.create({
   },
   featureTitle: {
     fontSize: 20,
-    fontWeight: '600',
+    fontWeight: "600",
     color: semantic.text.primary,
     marginBottom: 0,
-    alignSelf: 'center',
-    textAlign: 'center',
+    alignSelf: "center",
+    textAlign: "center",
   },
   featureDescription: {
     fontSize: 16,
-    fontWeight: '400',
+    fontWeight: "400",
     color: semantic.text.secondary,
   },
   // Pricing styles
   couponBanner: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    alignSelf: 'center',
+    flexDirection: "row",
+    alignItems: "center",
+    alignSelf: "center",
     gap: 8,
     paddingHorizontal: 14,
     paddingVertical: 10,
     borderWidth: 1,
-    borderColor: '#FF9500',
-    backgroundColor: '#FFF9E6',
+    borderColor: "#FF9500",
+    backgroundColor: "#FFF9E6",
     borderRadius: 10,
     marginBottom: 20,
   },
@@ -369,21 +369,21 @@ const styles = StyleSheet.create({
   },
   couponText: {
     ...typography.caption,
-    color: '#FF9500',
+    color: "#FF9500",
   },
   couponCodeWrap: {
     borderRadius: 6,
   },
   pricingRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     gap: 16,
-    width: '70%',
-    alignSelf: 'center',
+    width: "70%",
+    alignSelf: "center",
     marginBottom: 16,
   },
   pricingCard: {
-    flexBasis: '23%',
+    flexBasis: "23%",
     backgroundColor: semantic.background.primary,
     borderWidth: 1,
     borderColor: semantic.border.light,
@@ -394,13 +394,13 @@ const styles = StyleSheet.create({
     borderColor: primary.purple,
   },
   pricingTopRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     marginBottom: 6,
   },
   saveBadge: {
-    backgroundColor: 'rgba(20,184,166,0.15)',
+    backgroundColor: "rgba(20,184,166,0.15)",
     paddingHorizontal: 10,
     paddingVertical: 6,
     borderRadius: 999,
@@ -408,7 +408,7 @@ const styles = StyleSheet.create({
   saveBadgeText: {
     ...typography.caption,
     color: primary.teal,
-    fontWeight: '700',
+    fontWeight: "700",
   },
   tagBadge: {
     paddingHorizontal: 10,
@@ -417,12 +417,12 @@ const styles = StyleSheet.create({
     backgroundColor: semantic.background.tertiary,
   },
   tagPurple: {
-    backgroundColor: 'rgba(139,92,246,0.15)',
+    backgroundColor: "rgba(139,92,246,0.15)",
   },
   tagBadgeText: {
     ...typography.caption,
     color: primary.purple,
-    fontWeight: '700',
+    fontWeight: "700",
   },
   pricingTitle: {
     ...typography.h5,
@@ -432,12 +432,12 @@ const styles = StyleSheet.create({
   mrp: {
     ...typography.caption,
     color: semantic.text.tertiary,
-    textDecorationLine: 'line-through',
+    textDecorationLine: "line-through",
     marginTop: 8,
   },
   priceLine: {
-    flexDirection: 'row',
-    alignItems: 'flex-end',
+    flexDirection: "row",
+    alignItems: "flex-end",
     gap: 8,
     marginTop: 4,
     marginBottom: 8,
@@ -456,7 +456,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   pillBannerWrap: {
-    alignItems: 'center',
+    alignItems: "center",
     marginTop: 12,
     marginBottom: 24,
   },
@@ -473,14 +473,14 @@ const styles = StyleSheet.create({
     color: semantic.text.secondary,
   },
   perkRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     gap: 16,
-    width: '70%',
-    alignSelf: 'center',
+    width: "70%",
+    alignSelf: "center",
   },
   perkCard: {
-    flexBasis: '32%',
+    flexBasis: "32%",
     backgroundColor: semantic.background.primary,
     borderWidth: 1,
     borderColor: semantic.border.light,
@@ -505,12 +505,12 @@ const styles = StyleSheet.create({
   },
   // Why DNA Testing grid
   whyGrid: {
-    width: '70%',
-    alignSelf: 'center',
+    width: "70%",
+    alignSelf: "center",
     gap: 24,
   },
   whyRow: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: 24,
   },
   whyRowDivider: {
@@ -529,8 +529,8 @@ const styles = StyleSheet.create({
   whyIcon: {
     width: 36,
     height: 36,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     marginBottom: 10,
   },
   whyTitle: {
@@ -544,12 +544,12 @@ const styles = StyleSheet.create({
   },
   // Doctors Slider
   doctorsCarousel: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
     gap: 12,
-    width: '85%',
-    alignSelf: 'center',
+    width: "85%",
+    alignSelf: "center",
   },
   doctorsWrap: {
     flex: 1,
@@ -562,14 +562,14 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: semantic.border.light,
     borderRadius: 14,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   doctorCardPurple: {
-    backgroundColor: 'rgba(136,107,249,0.04)',
+    backgroundColor: "rgba(136,107,249,0.04)",
   },
   doctorSeparator: { width: 16 },
   doctorImage: {
-    width: '100%',
+    width: "100%",
     height: 220,
   },
   doctorInfo: {
@@ -588,22 +588,22 @@ const styles = StyleSheet.create({
     width: 36,
     height: 36,
     borderRadius: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     backgroundColor: primary.purple,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOpacity: 0.15,
     shadowRadius: 6,
     shadowOffset: { width: 0, height: 2 },
   },
   arrowText: {
     color: semantic.text.inverse,
-    fontWeight: '700',
+    fontWeight: "700",
   },
   rowWrapBetween: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
     gap: 16,
   },
 });
