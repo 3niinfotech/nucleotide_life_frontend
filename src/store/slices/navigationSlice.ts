@@ -5,6 +5,9 @@ interface NavigationState {
   isMenuOpen: boolean;
   currentScreen: string;
   productId?: string;
+  isRequestOTPModalOpen: boolean;
+  isOTPModalOpen: boolean;
+  mobileNumber: string;
 }
 
 const initialState: NavigationState = {
@@ -12,6 +15,9 @@ const initialState: NavigationState = {
   isMenuOpen: false,
   currentScreen: "Login",
   productId: undefined,
+  isRequestOTPModalOpen: false,
+  isOTPModalOpen: false,
+  mobileNumber: "",
 };
 
 const navigationSlice = createSlice({
@@ -52,6 +58,23 @@ const navigationSlice = createSlice({
       state.activeSection = "checkout";
       state.currentScreen = "Checkout";
     },
+    openRequestOTPModal: (state) => {
+      state.isRequestOTPModalOpen = true;
+    },
+    closeRequestOTPModal: (state) => {
+      state.isRequestOTPModalOpen = false;
+      state.mobileNumber = "";
+    },
+    setMobileNumber: (state, action: PayloadAction<string>) => {
+      state.mobileNumber = action.payload;
+    },
+    openOTPModal: (state) => {
+      state.isOTPModalOpen = true;
+      state.isRequestOTPModalOpen = false;
+    },
+    closeOTPModal: (state) => {
+      state.isOTPModalOpen = false;
+    },
   },
 });
 
@@ -62,6 +85,11 @@ export const {
   closeMenu,
   navigateToProductDetails,
   navigateToCheckout,
+  openRequestOTPModal,
+  closeRequestOTPModal,
+  setMobileNumber,
+  openOTPModal,
+  closeOTPModal,
 } = navigationSlice.actions;
 
 export default navigationSlice.reducer;

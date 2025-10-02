@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -7,13 +7,13 @@ import {
   TouchableOpacity,
   Switch,
   Alert,
-} from 'react-native';
-import { MainTabScreenProps } from '../navigation/types';
-import { semantic } from '../utils/colors';
-import { typography } from '../utils/fonts';
-import { NavigationHeader } from '../components';
+} from "react-native";
+import { MainTabScreenProps } from "../navigation/types";
+import { semantic } from "../utils/colors";
+import { typography } from "../utils/fonts";
+import { NavigationHeader } from "../components";
 
-type Props = MainTabScreenProps<'Profile'>;
+type Props = MainTabScreenProps<"Profile">;
 
 const ProfileScreen: React.FC<Props> = ({ navigation }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -21,17 +21,17 @@ const ProfileScreen: React.FC<Props> = ({ navigation }) => {
   const [dataSharing, setDataSharing] = useState(false);
 
   const handleLogout = () => {
-    Alert.alert('Logout', 'Are you sure you want to logout?', [
+    Alert.alert("Logout", "Are you sure you want to logout?", [
       {
-        text: 'Cancel',
-        style: 'cancel',
+        text: "Cancel",
+        style: "cancel",
       },
       {
-        text: 'Logout',
-        style: 'destructive',
+        text: "Logout",
+        style: "destructive",
         onPress: () => {
           // Handle logout logic
-          console.log('User logged out');
+          console.log("User logged out");
         },
       },
     ]);
@@ -39,22 +39,22 @@ const ProfileScreen: React.FC<Props> = ({ navigation }) => {
 
   const handleDeleteAccount = () => {
     Alert.alert(
-      'Delete Account',
-      'This action cannot be undone. All your data will be permanently deleted.',
+      "Delete Account",
+      "This action cannot be undone. All your data will be permanently deleted.",
       [
         {
-          text: 'Cancel',
-          style: 'cancel',
+          text: "Cancel",
+          style: "cancel",
         },
         {
-          text: 'Delete',
-          style: 'destructive',
+          text: "Delete",
+          style: "destructive",
           onPress: () => {
             // Handle account deletion
-            console.log('Account deletion requested');
+            console.log("Account deletion requested");
           },
         },
-      ],
+      ]
     );
   };
 
@@ -217,40 +217,40 @@ const styles = StyleSheet.create({
     padding: 24,
   },
   header: {
-    alignItems: 'center',
+    alignItems: "center",
     marginBottom: 32,
   },
   title: {
     ...typography.h1,
     color: semantic.text.primary,
-    textAlign: 'center',
+    textAlign: "center",
     marginBottom: 8,
   },
   subtitle: {
     ...typography.body,
     color: semantic.text.secondary,
-    textAlign: 'center',
+    textAlign: "center",
   },
   profileSection: {
-    alignItems: 'center',
+    alignItems: "center",
     marginBottom: 32,
   },
   avatarContainer: {
-    alignItems: 'center',
+    alignItems: "center",
   },
   avatar: {
     width: 80,
     height: 80,
     borderRadius: 40,
     backgroundColor: semantic.interactive.primary,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     marginBottom: 16,
   },
   avatarText: {
     ...typography.h2,
     color: semantic.text.inverse,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   userName: {
     ...typography.h3,
@@ -270,9 +270,9 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   settingItem: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     backgroundColor: semantic.background.secondary,
     padding: 16,
     borderRadius: 12,
@@ -286,7 +286,7 @@ const styles = StyleSheet.create({
   settingLabel: {
     ...typography.body,
     color: semantic.text.primary,
-    fontWeight: '600',
+    fontWeight: "600",
     marginBottom: 4,
   },
   settingDescription: {
@@ -300,9 +300,9 @@ const styles = StyleSheet.create({
     marginBottom: 32,
   },
   menuItem: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     backgroundColor: semantic.background.secondary,
     padding: 16,
     borderRadius: 12,
@@ -327,23 +327,23 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderWidth: 1,
     borderColor: semantic.border.medium,
-    alignItems: 'center',
+    alignItems: "center",
   },
   logoutButtonText: {
     ...typography.button,
     color: semantic.text.secondary,
   },
   deleteButton: {
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent",
     paddingVertical: 16,
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: '#ef4444',
-    alignItems: 'center',
+    borderColor: "#ef4444",
+    alignItems: "center",
   },
   deleteButtonText: {
     ...typography.button,
-    color: '#ef4444',
+    color: "#ef4444",
   },
 });
 

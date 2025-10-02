@@ -1,56 +1,56 @@
-import React from 'react';
+import React from "react";
 import {
   View,
   Text,
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-} from 'react-native';
-import { MainTabScreenProps } from '../navigation/types';
-import { semantic } from '../utils/colors';
-import { typography } from '../utils/fonts';
-import { NavigationHeader } from '../components';
+} from "react-native";
+import { MainTabScreenProps } from "../navigation/types";
+import { semantic } from "../utils/colors";
+import { typography } from "../utils/fonts";
+import { NavigationHeader } from "../components";
 
-type Props = MainTabScreenProps<'Products'>;
+type Props = MainTabScreenProps<"Products">;
 
 const ProductsScreen: React.FC<Props> = ({ navigation }) => {
   const products = [
     {
-      id: '1',
-      name: 'Complete DNA Kit',
+      id: "1",
+      name: "Complete DNA Kit",
       description:
-        'Comprehensive genetic analysis including health, ancestry, and traits',
-      price: '$199',
+        "Comprehensive genetic analysis including health, ancestry, and traits",
+      price: "$199",
       features: [
-        'Health Risk Analysis',
-        'Drug Response',
-        'Ancestry Report',
-        'Trait Analysis',
+        "Health Risk Analysis",
+        "Drug Response",
+        "Ancestry Report",
+        "Trait Analysis",
       ],
     },
     {
-      id: '2',
-      name: 'Health Focus Kit',
+      id: "2",
+      name: "Health Focus Kit",
       description:
-        'Focused on health-related genetic insights and recommendations',
-      price: '$149',
+        "Focused on health-related genetic insights and recommendations",
+      price: "$149",
       features: [
-        'Disease Risk Assessment',
-        'Nutritional Needs',
-        'Exercise Response',
-        'Health Recommendations',
+        "Disease Risk Assessment",
+        "Nutritional Needs",
+        "Exercise Response",
+        "Health Recommendations",
       ],
     },
     {
-      id: '3',
-      name: 'Ancestry Kit',
-      description: 'Discover your genetic heritage and family history',
-      price: '$99',
+      id: "3",
+      name: "Ancestry Kit",
+      description: "Discover your genetic heritage and family history",
+      price: "$99",
       features: [
-        'Ethnicity Breakdown',
-        'Family Migration',
-        'DNA Matches',
-        'Historical Timeline',
+        "Ethnicity Breakdown",
+        "Family Migration",
+        "DNA Matches",
+        "Historical Timeline",
       ],
     },
   ];
@@ -70,7 +70,7 @@ const ProductsScreen: React.FC<Props> = ({ navigation }) => {
         </View>
 
         <View style={styles.productsList}>
-          {products.map(product => (
+          {products.map((product) => (
             <View key={product.id} style={styles.productCard}>
               <View style={styles.productHeader}>
                 <Text style={styles.productName}>{product.name}</Text>
@@ -112,19 +112,19 @@ const styles = StyleSheet.create({
     padding: 24,
   },
   header: {
-    alignItems: 'center',
+    alignItems: "center",
     marginBottom: 32,
   },
   title: {
     ...typography.h1,
     color: semantic.text.primary,
-    textAlign: 'center',
+    textAlign: "center",
     marginBottom: 8,
   },
   subtitle: {
     ...typography.body,
     color: semantic.text.secondary,
-    textAlign: 'center',
+    textAlign: "center",
   },
   productsList: {
     gap: 20,
@@ -137,9 +137,9 @@ const styles = StyleSheet.create({
     borderColor: semantic.border.light,
   },
   productHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     marginBottom: 12,
   },
   productName: {
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
   productPrice: {
     ...typography.h3,
     color: semantic.interactive.primary,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   productDescription: {
     ...typography.body,
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 24,
     borderRadius: 8,
-    alignItems: 'center',
+    alignItems: "center",
   },
   orderButtonText: {
     ...typography.button,

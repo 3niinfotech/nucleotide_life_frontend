@@ -1,5 +1,5 @@
-export { useAppDispatch } from './useAppDispatch';
-export { useAppSelector } from './useAppSelector';
+export { useAppDispatch } from "./useAppDispatch";
+export { useAppSelector } from "./useAppSelector";
 export {
   useFonts,
   useFontStyle,
@@ -7,4 +7,4 @@ export {
   useTypography,
   useFontWeights,
   useFontSizes,
-} from './useFonts';
+} from "./useFonts";

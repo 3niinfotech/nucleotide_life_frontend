@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   View,
   Text,
@@ -6,43 +6,49 @@ import {
   TouchableOpacity,
   ScrollView,
   Platform,
-} from 'react-native';
-import { useAppSelector, useAppDispatch } from '../../hooks/index';
+} from "react-native";
+import { useAppSelector, useAppDispatch } from "../../hooks/index";
 import {
   setActiveSection,
   toggleMenu,
   closeMenu,
-} from '../../store/slices/navigationSlice';
-import { semantic, primary } from '../../utils/colors';
-import { poppinsWeights } from '../../utils/fonts';
-import { IcAppIcon } from '../../utils/iconUtil';
+  openRequestOTPModal,
+} from "../../store/slices/navigationSlice";
+import { semantic, primary } from "../../utils/colors";
+import { poppinsWeights } from "../../utils/fonts";
+import { IcAppIcon } from "../../utils/iconUtil";
 
 const NavigationMenu: React.FC = () => {
   const { activeSection, isMenuOpen } = useAppSelector(
-    (state: any) => state.navigation,
+    (state: any) => state.navigation
   );
   const dispatch = useAppDispatch();
 
   const menuItems = [
-    { id: 'home', label: 'Home' },
-    { id: 'products', label: 'Products' },
-    { id: 'track', label: 'Track Order' },
-    { id: 'login', label: 'Login' },
+    { id: "home", label: "Home" },
+    { id: "products", label: "Products" },
+    { id: "track", label: "Track Order" },
+    { id: "login", label: "Login" },
   ];
 
   const handleMenuPress = (section: string) => {
-    dispatch(setActiveSection(section));
-    dispatch(closeMenu());
+    if (section === "login") {
+      dispatch(openRequestOTPModal());
+      dispatch(closeMenu());
+    } else {
+      dispatch(setActiveSection(section));
+      dispatch(closeMenu());
+    }
   };
 
   const handleActivateKit = () => {
     // Handle activate kit logic
-    console.log('Activate Kit pressed');
+    console.log("Activate Kit pressed");
   };
 
   const handleOrderKit = () => {
     // Navigate to products screen
-    dispatch(setActiveSection('products'));
+    dispatch(setActiveSection("products"));
   };
 
   return (
@@ -57,9 +63,9 @@ const NavigationMenu: React.FC = () => {
 
         {/* Center Container - Navigation */}
         <View style={styles.centerContainer}>
-          {Platform.OS === 'web' ? (
+          {Platform.OS === "web" ? (
             <View style={styles.desktopNav}>
-              {menuItems.map(item => (
+              {menuItems.map((item) => (
                 <TouchableOpacity
                   key={item.id}
                   style={styles.navItem}
@@ -112,10 +118,10 @@ const NavigationMenu: React.FC = () => {
         </View>
       </View>
 
-      {isMenuOpen && Platform.OS !== 'web' && (
+      {isMenuOpen && Platform.OS !== "web" && (
         <View style={styles.mobileMenu}>
           <ScrollView>
-            {menuItems.map(item => (
+            {menuItems.map((item) => (
               <TouchableOpacity
                 key={item.id}
                 style={[
@@ -144,7 +150,7 @@ const NavigationMenu: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: semantic.background.primary,
-    position: 'relative',
+    position: "relative",
     zIndex: 1000,
     borderBottomWidth: 1,
     borderBottomColor: semantic.border.light,
@@ -158,46 +164,46 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     paddingHorizontal: 24,
     paddingVertical: 20,
     backgroundColor: semantic.background.primary,
     maxWidth: 1440,
-    alignSelf: 'center',
-    width: '100%',
+    alignSelf: "center",
+    width: "100%",
   },
   leftContainer: {
     flex: 1,
-    justifyContent: 'flex-start',
+    justifyContent: "flex-start",
   },
   centerContainer: {
     flex: 2,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   rightContainer: {
     flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'flex-end',
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
   },
   logoContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   logoIcon: {
     // SVG icon styling
   },
   desktopNav: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
   navItem: {
     marginHorizontal: 16,
     paddingVertical: 5,
     paddingHorizontal: 8,
-    position: 'relative',
+    position: "relative",
   },
   navText: {
     fontFamily: poppinsWeights.regular,
@@ -209,7 +215,7 @@ const styles = StyleSheet.create({
     fontFamily: poppinsWeights.medium,
   },
   activeUnderline: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 0,
     left: 0,
     right: 0,
@@ -222,7 +228,7 @@ const styles = StyleSheet.create({
   hamburger: {
     width: 24,
     height: 18,
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
   },
   hamburgerLine: {
     height: 2,
@@ -230,8 +236,8 @@ const styles = StyleSheet.create({
     borderRadius: 1,
   },
   mobileMenu: {
-    position: 'absolute',
-    top: '100%',
+    position: "absolute",
+    top: "100%",
     left: 0,
     right: 0,
     backgroundColor: semantic.background.primary,
@@ -259,16 +265,16 @@ const styles = StyleSheet.create({
   mobileNavText: {
     color: semantic.text.secondary,
     fontSize: 16,
-    fontWeight: '500',
+    fontWeight: "500",
   },
   activeMobileNavText: {
     color: semantic.text.primary,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   actionButtons: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: 12,
-    alignItems: 'center',
+    alignItems: "center",
   },
   activateButton: {
     backgroundColor: semantic.background.primary,

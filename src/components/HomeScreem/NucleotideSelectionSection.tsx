@@ -1,17 +1,17 @@
-import React, { useMemo } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { useAppDispatch } from '../../hooks';
-import { navigateToProductDetails } from '../../store/slices/navigationSlice';
-import LinearGradient from '../../mocks/LinearGradient';
-import { semantic, primary, gradients, special } from '../../utils/colors';
-import { poppinsWeights, typography } from '../../utils/fonts';
-import PrimaryButton from '../shared/PrimaryButton';
-import { Section } from '..';
+import React, { useMemo } from "react";
+import { View, Text, StyleSheet } from "react-native";
+import { useAppDispatch } from "../../hooks";
+import { navigateToProductDetails } from "../../store/slices/navigationSlice";
+import LinearGradient from "../../mocks/LinearGradient";
+import { semantic, primary, gradients, special } from "../../utils/colors";
+import { poppinsWeights, typography } from "../../utils/fonts";
+import PrimaryButton from "../shared/PrimaryButton";
+import { Section } from "..";
 import {
   IcGeneticConfident,
   IcGeneticFreeOneTime,
   IcGeneticFullOwner,
-} from '../../utils/iconUtil';
+} from "../../utils/iconUtil";
 
 type Plan = {
   badge: string;
@@ -26,59 +26,59 @@ type Plan = {
 
 const plans: Plan[] = [
   {
-    badge: 'Save 30%',
-    title: '1 Genetic One – Personal Plan',
-    originalPrice: '₹32,000',
-    price: '₹22,000',
-    perTest: '/Per Test',
-    description: 'Perfect to begin your own DNA journey.',
+    badge: "Save 30%",
+    title: "1 Genetic One – Personal Plan",
+    originalPrice: "₹32,000",
+    price: "₹22,000",
+    perTest: "/Per Test",
+    description: "Perfect to begin your own DNA journey.",
   },
   {
-    badge: 'Save 35%',
-    title: '2 Genetic One – Couple Pack',
-    originalPrice: '₹64,000',
-    price: '₹41,600',
-    perTest: '/Per Test ₹20,800',
+    badge: "Save 35%",
+    title: "2 Genetic One – Couple Pack",
+    originalPrice: "₹64,000",
+    price: "₹41,600",
+    perTest: "/Per Test ₹20,800",
     description:
-      'Great for couples or parents planning family health together.',
+      "Great for couples or parents planning family health together.",
   },
   {
-    badge: 'Save 40%',
-    secondBadge: 'Most Popular',
-    title: '3 Genetic One – Family Pack',
-    originalPrice: '₹64,000',
-    price: '₹41,600',
-    perTest: '/Per Test ₹19,200',
+    badge: "Save 40%",
+    secondBadge: "Most Popular",
+    title: "3 Genetic One – Family Pack",
+    originalPrice: "₹64,000",
+    price: "₹41,600",
+    perTest: "/Per Test ₹19,200",
     description:
-      'Ideal for parents and child, or three family members the most popular choice.',
+      "Ideal for parents and child, or three family members the most popular choice.",
   },
   {
-    badge: 'Save 45%',
-    secondBadge: 'Best Value',
-    title: '4 Genetic One – Extended Family Pack',
-    originalPrice: '₹1,28,000',
-    price: '₹70,400',
-    perTest: '/Per Test ₹17,600',
+    badge: "Save 45%",
+    secondBadge: "Best Value",
+    title: "4 Genetic One – Extended Family Pack",
+    originalPrice: "₹1,28,000",
+    price: "₹70,400",
+    perTest: "/Per Test ₹17,600",
     description:
-      'Cover the whole family with lifetime DNA insights best value per test.',
+      "Cover the whole family with lifetime DNA insights best value per test.",
   },
 ];
 
 const additionalFeatures = [
   {
     icon: <IcGeneticFullOwner />,
-    title: 'Data Privacy First',
-    description: 'Your data is encrypted and always under your control.',
+    title: "Data Privacy First",
+    description: "Your data is encrypted and always under your control.",
   },
   {
     icon: <IcGeneticFreeOneTime />,
-    title: 'Free One Time Blood Collection',
-    description: 'Convenient at-home collection with no extra charges.',
+    title: "Free One Time Blood Collection",
+    description: "Convenient at-home collection with no extra charges.",
   },
   {
     icon: <IcGeneticConfident />,
-    title: 'Interactive Reports',
-    description: 'Access dynamic insights anytime via app & web dashboard.',
+    title: "Interactive Reports",
+    description: "Access dynamic insights anytime via app & web dashboard.",
   },
 ];
 
@@ -110,7 +110,7 @@ const NucleotideSelectionSection: React.FC<{ isBackground?: boolean }> =
               <Text style={styles.couponCode}>NUCLEO</Text>
             </LinearGradient>
             <Text style={styles.couponText}>
-              at checkout to unlock up to{' '}
+              at checkout to unlock up to{" "}
               <Text style={styles.couponTextBold}>45% off </Text> launch pricing
             </Text>
           </View>
@@ -195,24 +195,24 @@ const styles = StyleSheet.create({
     backgroundColor: special.purpleBg,
   },
   header: {
-    alignItems: 'center',
+    alignItems: "center",
     marginBottom: 12,
   },
   title: {
     ...typography.h3,
     color: semantic.text.primary,
-    textAlign: 'center',
+    textAlign: "center",
   },
   subtitle: {
     ...typography.body,
     color: semantic.text.secondary,
-    textAlign: 'center',
+    textAlign: "center",
     marginTop: 4,
     marginBottom: 10,
   },
   couponBanner: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: 8,
     paddingHorizontal: 14,
     paddingVertical: 10,
@@ -238,38 +238,38 @@ const styles = StyleSheet.create({
   couponCode: {
     ...typography.caption,
     color: semantic.text.inverse,
-    fontWeight: '700',
+    fontWeight: "700",
   },
   grid4: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     gap: 16,
-    width: '70%',
-    alignSelf: 'center',
+    width: "70%",
+    alignSelf: "center",
     marginVertical: 12,
   },
   card: {
-    flexBasis: '23%',
+    flexBasis: "23%",
     backgroundColor: semantic.background.primary,
     borderWidth: 1,
     borderColor: semantic.border.light,
     borderRadius: 12,
     padding: 16,
     height: 300,
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
   },
   cardPopular: {
     borderColor: primary.purple,
   },
   cardTopRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     marginBottom: 6,
   },
   cardContent: {
     flex: 1,
-    justifyContent: 'flex-start',
+    justifyContent: "flex-start",
   },
   badge: {
     backgroundColor: special.tealBg,
@@ -284,7 +284,7 @@ const styles = StyleSheet.create({
   },
   tagBadgeContainer: {
     borderRadius: 999,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   tagBadgeGradient: {
     paddingHorizontal: 10,
@@ -305,12 +305,12 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: poppinsWeights.regular,
     color: semantic.text.light,
-    textDecorationLine: 'line-through',
+    textDecorationLine: "line-through",
     marginTop: 6,
   },
   priceLine: {
-    flexDirection: 'row',
-    alignItems: 'flex-end',
+    flexDirection: "row",
+    alignItems: "flex-end",
     gap: 8,
     marginTop: 4,
     marginBottom: 8,
@@ -333,11 +333,11 @@ const styles = StyleSheet.create({
     maxHeight: 36, // 2 lines * 18 lineHeight
   },
   orderButton: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   centerRow: {
-    alignItems: 'center',
+    alignItems: "center",
     marginTop: 12,
     marginBottom: 24,
   },
@@ -355,14 +355,14 @@ const styles = StyleSheet.create({
     fontFamily: poppinsWeights.regular,
   },
   grid3: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     gap: 16,
-    width: '70%',
-    alignSelf: 'center',
+    width: "70%",
+    alignSelf: "center",
   },
   featureCard: {
-    flexBasis: '32%',
+    flexBasis: "32%",
     backgroundColor: semantic.background.primary,
     borderWidth: 1,
     borderColor: semantic.border.light,
@@ -370,14 +370,14 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   featureHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginBottom: 8,
     gap: 12,
   },
   featureIcon: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     // width: 24,
     // height: 24,
   },
