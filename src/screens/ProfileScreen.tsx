@@ -5,346 +5,546 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-  Switch,
-  Alert,
+  Platform,
 } from "react-native";
-import { MainTabScreenProps } from "../navigation/types";
-import { semantic } from "../utils/colors";
-import { typography } from "../utils/fonts";
-import { NavigationHeader } from "../components";
+import { semantic, primary } from "../utils/colors";
+import { poppinsWeights } from "../utils/fonts";
+import { useAppDispatch, useDynamicFonts } from "../hooks";
+import { setActiveSection } from "../store/slices/navigationSlice";
+import {
+  IcEdit,
+  IcMyOrder,
+  IcMyFamily,
+  IcLocation,
+  IcSetting,
+  IcSupport,
+  IcLogout,
+  IcMail,
+  IcPhone,
+  IcCalling,
+} from "../utils/iconUtil";
 
-type Props = MainTabScreenProps<"Profile">;
+const ProfileScreen: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const { typography, fontSizes } = useDynamicFonts();
+  const [activeMenuItem, setActiveMenuItem] = useState("My Orders");
 
-const ProfileScreen: React.FC<Props> = ({ navigation }) => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const [notifications, setNotifications] = useState(true);
-  const [dataSharing, setDataSharing] = useState(false);
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: semantic.background.secondary,
+      paddingVertical: 50,
+    },
+    topSection: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      padding: 24,
+      backgroundColor: semantic.background.primary,
+      borderWidth: 1,
+      borderColor: semantic.border.light,
+      maxWidth: 1440,
+      alignSelf: "center",
+      width: "100%",
+      marginBottom: 24,
+      borderRadius: 8,
+    },
+    profileInfo: {
+      flexDirection: "row",
+      alignItems: "center",
+      flex: 1,
+    },
+    avatar: {
+      width: 60,
+      height: 60,
+      borderRadius: 30,
+      backgroundColor: primary.purple,
+      justifyContent: "center",
+      alignItems: "center",
+      marginRight: 16,
+    },
+    avatarText: {
+      fontFamily: poppinsWeights.semiBold,
+      fontSize: fontSizes.xl,
+      color: semantic.background.primary,
+    },
+    userDetails: {
+      flex: 1,
+    },
+    userName: {
+      fontFamily: poppinsWeights.semiBold,
+      fontSize: fontSizes.xl,
+      color: semantic.text.primary,
+      marginBottom: 8,
+    },
+    contactInfo: {
+      flexDirection: "row",
+      gap: 20,
+    },
+    contactItem: {
+      flexDirection: "row",
+      alignItems: "center",
+    },
+    contactIcon: {
+      marginRight: 8,
+    },
+    userEmail: {
+      fontFamily: poppinsWeights.regular,
+      fontSize: fontSizes.sm,
+      color: semantic.text.secondary,
+    },
+    userPhone: {
+      fontFamily: poppinsWeights.regular,
+      fontSize: fontSizes.sm,
+      color: semantic.text.secondary,
+    },
+    editButton: {
+      backgroundColor: "transparent",
+      borderWidth: 1,
+      borderColor: semantic.border.light,
+      paddingHorizontal: 16,
+      paddingVertical: 10,
+      borderRadius: 6,
+      flexDirection: "row",
+      alignItems: "center",
+    },
+    editIcon: {
+      marginRight: 8,
+    },
+    editButtonText: {
+      fontFamily: poppinsWeights.medium,
+      fontSize: fontSizes.sm,
+      color: semantic.text.secondary,
+    },
+    bottomSection: {
+      flex: 1,
+      flexDirection: Platform.OS === "web" ? "row" : "column",
+      maxWidth: 1440,
+      alignSelf: "center",
+      width: "100%",
+      borderRadius: 8,
+      borderWidth: 1,
+      borderColor: semantic.border.light,
+      overflow: "hidden",
+    },
+    leftMenu: {
+      width: Platform.OS === "web" ? "15%" : "100%",
+      backgroundColor: semantic.background.primary,
+      borderRightWidth: Platform.OS === "web" ? 1 : 0,
+      borderRightColor: semantic.border.light,
+      paddingVertical: 16,
+    },
+    rightContent: {
+      flex: 1,
+      backgroundColor: semantic.background.primary,
+    },
+    scrollView: {
+      flex: 1,
+    },
+    menuItem: {
+      flexDirection: "row",
+      alignItems: "center",
+      paddingVertical: 10,
+      paddingHorizontal: 16,
+      marginBottom: 4,
+      borderBottomWidth: 1,
+      borderBottomColor: semantic.border.light,
+    },
+    activeMenuItem: {
+      // backgroundColor: "#f8f9ff",
+      // borderRightWidth: 4,
+      // borderRightColor: primary.purple,
+    },
+    menuItemIcon: {
+      marginRight: 16,
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    menuItemText: {
+      fontFamily: poppinsWeights.regular,
+      fontSize: fontSizes.base,
+      color: semantic.text.secondary,
+    },
+    activeMenuItemText: {
+      fontFamily: poppinsWeights.medium,
+      color: primary.purple,
+    },
+    contentSection: {
+      flex: 1,
+    },
+    sectionTitle: {
+      fontFamily: poppinsWeights.medium,
+      fontSize: fontSizes.lg,
+      color: semantic.text.primary,
+      marginBottom: 24,
+      borderBottomWidth: 1,
+      borderBottomColor: semantic.border.light,
+      padding: 24,
+    },
+    placeholderText: {
+      fontFamily: poppinsWeights.regular,
+      fontSize: fontSizes.base,
+      color: semantic.text.secondary,
+      textAlign: "center",
+      marginTop: 40,
+    },
+    orderCard: {
+      backgroundColor: semantic.background.secondary,
+      borderRadius: 8,
+      padding: 20,
+      marginBottom: 16,
+      marginHorizontal: 24,
+      borderWidth: 1,
+      borderColor: semantic.border.light,
+      shadowColor: semantic.shadow.light,
+      shadowOffset: {
+        width: 0,
+        height: 1,
+      },
+      shadowOpacity: 0.05,
+      shadowRadius: 2,
+      elevation: 1,
+    },
+    orderHeader: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "flex-start",
+      marginBottom: 12,
+    },
+    orderTitle: {
+      fontFamily: poppinsWeights.semiBold,
+      fontSize: fontSizes.base,
+      color: semantic.text.primary,
+      flex: 1,
+      marginRight: 12,
+    },
+    viewDetailsButton: {
+      backgroundColor: primary.purple,
+      paddingHorizontal: 16,
+      paddingVertical: 8,
+      borderRadius: 6,
+    },
+    viewDetailsText: {
+      fontFamily: poppinsWeights.medium,
+      fontSize: fontSizes.xs,
+      color: semantic.background.primary,
+    },
+    orderDetails: {
+      marginBottom: 12,
+    },
+    orderDetailText: {
+      fontFamily: poppinsWeights.regular,
+      fontSize: fontSizes.sm,
+      color: semantic.text.secondary,
+      marginBottom: 4,
+    },
+    orderFooter: {
+      borderTopWidth: 1,
+      borderTopColor: semantic.border.light,
+      paddingTop: 12,
+    },
+    deliveryStatus: {
+      fontFamily: poppinsWeights.medium,
+      fontSize: fontSizes.sm,
+      color: semantic.text.primary,
+      textAlign: "right",
+    },
+  });
 
   const handleLogout = () => {
-    Alert.alert("Logout", "Are you sure you want to logout?", [
-      {
-        text: "Cancel",
-        style: "cancel",
-      },
-      {
-        text: "Logout",
-        style: "destructive",
-        onPress: () => {
-          // Handle logout logic
-          console.log("User logged out");
-        },
-      },
-    ]);
+    // Handle logout logic
+    console.log("User logged out");
+    dispatch(setActiveSection("home"));
   };
 
-  const handleDeleteAccount = () => {
-    Alert.alert(
-      "Delete Account",
-      "This action cannot be undone. All your data will be permanently deleted.",
-      [
-        {
-          text: "Cancel",
-          style: "cancel",
-        },
-        {
-          text: "Delete",
-          style: "destructive",
-          onPress: () => {
-            // Handle account deletion
-            console.log("Account deletion requested");
-          },
-        },
-      ]
-    );
+  const handleMenuItemPress = (item: string) => {
+    console.log(`${item} pressed`);
+    setActiveMenuItem(item);
   };
+
+  const handleViewOrderDetails = (orderId: string) => {
+    console.log(`View details for order ${orderId}`);
+  };
+
+  const renderRightContent = () => {
+    switch (activeMenuItem) {
+      case "My Orders":
+        return renderMyOrders();
+      case "My Family":
+        return renderMyFamily();
+      case "Address":
+        return renderAddress();
+      case "Settings":
+        return renderSettings();
+      case "Support":
+        return renderSupport();
+      default:
+        return renderMyOrders();
+    }
+  };
+
+  const renderMyOrders = () => (
+    <View style={styles.contentSection}>
+      <Text style={styles.sectionTitle}>My Orders</Text>
+      {orderHistory.map((order) => (
+        <View key={order.id} style={styles.orderCard}>
+          <View style={styles.orderHeader}>
+            <Text style={styles.orderTitle}>{order.title}</Text>
+            <TouchableOpacity
+              style={styles.viewDetailsButton}
+              onPress={() => handleViewOrderDetails(order.id)}
+            >
+              <Text style={styles.viewDetailsText}>View Details</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.orderDetails}>
+            <Text style={styles.orderDetailText}>
+              Quantity : {order.quantity}
+            </Text>
+            <Text style={styles.orderDetailText}>
+              Total Paid : {order.totalPaid}
+            </Text>
+            <Text style={styles.orderDetailText}>
+              Reference No : {order.referenceNo}
+            </Text>
+          </View>
+          <View style={styles.orderFooter}>
+            <Text style={styles.deliveryStatus}>
+              {order.status} {order.deliverDate}
+            </Text>
+          </View>
+        </View>
+      ))}
+    </View>
+  );
+
+  const renderMyFamily = () => (
+    <View style={styles.contentSection}>
+      <Text style={styles.sectionTitle}>My Family</Text>
+      <Text style={styles.placeholderText}>
+        Family members will be displayed here.
+      </Text>
+    </View>
+  );
+
+  const renderAddress = () => (
+    <View style={styles.contentSection}>
+      <Text style={styles.sectionTitle}>Address</Text>
+      <Text style={styles.placeholderText}>
+        Address information will be displayed here.
+      </Text>
+    </View>
+  );
+
+  const renderSettings = () => (
+    <View style={styles.contentSection}>
+      <Text style={styles.sectionTitle}>Settings</Text>
+      <Text style={styles.placeholderText}>
+        Settings options will be displayed here.
+      </Text>
+    </View>
+  );
+
+  const renderSupport = () => (
+    <View style={styles.contentSection}>
+      <Text style={styles.sectionTitle}>Support</Text>
+      <Text style={styles.placeholderText}>
+        Support information will be displayed here.
+      </Text>
+    </View>
+  );
+
+  const orderHistory = [
+    {
+      id: "1",
+      title: "Genetic One - Personal Plan",
+      quantity: 1,
+      totalPaid: "₹22,000",
+      referenceNo: "#1234567890",
+      deliverDate: "Mon, 23 Oct 2025",
+      status: "Deliver on",
+    },
+    {
+      id: "2",
+      title: "Genetic One - Couple Pack",
+      quantity: 1,
+      totalPaid: "₹41,600",
+      referenceNo: "#1234567890",
+      deliverDate: "Mon, 23 Oct 2025",
+      status: "Delivered on",
+    },
+    {
+      id: "3",
+      title: "Genetic One - Family Pack",
+      quantity: 1,
+      totalPaid: "₹57,600",
+      referenceNo: "#1234567890",
+      deliverDate: "Mon, 23 Oct 2025",
+      status: "Delivered on",
+    },
+    {
+      id: "4",
+      title: "Genetic One - Extended Family Pack",
+      quantity: 1,
+      totalPaid: "₹70,400",
+      referenceNo: "#1234567890",
+      deliverDate: "Mon, 23 Oct 2025",
+      status: "Delivered on",
+    },
+  ];
 
   return (
     <View style={styles.container}>
-      <NavigationHeader title="Profile" />
-      <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={styles.content}
-      >
-        <View style={styles.header}>
-          <Text style={styles.title}>Profile</Text>
-          <Text style={styles.subtitle}>
-            Manage your account settings and preferences
-          </Text>
-        </View>
-
-        <View style={styles.profileSection}>
-          <View style={styles.avatarContainer}>
-            <View style={styles.avatar}>
-              <Text style={styles.avatarText}>JD</Text>
+      {/* Top Profile Section */}
+      <View style={styles.topSection}>
+        <View style={styles.profileInfo}>
+          <View style={styles.avatar}>
+            <Text style={styles.avatarText}>NG</Text>
+          </View>
+          <View style={styles.userDetails}>
+            <Text style={styles.userName}>Nirav Gabani</Text>
+            <View style={styles.contactInfo}>
+              <View style={styles.contactItem}>
+                <IcMail style={styles.contactIcon} />
+                <Text style={styles.userEmail}>niravgabani@gmail.com</Text>
+              </View>
+              <View style={styles.contactItem}>
+                <IcCalling style={styles.contactIcon} />
+                <Text style={styles.userPhone}>+91 98765 43210</Text>
+              </View>
             </View>
-            <Text style={styles.userName}>John Doe</Text>
-            <Text style={styles.userEmail}>john.doe@example.com</Text>
           </View>
         </View>
+        <TouchableOpacity style={styles.editButton}>
+          <IcEdit style={styles.editIcon} />
+          <Text style={styles.editButtonText}>Edit Profile</Text>
+        </TouchableOpacity>
+      </View>
 
-        <View style={styles.settingsSection}>
-          <Text style={styles.sectionTitle}>Preferences</Text>
-
-          <View style={styles.settingItem}>
-            <View style={styles.settingInfo}>
-              <Text style={styles.settingLabel}>Dark Mode</Text>
-              <Text style={styles.settingDescription}>
-                Switch to dark theme
-              </Text>
+      {/* Bottom Section with Left Menu and Right Content */}
+      <View style={styles.bottomSection}>
+        {/* Left Menu */}
+        <View style={styles.leftMenu}>
+          <TouchableOpacity
+            style={[
+              styles.menuItem,
+              activeMenuItem === "My Orders" && styles.activeMenuItem,
+            ]}
+            onPress={() => handleMenuItemPress("My Orders")}
+          >
+            <View style={styles.menuItemIcon}>
+              <IcMyOrder />
             </View>
-            <Switch
-              value={isDarkMode}
-              onValueChange={setIsDarkMode}
-              trackColor={{
-                false: semantic.background.tertiary,
-                true: semantic.interactive.primary,
-              }}
-              thumbColor={semantic.background.primary}
-            />
-          </View>
-
-          <View style={styles.settingItem}>
-            <View style={styles.settingInfo}>
-              <Text style={styles.settingLabel}>Push Notifications</Text>
-              <Text style={styles.settingDescription}>
-                Receive updates about your analysis
-              </Text>
-            </View>
-            <Switch
-              value={notifications}
-              onValueChange={setNotifications}
-              trackColor={{
-                false: semantic.background.tertiary,
-                true: semantic.interactive.primary,
-              }}
-              thumbColor={semantic.background.primary}
-            />
-          </View>
-
-          <View style={styles.settingItem}>
-            <View style={styles.settingInfo}>
-              <Text style={styles.settingLabel}>Data Sharing</Text>
-              <Text style={styles.settingDescription}>
-                Allow anonymous data for research
-              </Text>
-            </View>
-            <Switch
-              value={dataSharing}
-              onValueChange={setDataSharing}
-              trackColor={{
-                false: semantic.background.tertiary,
-                true: semantic.interactive.primary,
-              }}
-              thumbColor={semantic.background.primary}
-            />
-          </View>
-        </View>
-
-        <View style={styles.accountSection}>
-          <Text style={styles.sectionTitle}>Account</Text>
-
-          <TouchableOpacity style={styles.menuItem}>
-            <Text style={styles.menuItemText}>Edit Profile</Text>
-            <Text style={styles.menuItemArrow}>›</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.menuItem}>
-            <Text style={styles.menuItemText}>Change Password</Text>
-            <Text style={styles.menuItemArrow}>›</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.menuItem}>
-            <Text style={styles.menuItemText}>Privacy Settings</Text>
-            <Text style={styles.menuItemArrow}>›</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.menuItem}>
-            <Text style={styles.menuItemText}>Download Data</Text>
-            <Text style={styles.menuItemArrow}>›</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.supportSection}>
-          <Text style={styles.sectionTitle}>Support</Text>
-
-          <TouchableOpacity style={styles.menuItem}>
-            <Text style={styles.menuItemText}>Help Center</Text>
-            <Text style={styles.menuItemArrow}>›</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.menuItem}>
-            <Text style={styles.menuItemText}>Contact Support</Text>
-            <Text style={styles.menuItemArrow}>›</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.menuItem}>
-            <Text style={styles.menuItemText}>Terms of Service</Text>
-            <Text style={styles.menuItemArrow}>›</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.menuItem}>
-            <Text style={styles.menuItemText}>Privacy Policy</Text>
-            <Text style={styles.menuItemArrow}>›</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.dangerSection}>
-          <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-            <Text style={styles.logoutButtonText}>Logout</Text>
+            <Text
+              style={[
+                styles.menuItemText,
+                activeMenuItem === "My Orders" && styles.activeMenuItemText,
+              ]}
+            >
+              My Orders
+            </Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={styles.deleteButton}
-            onPress={handleDeleteAccount}
+            style={[
+              styles.menuItem,
+              activeMenuItem === "My Family" && styles.activeMenuItem,
+            ]}
+            onPress={() => handleMenuItemPress("My Family")}
           >
-            <Text style={styles.deleteButtonText}>Delete Account</Text>
+            <View style={styles.menuItemIcon}>
+              <IcMyFamily />
+            </View>
+            <Text
+              style={[
+                styles.menuItemText,
+                activeMenuItem === "My Family" && styles.activeMenuItemText,
+              ]}
+            >
+              My Family
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[
+              styles.menuItem,
+              activeMenuItem === "Address" && styles.activeMenuItem,
+            ]}
+            onPress={() => handleMenuItemPress("Address")}
+          >
+            <View style={styles.menuItemIcon}>
+              <IcLocation />
+            </View>
+            <Text
+              style={[
+                styles.menuItemText,
+                activeMenuItem === "Address" && styles.activeMenuItemText,
+              ]}
+            >
+              Address
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[
+              styles.menuItem,
+              activeMenuItem === "Settings" && styles.activeMenuItem,
+            ]}
+            onPress={() => handleMenuItemPress("Settings")}
+          >
+            <View style={styles.menuItemIcon}>
+              <IcSetting />
+            </View>
+            <Text
+              style={[
+                styles.menuItemText,
+                activeMenuItem === "Settings" && styles.activeMenuItemText,
+              ]}
+            >
+              Settings
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[
+              styles.menuItem,
+              activeMenuItem === "Support" && styles.activeMenuItem,
+            ]}
+            onPress={() => handleMenuItemPress("Support")}
+          >
+            <View style={styles.menuItemIcon}>
+              <IcSupport />
+            </View>
+            <Text
+              style={[
+                styles.menuItemText,
+                activeMenuItem === "Support" && styles.activeMenuItemText,
+              ]}
+            >
+              Support
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.menuItem} onPress={handleLogout}>
+            <View style={styles.menuItemIcon}>
+              <IcLogout />
+            </View>
+            <Text style={styles.menuItemText}>Logout</Text>
           </TouchableOpacity>
         </View>
-      </ScrollView>
+
+        {/* Right Content Area */}
+        <View style={styles.rightContent}>
+          <ScrollView
+            style={styles.scrollView}
+            showsVerticalScrollIndicator={false}
+          >
+            {renderRightContent()}
+          </ScrollView>
+        </View>
+      </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: semantic.background.primary,
-  },
-  scrollView: {
-    flex: 1,
-  },
-  content: {
-    padding: 24,
-  },
-  header: {
-    alignItems: "center",
-    marginBottom: 32,
-  },
-  title: {
-    ...typography.h1,
-    color: semantic.text.primary,
-    textAlign: "center",
-    marginBottom: 8,
-  },
-  subtitle: {
-    ...typography.body,
-    color: semantic.text.secondary,
-    textAlign: "center",
-  },
-  profileSection: {
-    alignItems: "center",
-    marginBottom: 32,
-  },
-  avatarContainer: {
-    alignItems: "center",
-  },
-  avatar: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    backgroundColor: semantic.interactive.primary,
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 16,
-  },
-  avatarText: {
-    ...typography.h2,
-    color: semantic.text.inverse,
-    fontWeight: "bold",
-  },
-  userName: {
-    ...typography.h3,
-    color: semantic.text.primary,
-    marginBottom: 4,
-  },
-  userEmail: {
-    ...typography.body,
-    color: semantic.text.secondary,
-  },
-  settingsSection: {
-    marginBottom: 32,
-  },
-  sectionTitle: {
-    ...typography.h2,
-    color: semantic.text.primary,
-    marginBottom: 16,
-  },
-  settingItem: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    backgroundColor: semantic.background.secondary,
-    padding: 16,
-    borderRadius: 12,
-    marginBottom: 12,
-    borderWidth: 1,
-    borderColor: semantic.border.light,
-  },
-  settingInfo: {
-    flex: 1,
-  },
-  settingLabel: {
-    ...typography.body,
-    color: semantic.text.primary,
-    fontWeight: "600",
-    marginBottom: 4,
-  },
-  settingDescription: {
-    ...typography.caption,
-    color: semantic.text.secondary,
-  },
-  accountSection: {
-    marginBottom: 32,
-  },
-  supportSection: {
-    marginBottom: 32,
-  },
-  menuItem: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    backgroundColor: semantic.background.secondary,
-    padding: 16,
-    borderRadius: 12,
-    marginBottom: 12,
-    borderWidth: 1,
-    borderColor: semantic.border.light,
-  },
-  menuItemText: {
-    ...typography.body,
-    color: semantic.text.primary,
-  },
-  menuItemArrow: {
-    ...typography.h3,
-    color: semantic.text.tertiary,
-  },
-  dangerSection: {
-    gap: 12,
-  },
-  logoutButton: {
-    backgroundColor: semantic.interactive.secondary,
-    paddingVertical: 16,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: semantic.border.medium,
-    alignItems: "center",
-  },
-  logoutButtonText: {
-    ...typography.button,
-    color: semantic.text.secondary,
-  },
-  deleteButton: {
-    backgroundColor: "transparent",
-    paddingVertical: 16,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: "#ef4444",
-    alignItems: "center",
-  },
-  deleteButtonText: {
-    ...typography.button,
-    color: "#ef4444",
-  },
-});
 
 export default ProfileScreen;

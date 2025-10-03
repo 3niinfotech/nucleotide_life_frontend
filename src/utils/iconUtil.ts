@@ -66,6 +66,15 @@ export { default as IcGeneticFreeOneTime } from "../assets/svg/ic_genetic_free_o
 export { default as IcTruck } from "../assets/svg/ic_truck.svg";
 export { default as IcAddAddress } from "../assets/svg/ic_add_address.svg";
 
+// Profile Icons
+export { default as IcEdit } from "../assets/svg/ic_edit.svg";
+export { default as IcMyOrder } from "../assets/svg/ic_my_order.svg";
+export { default as IcMyFamily } from "../assets/svg/ic_my_family.svg";
+export { default as IcSetting } from "../assets/svg/ic_setting.svg";
+export { default as IcSupport } from "../assets/svg/ic_support.svg";
+export { default as IcLogout } from "../assets/svg/ic_logout.svg";
+export { default as IcMail } from "../assets/svg/ic_mail.svg";
+
 // Optional grouped export
 import IcAppIconImport from "../assets/svg/ic_app_icon.svg";
 import IcAppWhiteTxtIconImport from "../assets/svg/ic_app_icon_white_txt.svg";
@@ -114,6 +123,13 @@ import IcDnaTrustedImport from "../assets/svg/ic_dna_trusted.svg";
 import IcDnaInfinityImport from "../assets/svg/ic_dna_infinity.svg";
 import IcTruckImport from "../assets/svg/ic_truck.svg";
 import IcAddAddressImport from "../assets/svg/ic_add_address.svg";
+import IcEditImport from "../assets/svg/ic_edit.svg";
+import IcMyOrderImport from "../assets/svg/ic_my_order.svg";
+import IcMyFamilyImport from "../assets/svg/ic_my_family.svg";
+import IcSettingImport from "../assets/svg/ic_setting.svg";
+import IcSupportImport from "../assets/svg/ic_support.svg";
+import IcLogoutImport from "../assets/svg/ic_logout.svg";
+import IcMailImport from "../assets/svg/ic_mail.svg";
 
 // Future Health Icons Imports
 import IcFutureAiPoweredImport from "../assets/svg/ic_future_ai_powered.svg";
@@ -165,6 +181,15 @@ export const Icons = {
   geneticFreeOneTime: IcGeneticFreeOneTimeImport,
   truck: IcTruckImport,
   addAddress: IcAddAddressImport,
+
+  // Profile Icons
+  edit: IcEditImport,
+  myOrder: IcMyOrderImport,
+  myFamily: IcMyFamilyImport,
+  setting: IcSettingImport,
+  support: IcSupportImport,
+  logout: IcLogoutImport,
+  mail: IcMailImport,
   // DNA themed
   dnaIq: IcDnaIqImport,
   dnaPharma: IcDnaPharmaImport,

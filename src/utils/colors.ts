@@ -8,6 +8,7 @@ export const primary = {
   teal: "#14b8a6", // Primary teal for logo and accents
   purple: "#8b5cf6", // Primary purple for buttons and highlights
   darkBlue: "#1e1b4b", // Dark blue for footer background
+  orange: "#FF9500", // Gray for text
 } as const;
 
 // Neutral Colors
@@ -99,6 +100,7 @@ export const semantic = {
     secondary: neutral.gray100, // #f3f4f6 - Secondary buttons
     hover: neutral.gray50, // #f9fafb - Hover states
     active: neutral.gray200, // #e5e7eb - Active states
+    orange: primary.orange, // #FF9500 - Orange for buttons
   },
 
   // Shadow colors

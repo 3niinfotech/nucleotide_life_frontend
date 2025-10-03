@@ -51,6 +51,10 @@ const NavigationMenu: React.FC = () => {
     dispatch(setActiveSection("products"));
   };
 
+  const handleNavigateToProfile = () => {
+    dispatch(setActiveSection("profile"));
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -113,6 +117,12 @@ const NavigationMenu: React.FC = () => {
               onPress={handleOrderKit}
             >
               <Text style={styles.orderButtonText}>Order DNA Kit</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.profileButton}
+              onPress={handleNavigateToProfile}
+            >
+              <Text style={styles.profileButtonText}>NG</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -299,6 +309,18 @@ const styles = StyleSheet.create({
     fontFamily: poppinsWeights.medium,
     fontSize: 14,
     color: semantic.text.inverse,
+  },
+  profileButton: {
+    backgroundColor: semantic.interactive.orange,
+    padding: 8,
+    // paddingHorizontal: 16,
+    // paddingVertical: 10,
+    borderRadius: 50,
+  },
+  profileButtonText: {
+    fontFamily: poppinsWeights.medium,
+    fontSize: 16,
+    color: semantic.background.primary,
   },
 });
 
