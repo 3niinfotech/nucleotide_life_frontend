@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { semantic, primary } from "../utils/colors";
 import { poppinsWeights } from "../utils/fonts";
-import { useAppDispatch, useDynamicFonts } from "../hooks";
+import { useAppDispatch } from "../hooks";
 import { setActiveSection } from "../store/slices/navigationSlice";
 import {
   IcEdit,
@@ -26,7 +26,6 @@ import {
 
 const ProfileScreen: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { typography, fontSizes } = useDynamicFonts();
   const [activeMenuItem, setActiveMenuItem] = useState("My Orders");
 
   const styles = StyleSheet.create({
@@ -65,7 +64,7 @@ const ProfileScreen: React.FC = () => {
     },
     avatarText: {
       fontFamily: poppinsWeights.semiBold,
-      fontSize: fontSizes.xl,
+      fontSize: 16,
       color: semantic.background.primary,
     },
     userDetails: {
@@ -73,7 +72,7 @@ const ProfileScreen: React.FC = () => {
     },
     userName: {
       fontFamily: poppinsWeights.semiBold,
-      fontSize: fontSizes.xl,
+      fontSize: 16,
       color: semantic.text.primary,
       marginBottom: 8,
     },
@@ -90,12 +89,12 @@ const ProfileScreen: React.FC = () => {
     },
     userEmail: {
       fontFamily: poppinsWeights.regular,
-      fontSize: fontSizes.sm,
+      fontSize: 14,
       color: semantic.text.secondary,
     },
     userPhone: {
       fontFamily: poppinsWeights.regular,
-      fontSize: fontSizes.sm,
+      fontSize: 14,
       color: semantic.text.secondary,
     },
     editButton: {
@@ -113,7 +112,7 @@ const ProfileScreen: React.FC = () => {
     },
     editButtonText: {
       fontFamily: poppinsWeights.medium,
-      fontSize: fontSizes.sm,
+      fontSize: 14,
       color: semantic.text.secondary,
     },
     bottomSection: {
@@ -162,7 +161,7 @@ const ProfileScreen: React.FC = () => {
     },
     menuItemText: {
       fontFamily: poppinsWeights.regular,
-      fontSize: fontSizes.base,
+      fontSize: 16,
       color: semantic.text.secondary,
     },
     activeMenuItemText: {
@@ -174,7 +173,7 @@ const ProfileScreen: React.FC = () => {
     },
     sectionTitle: {
       fontFamily: poppinsWeights.medium,
-      fontSize: fontSizes.lg,
+      fontSize: 18,
       color: semantic.text.primary,
       marginBottom: 24,
       borderBottomWidth: 1,
@@ -183,7 +182,7 @@ const ProfileScreen: React.FC = () => {
     },
     placeholderText: {
       fontFamily: poppinsWeights.regular,
-      fontSize: fontSizes.base,
+      fontSize: 16,
       color: semantic.text.secondary,
       textAlign: "center",
       marginTop: 40,
@@ -213,7 +212,7 @@ const ProfileScreen: React.FC = () => {
     },
     orderTitle: {
       fontFamily: poppinsWeights.semiBold,
-      fontSize: fontSizes.base,
+      fontSize: 16,
       color: semantic.text.primary,
       flex: 1,
       marginRight: 12,
@@ -226,7 +225,7 @@ const ProfileScreen: React.FC = () => {
     },
     viewDetailsText: {
       fontFamily: poppinsWeights.medium,
-      fontSize: fontSizes.xs,
+      fontSize: 12,
       color: semantic.background.primary,
     },
     orderDetails: {
@@ -234,7 +233,7 @@ const ProfileScreen: React.FC = () => {
     },
     orderDetailText: {
       fontFamily: poppinsWeights.regular,
-      fontSize: fontSizes.sm,
+      fontSize: 14,
       color: semantic.text.secondary,
       marginBottom: 4,
     },
@@ -245,7 +244,7 @@ const ProfileScreen: React.FC = () => {
     },
     deliveryStatus: {
       fontFamily: poppinsWeights.medium,
-      fontSize: fontSizes.sm,
+      fontSize: 14,
       color: semantic.text.primary,
       textAlign: "right",
     },
