@@ -1,8 +1,9 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 import { Section, PrimaryButton } from "..";
 import { semantic, special } from "../../utils/colors";
 import { poppinsWeights } from "../../utils/fonts";
+import { Images } from "../../utils/imageUtil";
 
 const HowItWorksSection: React.FC<{ isBackground?: boolean }> = ({
   isBackground = false,
@@ -20,26 +21,60 @@ const HowItWorksSection: React.FC<{ isBackground?: boolean }> = ({
               <View style={styles.hiwStepBadge}>
                 <Text style={styles.hiwStepText}>1</Text>
               </View>
-              <Text style={styles.hiwTitle}>Order & Collect</Text>
+              <Text style={styles.hiwTitle}>Place Your Order</Text>
             </View>
             <View style={[styles.hiwBullets, styles.hiwBulletsSpaced]}>
               <Text style={styles.hiwBullet}>
-                • Buy the Genetic One Kit online.
+                • Purchase the Genetic One package from our website.
               </Text>
               <Text style={styles.hiwBullet}>
-                • Provide your saliva sample easily at home.
+                • Provide accurate address and contact details for smooth
+                coordination.
               </Text>
               <Text style={styles.hiwBullet}>
-                • Free doorstep pickup with secure tracking.
+                • Complete the required form with all information needed for
+                home sample collection.
               </Text>
             </View>
-            <View style={styles.hiwImageArea} />
+            <View style={styles.hiwImageArea}>
+              <Image
+                source={Images.howItWorks1}
+                style={styles.hiwImage}
+                // resizeMode="contain"
+              />
+            </View>
           </View>
 
           <View style={styles.hiwCard}>
             <View style={styles.hiwHeader}>
               <View style={styles.hiwStepBadge}>
                 <Text style={styles.hiwStepText}>2</Text>
+              </View>
+              <Text style={styles.hiwTitle}>Blood Sample Collection</Text>
+            </View>
+            <View style={[styles.hiwBullets, styles.hiwBulletsSpaced]}>
+              <Text style={styles.hiwBullet}>
+                • Our certified partner technician visits your home for sample
+                collection.
+              </Text>
+              <Text style={styles.hiwBullet}>
+                • The process is safe, hygienic, and handled with utmost care.
+              </Text>
+              <Text style={styles.hiwBullet}>
+                • Quick and convenient, completed in just a few minutes.
+              </Text>
+            </View>
+            <View style={styles.hiwImageArea}>
+              <Image source={Images.howItWorks2} style={styles.hiwImage} />
+            </View>
+          </View>
+        </View>
+
+        <View style={styles.hiwRow}>
+          <View style={styles.hiwCard}>
+            <View style={styles.hiwHeader}>
+              <View style={styles.hiwStepBadge}>
+                <Text style={styles.hiwStepText}>3</Text>
               </View>
               <Text style={styles.hiwTitle}>Sequence & Decode</Text>
             </View>
@@ -55,11 +90,43 @@ const HowItWorksSection: React.FC<{ isBackground?: boolean }> = ({
                 • Data is encrypted end‑to‑end.
               </Text>
             </View>
-            <View style={styles.hiwImageArea} />
+            <View style={styles.hiwImageArea}>
+              <Image source={Images.howItWorks3} style={styles.hiwImage} />
+            </View>
+          </View>
+
+          <View style={styles.hiwCard}>
+            <View style={styles.hiwHeader}>
+              <View style={styles.hiwStepBadge}>
+                <Text style={styles.hiwStepText}>4</Text>
+              </View>
+              <Text style={styles.hiwTitle}>
+                Explore Your Interactive Dashboard
+              </Text>
+            </View>
+            <View style={[styles.hiwBullets, styles.hiwBulletsSpaced]}>
+              <Text style={styles.hiwBullet}>
+                • Access your results anytime on web or mobile app.
+              </Text>
+              <Text style={styles.hiwBullet}>
+                • Browse categories: Disease Risks, Drug Responses, Vitamin
+                Profiling, IQ & Cognition.
+              </Text>
+              <Text style={styles.hiwBullet}>
+                • Each report includes risk scores, gene insights, and
+                personalized guidance.
+              </Text>
+              <Text style={styles.hiwBullet}>
+                • Lifetime access — new science = new insights.
+              </Text>
+            </View>
+            <View style={styles.hiwImageArea}>
+              <Image source={Images.howItWorks4} style={styles.hiwImage} />
+            </View>
           </View>
         </View>
 
-        <View style={styles.hiwRowSingle}>
+        {/* <View style={styles.hiwRowSingle}>
           <View style={[styles.hiwCard, styles.hiwCardRow]}>
             <View style={styles.hiwTextCol}>
               <View style={styles.hiwHeader}>
@@ -97,7 +164,7 @@ const HowItWorksSection: React.FC<{ isBackground?: boolean }> = ({
               <View style={[styles.hiwImageArea, {}]} />
             </View>
           </View>
-        </View>
+        </View> */}
       </View>
     </Section>
   );
@@ -150,6 +217,7 @@ const styles = StyleSheet.create({
   },
   hiwTitle: {
     fontSize: 32,
+    lineHeight: 36,
     fontFamily: poppinsWeights.semiBold,
     color: semantic.text.primary,
   },
@@ -166,7 +234,7 @@ const styles = StyleSheet.create({
     color: semantic.text.secondary,
   },
   hiwImageArea: {
-    height: 250,
+    height: 400,
     backgroundColor: semantic.background.tertiary,
     borderColor: semantic.border.light,
     borderBottomLeftRadius: 10,
@@ -189,6 +257,12 @@ const styles = StyleSheet.create({
   inlineButton: {
     alignSelf: "flex-start",
     marginLeft: 16,
+  },
+  hiwImage: {
+    width: "100%",
+    height: "100%",
+    borderBottomLeftRadius: 12,
+    borderBottomRightRadius: 12,
   },
 });
 

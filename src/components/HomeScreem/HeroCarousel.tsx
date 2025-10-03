@@ -1,8 +1,14 @@
-import React, { useMemo } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Carousel, PrimaryButton } from '../index';
-import { semantic, status } from '../../utils/colors';
-import { poppinsWeights } from '../../utils/fonts';
+import React, { useMemo } from "react";
+import { View, Text, StyleSheet, Image } from "react-native";
+import { Carousel, PrimaryButton } from "../index";
+import { semantic, status } from "../../utils/colors";
+import { poppinsWeights } from "../../utils/fonts";
+import {
+  SliderGeneticOne,
+  SliderGeneticOnePlus,
+  SliderGutMicrobiome,
+  SliderBloodUrineMarkers,
+} from "../../utils/imageUtil";
 
 const HeroCarousel: React.FC = React.memo(() => {
   const slides = useMemo(
@@ -12,7 +18,9 @@ const HeroCarousel: React.FC = React.memo(() => {
           <View style={styles.heroTextBlock}>
             <View style={styles.heroBadge}>
               <View style={styles.heroBadgeDot} />
-              <Text style={styles.heroBadgeText}>Available Now</Text>
+              <Text style={styles.heroBadgeText}>
+                Genetic One (Available Now)
+              </Text>
             </View>
             <Text style={styles.heroHeadingLine}>
               Start Your DNA Journey with Genetic One by Nucleotide
@@ -34,7 +42,7 @@ const HeroCarousel: React.FC = React.memo(() => {
                 <View style={styles.bulletItem}>
                   <View style={styles.bulletDot} />
                   <Text style={styles.bulletText}>
-                    635+ drug metabolism insights
+                    635+ drug metabolism insights (Pharmacogenomics)
                   </Text>
                 </View>
               </View>
@@ -58,36 +66,46 @@ const HeroCarousel: React.FC = React.memo(() => {
             </View>
           </View>
           <View style={styles.heroMedia}>
-            <View style={styles.mediaPlaceholder} />
+            <Image source={SliderGeneticOne} style={styles.heroImage} />
           </View>
         </View>
       </View>,
       <View key="slide-hero-2" style={styles.heroContainer}>
         <View style={styles.heroContent}>
           <View style={styles.heroTextBlock}>
-            <View style={styles.heroBadge}>
-              <View style={styles.heroBadgeDot} />
-              <Text style={styles.heroBadgeText}>Available Now</Text>
+            <View
+              style={[
+                styles.heroBadge,
+                { backgroundColor: semantic.interactive.orange + "2A" },
+              ]}
+            >
+              <View style={styles.heroBadgeOrangeDot} />
+              <Text
+                style={[
+                  styles.heroBadgeText,
+                  { color: semantic.interactive.orange },
+                ]}
+              >
+                Genetic One Plus (Coming Soon)
+              </Text>
             </View>
-            <Text style={styles.heroHeadingLine}>Start Your DNA Journey</Text>
-            <Text style={styles.heroHeadingLine}>with Genetic One by</Text>
-            <Text style={styles.heroHeadingBrand}>Nucleotide</Text>
+            <Text style={styles.heroHeadingLine}>Full Genome. Full Power</Text>
             <Text style={styles.heroDescription}>
-              Our flagship test that decodes your DNA to reveal disease risk,
-              drug response, vitamin needs, and cognitive insights.
+              Genetic One Plus is our advanced whole-genome sequencing service
+              that covers every letter of your DNA for unmatched precision.
             </Text>
             <View style={styles.bulletRow}>
               <View style={styles.bulletCol}>
                 <View style={styles.bulletItem}>
                   <View style={styles.bulletDot} />
                   <Text style={styles.bulletText}>
-                    600+ diseases across 19 categories
+                    Entire genome decoded - 3+ billion base pairs
                   </Text>
                 </View>
                 <View style={styles.bulletItem}>
                   <View style={styles.bulletDot} />
                   <Text style={styles.bulletText}>
-                    635+ drug metabolism insights
+                    Covers rare & complex genetic conditions
                   </Text>
                 </View>
               </View>
@@ -95,52 +113,66 @@ const HeroCarousel: React.FC = React.memo(() => {
                 <View style={styles.bulletItem}>
                   <View style={styles.bulletDot} />
                   <Text style={styles.bulletText}>
-                    Vitamin profiling for essential nutrients
+                    Lifetime re-analysis as science evolves
                   </Text>
                 </View>
                 <View style={styles.bulletItem}>
                   <View style={styles.bulletDot} />
                   <Text style={styles.bulletText}>
-                    IQ & Intelligence markers across cognition
+                    Highest resolution for clinical-grade insights
                   </Text>
                 </View>
               </View>
             </View>
             <View style={styles.heroActions}>
-              <PrimaryButton label="Order Genetic One" />
+              <PrimaryButton label="Order Genetic One Today" />
             </View>
           </View>
           <View style={styles.heroMedia}>
-            <View style={styles.mediaPlaceholder} />
+            <Image source={SliderGeneticOnePlus} style={styles.heroImage} />
           </View>
         </View>
       </View>,
       <View key="slide-hero-3" style={styles.heroContainer}>
         <View style={styles.heroContent}>
           <View style={styles.heroTextBlock}>
-            <View style={styles.heroBadge}>
-              <View style={styles.heroBadgeDot} />
-              <Text style={styles.heroBadgeText}>Available Now</Text>
+            <View
+              style={[
+                styles.heroBadge,
+                { backgroundColor: semantic.interactive.orange + "2A" },
+              ]}
+            >
+              <View style={styles.heroBadgeOrangeDot} />
+              <Text
+                style={[
+                  styles.heroBadgeText,
+                  { color: semantic.interactive.orange },
+                ]}
+              >
+                Gut Microbiome (Coming Soon)
+              </Text>
             </View>
-            <Text style={styles.heroHeadingLine}>Start Your DNA Journey</Text>
-            <Text style={styles.heroHeadingLine}>with Genetic One by</Text>
-            <Text style={styles.heroHeadingBrand}>Nucleotide</Text>
+            <Text style={styles.heroHeadingLine}>
+              Your Gut, Your Second Brain
+            </Text>
+            {/* <Text style={styles.heroHeadingLine}>with Genetic One by</Text>
+            <Text style={styles.heroHeadingBrand}>Nucleotide</Text> */}
             <Text style={styles.heroDescription}>
-              Our flagship test that decodes your DNA to reveal disease risk,
-              drug response, vitamin needs, and cognitive insights.
+              Discover how your microbiome impacts digestion, immunity, mood,
+              and chronic disease risk.
             </Text>
             <View style={styles.bulletRow}>
               <View style={styles.bulletCol}>
                 <View style={styles.bulletItem}>
                   <View style={styles.bulletDot} />
                   <Text style={styles.bulletText}>
-                    600+ diseases across 19 categories
+                    Gut diversity & barrier integrity
                   </Text>
                 </View>
                 <View style={styles.bulletItem}>
                   <View style={styles.bulletDot} />
                   <Text style={styles.bulletText}>
-                    635+ drug metabolism insights
+                    Dysbiosis detection with probiotic/prebiotic guidance
                   </Text>
                 </View>
               </View>
@@ -148,28 +180,95 @@ const HeroCarousel: React.FC = React.memo(() => {
                 <View style={styles.bulletItem}>
                   <View style={styles.bulletDot} />
                   <Text style={styles.bulletText}>
-                    Vitamin profiling for essential nutrients
+                    SCFA (short-chain fatty acids) potential
                   </Text>
                 </View>
                 <View style={styles.bulletItem}>
                   <View style={styles.bulletDot} />
                   <Text style={styles.bulletText}>
-                    IQ & Intelligence markers across cognition
+                    - Links to mood, digestion, and inflammation
                   </Text>
                 </View>
               </View>
             </View>
             <View style={styles.heroActions}>
-              <PrimaryButton label="Order Genetic One" />
+              <PrimaryButton label="Order Genetic One Today" />
             </View>
           </View>
           <View style={styles.heroMedia}>
-            <View style={styles.mediaPlaceholder} />
+            <Image source={SliderGutMicrobiome} style={styles.heroImage} />
+          </View>
+        </View>
+      </View>,
+      <View key="slide-hero-4" style={styles.heroContainer}>
+        <View style={styles.heroContent}>
+          <View style={styles.heroTextBlock}>
+            <View
+              style={[
+                styles.heroBadge,
+                { backgroundColor: semantic.interactive.orange + "2A" },
+              ]}
+            >
+              <View style={styles.heroBadgeOrangeDot} />
+              <Text
+                style={[
+                  styles.heroBadgeText,
+                  { color: semantic.interactive.orange },
+                ]}
+              >
+                Blood & Urine Biomarkers (Coming Soon)
+              </Text>
+            </View>
+            <Text style={styles.heroHeadingLine}>
+              Decode Your Body’s Daily Signals
+            </Text>
+            {/* <Text style={styles.heroHeadingLine}>with Genetic One by</Text>
+          <Text style={styles.heroHeadingBrand}>Nucleotide</Text> */}
+            <Text style={styles.heroDescription}>
+              Track key biomarkers for metabolic health, inflammation, and
+              nutrient balance.
+            </Text>
+            <View style={styles.bulletRow}>
+              <View style={styles.bulletCol}>
+                <View style={styles.bulletItem}>
+                  <View style={styles.bulletDot} />
+                  <Text style={styles.bulletText}>
+                    Lipids, glucose & hormonal health
+                  </Text>
+                </View>
+                <View style={styles.bulletItem}>
+                  <View style={styles.bulletDot} />
+                  <Text style={styles.bulletText}>
+                    Vitamin & micronutrient status
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.bulletCol}>
+                <View style={styles.bulletItem}>
+                  <View style={styles.bulletDot} />
+                  <Text style={styles.bulletText}>
+                    Oxidative stress & inflammation markers
+                  </Text>
+                </View>
+                <View style={styles.bulletItem}>
+                  <View style={styles.bulletDot} />
+                  <Text style={styles.bulletText}>
+                    Integrates with lifestyle and activity data
+                  </Text>
+                </View>
+              </View>
+            </View>
+            <View style={styles.heroActions}>
+              <PrimaryButton label="Order Genetic One Today" />
+            </View>
+          </View>
+          <View style={styles.heroMedia}>
+            <Image source={SliderBloodUrineMarkers} style={styles.heroImage} />
           </View>
         </View>
       </View>,
     ],
-    [],
+    []
   );
 
   return (
@@ -185,30 +284,28 @@ const styles = StyleSheet.create({
   },
   heroContainer: {
     paddingVertical: 50,
-    width: '70%',
-    height: '100%',
-    alignSelf: 'center',
+    width: "70%",
+    height: "100%",
+    alignSelf: "center",
   },
   heroContent: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: 24,
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   heroTextBlock: {
     flex: 1,
   },
   heroMedia: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
-  mediaPlaceholder: {
-    height: 300,
-    width: '80%',
-    borderRadius: 20,
-    backgroundColor: semantic.background.tertiary,
-    borderWidth: 1,
-    borderColor: semantic.border.light,
+  heroImage: {
+    height: 500,
+    width: "100%",
+    borderRadius: 24,
   },
   heroHeadingLine: {
     color: semantic.text.primary,
@@ -229,16 +326,16 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   heroActions: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: 12,
     marginTop: 25,
     marginBottom: 25,
   },
   heroBadge: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    alignSelf: 'flex-start',
-    backgroundColor: status.success + '1A', // 10% opacity
+    flexDirection: "row",
+    alignItems: "center",
+    alignSelf: "flex-start",
+    backgroundColor: status.success + "1A", // 10% opacity
     paddingHorizontal: 10,
     paddingVertical: 6,
     borderRadius: 999,
@@ -251,13 +348,20 @@ const styles = StyleSheet.create({
     backgroundColor: status.success,
     marginRight: 8,
   },
+  heroBadgeOrangeDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: semantic.interactive.orange,
+    marginRight: 8,
+  },
   heroBadgeText: {
     fontSize: 12,
     color: status.success,
     fontFamily: poppinsWeights.medium,
   },
   bulletRow: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: 16,
     marginTop: 12,
   },
@@ -266,16 +370,16 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   bulletItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   bulletDot: {
     width: 8,
     height: 8,
     borderRadius: 8,
-    backgroundColor: 'rgba(0,0,0,0.8)',
+    backgroundColor: "rgba(0,0,0,0.8)",
     marginRight: 8,
-    textAlignVertical: 'center',
+    textAlignVertical: "center",
   },
   bulletText: {
     fontSize: 14,

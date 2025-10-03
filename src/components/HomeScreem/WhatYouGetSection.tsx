@@ -1,7 +1,8 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Section, PrimaryButton } from '..';
-import { semantic } from '../../utils/colors';
+import React from "react";
+import { View, Text, StyleSheet, Image } from "react-native";
+import { Section, PrimaryButton } from "..";
+import { semantic } from "../../utils/colors";
+import { Images } from "../../utils/imageUtil";
 import {
   IcGeneticDisease,
   IcGeneticPill,
@@ -9,8 +10,8 @@ import {
   IcGeneticVitamin,
   IcGeneticCognitive,
   IcGeneticFutureProof,
-} from '../../utils/iconUtil';
-import { poppinsWeights } from '../../utils/fonts';
+} from "../../utils/iconUtil";
+import { poppinsWeights } from "../../utils/fonts";
 
 const WhatYouGetSection: React.FC = () => {
   return (
@@ -71,7 +72,13 @@ const WhatYouGetSection: React.FC = () => {
         </View>
 
         <View style={styles.featuresCenter}>
-          <View style={styles.mobilePreview}></View>
+          <View style={styles.mobilePreview}>
+            <Image
+              source={Images.geneticOneImage}
+              style={styles.previewImage}
+              // resizeMode="contain"
+            />
+          </View>
           <View style={styles.centerCta}>
             <PrimaryButton
               label="View Sample Report"
@@ -131,39 +138,43 @@ const WhatYouGetSection: React.FC = () => {
 
 const styles = StyleSheet.create({
   sectionBg: {
-    backgroundColor: 'rgba(136,107,249,0.04)',
+    backgroundColor: "rgba(136,107,249,0.04)",
   },
   featuresShowcase: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "flex-start",
+    justifyContent: "space-between",
     gap: 24,
-    width: '70%',
-    alignSelf: 'center',
+    width: "70%",
+    alignSelf: "center",
   },
   featuresCol: {
     flex: 1,
   },
   featuresCenter: {
     width: 380,
-    alignItems: 'center',
+    alignItems: "center",
   },
   mobilePreview: {
     width: 380,
     height: 440,
-    backgroundColor: semantic.background.tertiary,
+    // backgroundColor: semantic.background.tertiary,
     borderRadius: 16,
     borderWidth: 1,
     borderColor: semantic.border.light,
-    alignItems: 'center',
-    justifyContent: 'center',
-    overflow: 'hidden',
+    alignItems: "center",
+    justifyContent: "center",
+    overflow: "hidden",
+  },
+  previewImage: {
+    width: "100%",
+    height: "100%",
   },
   centerCta: {
     marginTop: 30,
   },
   inlineButton: {
-    alignSelf: 'flex-start',
+    alignSelf: "flex-start",
     marginLeft: 20,
   },
   featureRowDivider: {
@@ -176,15 +187,15 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   featureRow: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: 12,
-    alignItems: 'flex-start',
+    alignItems: "flex-start",
   },
   featureIcon: {
     width: 36,
     height: 36,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     marginTop: 2,
   },
   featureTitle: {
@@ -192,8 +203,8 @@ const styles = StyleSheet.create({
     fontFamily: poppinsWeights.semiBold,
     color: semantic.text.primary,
     marginBottom: 0,
-    alignSelf: 'center',
-    textAlign: 'center',
+    alignSelf: "center",
+    textAlign: "center",
   },
   featureDescription: {
     fontSize: 14,

@@ -160,8 +160,13 @@ const NavigationMenu: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: semantic.background.primary,
-    position: "relative",
-    zIndex: 1000,
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    width: "100%",
+    height: 80,
+    zIndex: 9999,
     borderBottomWidth: 1,
     borderBottomColor: semantic.border.light,
     shadowColor: semantic.shadow.light,
@@ -171,7 +176,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.1,
     shadowRadius: 4,
-    elevation: 3,
+    elevation: 10,
   },
   header: {
     flexDirection: "row",
@@ -182,6 +187,7 @@ const styles = StyleSheet.create({
     maxWidth: 1440,
     alignSelf: "center",
     width: "100%",
+    height: "100%",
   },
   leftContainer: {
     flex: 1,

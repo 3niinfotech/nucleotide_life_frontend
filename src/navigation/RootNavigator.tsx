@@ -12,7 +12,7 @@ import {
 
 // Import navigators
 import AuthStackNavigator from "./AuthStackNavigator";
-import { NavigationMenu, Footer } from "../components";
+import { Footer } from "../components";
 import ContentRenderer from "../components/ContentRenderer";
 import RequestOTPModal from "../components/shared/RequestOTPModal";
 import OTPModal from "../components/shared/OTPModal";
@@ -56,50 +56,51 @@ const RootNavigator: React.FC = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <NavigationContainer
-        theme={{
-          dark: false,
-          colors: {
-            primary: semantic.interactive.primary,
-            background: semantic.background.primary,
-            card: semantic.background.primary,
-            text: semantic.text.primary,
-            border: semantic.border.light,
-            notification: semantic.interactive.primary,
-          },
-          fonts: {
-            regular: {
-              fontFamily: "System",
-              fontWeight: "400",
+    <View style={styles.rootContainer}>
+      <View style={styles.scrollableContainer}>
+        <NavigationContainer
+          theme={{
+            dark: false,
+            colors: {
+              primary: semantic.interactive.primary,
+              background: semantic.background.primary,
+              card: semantic.background.primary,
+              text: semantic.text.primary,
+              border: semantic.border.light,
+              notification: semantic.interactive.primary,
             },
-            medium: {
-              fontFamily: "System",
-              fontWeight: "500",
+            fonts: {
+              regular: {
+                fontFamily: "System",
+                fontWeight: "400",
+              },
+              medium: {
+                fontFamily: "System",
+                fontWeight: "500",
+              },
+              bold: {
+                fontFamily: "System",
+                fontWeight: "700",
+              },
+              heavy: {
+                fontFamily: "System",
+                fontWeight: "900",
+              },
             },
-            bold: {
-              fontFamily: "System",
-              fontWeight: "700",
-            },
-            heavy: {
-              fontFamily: "System",
-              fontWeight: "900",
-            },
-          },
-        }}
-      >
-        {isAuthenticated ? (
-          <View style={styles.mainContainer}>
-            <NavigationMenu />
-            <View style={styles.contentContainer}>
-              <ContentRenderer />
+          }}
+        >
+          {isAuthenticated ? (
+            <View style={styles.mainContainer}>
+              <View style={styles.contentContainer}>
+                <ContentRenderer />
+              </View>
+              <Footer />
             </View>
-            <Footer />
-          </View>
-        ) : (
-          <AuthStackNavigator />
-        )}
-      </NavigationContainer>
+          ) : (
+            <AuthStackNavigator />
+          )}
+        </NavigationContainer>
+      </View>
 
       {/* Global RequestOTP Modal */}
       <RequestOTPModal
@@ -125,9 +126,12 @@ const RootNavigator: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
+  rootContainer: {
     flex: 1,
     backgroundColor: semantic.background.primary,
+  },
+  scrollableContainer: {
+    flex: 1,
   },
   mainContainer: {
     flex: 1,

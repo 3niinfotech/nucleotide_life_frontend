@@ -25,6 +25,21 @@ export { default as HealthJourney5 } from "../assets/imgs/img_health_journy_2.pn
 
 export { default as PaymentOption } from "../assets/imgs/img_payment_option.png";
 
+// Hero Carousel Slider Images
+export { default as SliderGeneticOne } from "../assets/imgs/slider_genetic_one_image.png";
+export { default as SliderGeneticOnePlus } from "../assets/imgs/slider_genetic_oneplus_image.png";
+export { default as SliderGutMicrobiome } from "../assets/imgs/slider_gut_microbiome_image.png";
+export { default as SliderBloodUrineMarkers } from "../assets/imgs/slider_blood_and_urine_markers_image.png";
+
+// How It Works Section Images
+export { default as HowItWorks1 } from "../assets/imgs/how_works_1.png";
+export { default as HowItWorks2 } from "../assets/imgs/how_works_2.png";
+export { default as HowItWorks3 } from "../assets/imgs/how_works_3.png";
+export { default as HowItWorks4 } from "../assets/imgs/how_works_4.png";
+
+// What You Get Section Images
+export { default as GeneticOneImage } from "../assets/imgs/genetic_one_image.png";
+
 // Thumbnail Images - using product detail images
 export const PhoneThumbnail = require("../assets/imgs/img_product_details_1.png");
 export const DocumentThumbnail = require("../assets/imgs/img_product_details_2.png");
@@ -36,6 +51,15 @@ import ImgAuthorAvatarImport from "../assets/imgs/img_author_avatar.png";
 import ImgFooterBackNucleotideImport from "../assets/imgs/footer_back_nucleotide.png";
 import ProductImgImport from "../assets/imgs/product_img.png";
 import PaymentOptionImport from "../assets/imgs/img_payment_option.png";
+import SliderGeneticOneImport from "../assets/imgs/slider_genetic_one_image.png";
+import SliderGeneticOnePlusImport from "../assets/imgs/slider_genetic_oneplus_image.png";
+import SliderGutMicrobiomeImport from "../assets/imgs/slider_gut_microbiome_image.png";
+import SliderBloodUrineMarkersImport from "../assets/imgs/slider_blood_and_urine_markers_image.png";
+import HowItWorks1Import from "../assets/imgs/how_works_1.png";
+import HowItWorks2Import from "../assets/imgs/how_works_2.png";
+import HowItWorks3Import from "../assets/imgs/how_works_3.png";
+import HowItWorks4Import from "../assets/imgs/how_works_4.png";
+import GeneticOneImageImport from "../assets/imgs/genetic_one_image.png";
 
 export const Images = {
   // Author Images
@@ -62,4 +86,16 @@ export const Images = {
   collectionThumbnail: require("../assets/imgs/img_product_details_4.png"),
   // Payment Option Images
   paymentOption: PaymentOptionImport,
+  // Hero Carousel Slider Images
+  sliderGeneticOne: SliderGeneticOneImport,
+  sliderGeneticOnePlus: SliderGeneticOnePlusImport,
+  sliderGutMicrobiome: SliderGutMicrobiomeImport,
+  sliderBloodUrineMarkers: SliderBloodUrineMarkersImport,
+  // How It Works Section Images
+  howItWorks1: HowItWorks1Import,
+  howItWorks2: HowItWorks2Import,
+  howItWorks3: HowItWorks3Import,
+  howItWorks4: HowItWorks4Import,
+  // What You Get Section Images
+  geneticOneImage: GeneticOneImageImport,
 } as const;

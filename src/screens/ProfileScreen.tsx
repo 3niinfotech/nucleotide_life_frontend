@@ -208,11 +208,10 @@ const ProfileScreen: React.FC = () => {
       flexDirection: "row",
       justifyContent: "space-between",
       alignItems: "flex-start",
-      marginBottom: 12,
     },
     orderTitle: {
       fontFamily: poppinsWeights.semiBold,
-      fontSize: 16,
+      fontSize: 18,
       color: semantic.text.primary,
       flex: 1,
       marginRight: 12,
@@ -225,11 +224,16 @@ const ProfileScreen: React.FC = () => {
     },
     viewDetailsText: {
       fontFamily: poppinsWeights.medium,
-      fontSize: 12,
+      fontSize: 16,
       color: semantic.background.primary,
     },
     orderDetails: {
-      marginBottom: 12,
+      // marginBottom: 12,
+    },
+    orderDetailTextBold: {
+      fontFamily: poppinsWeights.semiBold,
+      fontSize: 14,
+      color: semantic.text.primary,
     },
     orderDetailText: {
       fontFamily: poppinsWeights.regular,
@@ -237,14 +241,15 @@ const ProfileScreen: React.FC = () => {
       color: semantic.text.secondary,
       marginBottom: 4,
     },
-    orderFooter: {
-      borderTopWidth: 1,
-      borderTopColor: semantic.border.light,
-      paddingTop: 12,
+    orderDetailRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
     },
+    orderFooter: {},
     deliveryStatus: {
-      fontFamily: poppinsWeights.medium,
-      fontSize: 14,
+      fontFamily: poppinsWeights.regular,
+      fontSize: 18,
       color: semantic.text.primary,
       textAlign: "right",
     },
@@ -298,19 +303,26 @@ const ProfileScreen: React.FC = () => {
           </View>
           <View style={styles.orderDetails}>
             <Text style={styles.orderDetailText}>
-              Quantity : {order.quantity}
+              Quantity :{" "}
+              <Text style={styles.orderDetailTextBold}>{order.quantity}</Text>
             </Text>
             <Text style={styles.orderDetailText}>
-              Total Paid : {order.totalPaid}
+              Total Paid :{" "}
+              <Text style={styles.orderDetailTextBold}>{order.totalPaid}</Text>
             </Text>
-            <Text style={styles.orderDetailText}>
-              Reference No : {order.referenceNo}
-            </Text>
-          </View>
-          <View style={styles.orderFooter}>
-            <Text style={styles.deliveryStatus}>
-              {order.status} {order.deliverDate}
-            </Text>
+            <View style={styles.orderDetailRow}>
+              <Text style={styles.orderDetailText}>
+                Reference No :{" "}
+                <Text style={styles.orderDetailTextBold}>
+                  {order.referenceNo}
+                </Text>
+              </Text>
+              <View style={styles.orderFooter}>
+                <Text style={styles.deliveryStatus}>
+                  {order.status} {order.deliverDate}
+                </Text>
+              </View>
+            </View>
           </View>
         </View>
       ))}
