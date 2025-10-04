@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, ViewStyle } from "react-native";
 import { semantic } from "../../utils/colors";
-import { useResponsiveFontUtils } from "../../hooks";
+import { useResponsiveContext } from "../../contexts/ResponsiveContext";
 
 type IconProp = React.ReactNode | React.ComponentType<any>;
 
@@ -13,7 +13,7 @@ type Props = {
 };
 
 const FeatureTile: React.FC<Props> = ({ title, description, icon, style }) => {
-  const { getResponsiveStyle } = useResponsiveFontUtils();
+  const { getResponsiveStyle } = useResponsiveContext();
 
   const renderIcon = () => {
     if (!icon) return null;

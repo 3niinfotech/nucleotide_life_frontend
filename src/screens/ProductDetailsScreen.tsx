@@ -10,7 +10,7 @@ import {
 import { useAppSelector, useAppDispatch } from "../hooks";
 import { semantic, primary } from "../utils/colors";
 import { navigateToCheckout } from "../store/slices/navigationSlice";
-import { useResponsiveFontUtils } from "../hooks";
+import { useResponsiveContext } from "../contexts/ResponsiveContext";
 import PrimaryButton from "../components/shared/PrimaryButton";
 import { HowItWorksSection, HealthJourneysSection } from "../components";
 import {
@@ -49,7 +49,7 @@ const thumbnails = [
 ];
 
 const ProductDetailsScreen: React.FC = () => {
-  const { getResponsiveStyle } = useResponsiveFontUtils();
+  const { getResponsiveStyle } = useResponsiveContext();
   const [selectedThumbnail, setSelectedThumbnail] = useState(1);
   const { productId } = useAppSelector((state: any) => state.navigation);
   const dispatch = useAppDispatch();

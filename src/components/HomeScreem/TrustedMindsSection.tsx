@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { Section } from "..";
 import { semantic, primary } from "../../utils/colors";
-import { useResponsiveFontUtils } from "../../hooks";
+import { useResponsiveContext } from "../../contexts/ResponsiveContext";
 
 type Doctor = {
   id: string;
@@ -21,8 +21,7 @@ type Doctor = {
 const DoctorSeparator: React.FC = () => <View style={styles.separator} />;
 
 const TrustedMindsSection: React.FC = () => {
-  const { getResponsiveStyle, getScreenSizeCategory } =
-    useResponsiveFontUtils();
+  const { getResponsiveStyle, getScreenSizeCategory } = useResponsiveContext();
   const isSmallScreen = ["smallMobile", "mobile", "largeMobile"].includes(
     getScreenSizeCategory()
   );
@@ -154,19 +153,28 @@ const TrustedMindsSection: React.FC = () => {
                 style={[
                   styles.doctorCard,
                   styles.doctorCardPurple,
+                  isSmallScreen && styles.smallScreenDoctorCard,
                   { width: CARD_WIDTH },
                 ]}
               >
                 <Image
                   source={{ uri: item.photo }}
-                  style={styles.doctorImage}
+                  style={[
+                    styles.doctorImage,
+                    isSmallScreen && styles.smallScreenDoctorImage,
+                  ]}
                   resizeMode="cover"
                 />
-                <View style={styles.doctorInfo}>
+                <View
+                  style={[
+                    styles.doctorInfo,
+                    isSmallScreen && styles.smallScreenDoctorInfo,
+                  ]}
+                >
                   <Text
                     style={[
                       styles.doctorName,
-                      getResponsiveStyle("semiBold", 20),
+                      getResponsiveStyle("semiBold", 18),
                     ]}
                     numberOfLines={1}
                     ellipsizeMode="tail"
@@ -176,9 +184,9 @@ const TrustedMindsSection: React.FC = () => {
                   <Text
                     style={[
                       styles.doctorTitle,
-                      getResponsiveStyle("regular", 16),
+                      getResponsiveStyle("regular", 14),
                     ]}
-                    numberOfLines={2}
+                    numberOfLines={3}
                     ellipsizeMode="tail"
                   >
                     {item.title}
@@ -240,6 +248,7 @@ const styles = StyleSheet.create({
     borderRadius: 14,
     overflow: "hidden",
     height: 320,
+    flexDirection: "column",
   },
   doctorCardPurple: {
     backgroundColor: "rgba(136,107,249,0.04)",
@@ -247,19 +256,25 @@ const styles = StyleSheet.create({
   doctorImage: {
     width: "100%",
     height: 220,
+    flexShrink: 0,
   },
   doctorInfo: {
     padding: 14,
     alignItems: "center",
     justifyContent: "center",
     flex: 1,
+    minHeight: 100,
   },
   doctorName: {
     color: semantic.text.primary,
+    textAlign: "center",
+    marginBottom: 4,
   },
   doctorTitle: {
     color: semantic.text.secondary,
-    marginTop: 4,
+    textAlign: "center",
+    lineHeight: 20,
+    flex: 1,
   },
   arrowButton: {
     width: 36,
@@ -290,6 +305,16 @@ const styles = StyleSheet.create({
   smallScreenDoctorsCarousel: {
     width: "100%",
     paddingHorizontal: 16,
+  },
+  smallScreenDoctorCard: {
+    height: 280,
+  },
+  smallScreenDoctorImage: {
+    height: 180,
+  },
+  smallScreenDoctorInfo: {
+    minHeight: 80,
+    padding: 12,
   },
 });
 

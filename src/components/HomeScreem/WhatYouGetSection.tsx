@@ -281,7 +281,6 @@ const styles = StyleSheet.create({
     color: semantic.text.primary,
     marginBottom: 0,
     alignSelf: "center",
-    textAlign: "center",
   },
   featureDescription: {
     color: semantic.text.secondary,

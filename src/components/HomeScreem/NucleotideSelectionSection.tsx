@@ -299,7 +299,7 @@ const styles = StyleSheet.create({
     borderColor: semantic.border.light,
     borderRadius: 12,
     padding: 16,
-    height: 300,
+    // height: 300,
     justifyContent: "space-between",
   },
   cardPopular: {
@@ -365,6 +365,7 @@ const styles = StyleSheet.create({
   orderButton: {
     justifyContent: "center",
     alignItems: "center",
+    marginTop: 12,
   },
   centerRow: {
     alignItems: "center",

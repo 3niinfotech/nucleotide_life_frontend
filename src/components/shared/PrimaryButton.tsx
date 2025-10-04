@@ -9,7 +9,7 @@ import {
   Platform,
 } from "react-native";
 import { semantic } from "../../utils/colors";
-import { useResponsiveFontUtils } from "../../hooks";
+import { useResponsiveContext } from "../../contexts/ResponsiveContext";
 
 type Props = {
   label: string;
@@ -35,7 +35,7 @@ const PrimaryButton: React.FC<Props> = React.memo(
     loading = false,
     testID,
   }) => {
-    const { getResponsiveTypography } = useResponsiveFontUtils();
+    const { getResponsiveTypography } = useResponsiveContext();
     const responsiveTypography = getResponsiveTypography();
 
     const textStyle = useMemo(() => {

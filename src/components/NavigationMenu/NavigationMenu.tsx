@@ -13,13 +13,14 @@ import {
   toggleMenu,
   closeMenu,
   openRequestOTPModal,
+  navigateToProductDetails,
 } from "../../store/slices/navigationSlice";
 import { semantic, primary } from "../../utils/colors";
-import { useResponsiveFontUtils } from "../../hooks";
+import { useResponsiveContext } from "../../contexts/ResponsiveContext";
 import { IcAppIcon } from "../../utils/iconUtil";
 
 const NavigationMenu: React.FC = () => {
-  const { getResponsiveStyle } = useResponsiveFontUtils();
+  const { getResponsiveStyle } = useResponsiveContext();
   const { activeSection, isMenuOpen } = useAppSelector(
     (state: any) => state.navigation
   );
@@ -35,6 +36,9 @@ const NavigationMenu: React.FC = () => {
   const handleMenuPress = (section: string) => {
     if (section === "login") {
       dispatch(openRequestOTPModal());
+      dispatch(closeMenu());
+    } else if (section === "products") {
+      dispatch(navigateToProductDetails("1 Genetic One – Personal Plan"));
       dispatch(closeMenu());
     } else {
       dispatch(setActiveSection(section));
@@ -80,12 +84,17 @@ const NavigationMenu: React.FC = () => {
                     style={[
                       styles.navText,
                       getResponsiveStyle("regular", 16),
-                      activeSection === item.id && styles.activeNavText,
+                      (activeSection === item.id ||
+                        (item.id === "products" &&
+                          activeSection === "product-details")) &&
+                        styles.activeNavText,
                     ]}
                   >
                     {item.label}
                   </Text>
-                  {activeSection === item.id && (
+                  {(activeSection === item.id ||
+                    (item.id === "products" &&
+                      activeSection === "product-details")) && (
                     <View style={styles.activeUnderline} />
                   )}
                 </TouchableOpacity>
@@ -159,14 +168,20 @@ const NavigationMenu: React.FC = () => {
                 key={item.id}
                 style={[
                   styles.mobileNavItem,
-                  activeSection === item.id && styles.activeMobileNavItem,
+                  (activeSection === item.id ||
+                    (item.id === "products" &&
+                      activeSection === "product-details")) &&
+                    styles.activeMobileNavItem,
                 ]}
                 onPress={() => handleMenuPress(item.id)}
               >
                 <Text
                   style={[
                     styles.mobileNavText,
-                    activeSection === item.id && styles.activeMobileNavText,
+                    (activeSection === item.id ||
+                      (item.id === "products" &&
+                        activeSection === "product-details")) &&
+                      styles.activeMobileNavText,
                   ]}
                 >
                   {item.label}

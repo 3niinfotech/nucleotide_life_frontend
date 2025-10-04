@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { View, Text, StyleSheet, StyleProp, ViewStyle } from "react-native";
 import { semantic } from "../../utils/colors";
-import { useResponsiveFontUtils } from "../../hooks";
+import { useResponsiveContext } from "../../contexts/ResponsiveContext";
 import PrimaryButton from "./PrimaryButton";
 
 type Props = {
@@ -16,7 +16,7 @@ type Props = {
 
 const Section: React.FC<Props> = React.memo(
   ({ title, subtitle, ctaLabel, onPressCta, children, style, testID }) => {
-    const { getResponsiveStyle } = useResponsiveFontUtils();
+    const { getResponsiveStyle } = useResponsiveContext();
 
     const hasHeader = useMemo(
       () => !!(title || subtitle || ctaLabel),

@@ -6,6 +6,7 @@ import RootNavigator from "./src/navigation/RootNavigator";
 import { useFonts } from "./src/hooks";
 import { View, Text, ActivityIndicator } from "react-native";
 import { NavigationMenu } from "./src/components";
+import { ResponsiveProvider } from "./src/contexts/ResponsiveContext";
 
 const App = () => {
   const { fontsLoaded, fontsError } = useFonts();
@@ -30,14 +31,16 @@ const App = () => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <View style={{ flex: 1, position: "relative" }}>
-          {/* Navigation Menu - Completely fixed, no scrolling possible */}
-          <NavigationMenu />
-          {/* Content area with proper spacing */}
-          <View style={{ flex: 1, paddingTop: 80 }}>
-            <RootNavigator />
+        <ResponsiveProvider>
+          <View style={{ flex: 1, position: "relative" }}>
+            {/* Navigation Menu - Completely fixed, no scrolling possible */}
+            <NavigationMenu />
+            {/* Content area with proper spacing */}
+            <View style={{ flex: 1, paddingTop: 80 }}>
+              <RootNavigator />
+            </View>
           </View>
-        </View>
+        </ResponsiveProvider>
       </PersistGate>
     </Provider>
   );
