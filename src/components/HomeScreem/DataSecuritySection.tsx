@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useMemo } from "react";
 import {
   View,
   Text,
@@ -7,11 +7,11 @@ import {
   LayoutAnimation,
   Platform,
   UIManager,
-} from 'react-native';
-import { semantic, gradients, special } from '../../utils/colors';
-import { fontStyles, poppinsWeights } from '../../utils/fonts';
-import LinearGradient from '../../mocks/LinearGradient';
-import PrimaryButton from '../shared/PrimaryButton';
+} from "react-native";
+import { semantic, gradients, special } from "../../utils/colors";
+import { fontStyles, poppinsWeights } from "../../utils/fonts";
+import LinearGradient from "../../mocks/LinearGradient";
+import PrimaryButton from "../shared/PrimaryButton";
 import {
   IcGeneticShieldStar,
   IcGeneticLock,
@@ -23,11 +23,12 @@ import {
   IcGeneticDelete,
   IcGeneticFullOwner,
   IcGeneticConfident,
-} from '../../utils/iconUtil';
-import Section from '../shared/Section';
+} from "../../utils/iconUtil";
+import Section from "../shared/Section";
+import { useResponsiveFontUtils } from "../../hooks";
 
 if (
-  Platform.OS === 'android' &&
+  Platform.OS === "android" &&
   UIManager.setLayoutAnimationEnabledExperimental
 ) {
   UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -36,64 +37,69 @@ if (
 const securityFeatures = [
   {
     icon: <IcGeneticShieldStar />,
-    title: 'Take off Aadhaar based KYC verification',
+    title: "Take off Aadhaar based KYC verification",
     description:
-      'Every test starts with verified authentication, preventing unauthorized access.',
+      "Every test starts with verified authentication, preventing unauthorized access.",
   },
   {
     icon: <IcGeneticLock />,
-    title: 'Military-Grade Encryption',
+    title: "Military-Grade Encryption",
     description:
-      'Your genetic data is protected with advanced encryption protocols.',
+      "Your genetic data is protected with advanced encryption protocols.",
   },
   {
     icon: <IcGeneticMasks />,
-    title: 'Anonymized Data',
+    title: "Anonymized Data",
     description:
-      'Your personal information is separated from genetic data for maximum privacy.',
+      "Your personal information is separated from genetic data for maximum privacy.",
   },
   {
     icon: <IcGeneticCheckmarkCircle />,
-    title: 'Consent-Based Access',
-    description: 'You control who can access your data and for what purposes.',
+    title: "Consent-Based Access",
+    description: "You control who can access your data and for what purposes.",
   },
   {
     icon: <IcGeneticGlobal />,
-    title: 'Global Compliance',
-    description: 'We meet international standards for genetic data protection.',
+    title: "Global Compliance",
+    description: "We meet international standards for genetic data protection.",
   },
   {
     icon: <IcGeneticServer />,
-    title: 'Long-Term Protection',
-    description: 'Your data remains secure throughout its entire lifecycle.',
+    title: "Long-Term Protection",
+    description: "Your data remains secure throughout its entire lifecycle.",
   },
   {
     icon: <IcGeneticInfinity />,
-    title: 'Lifetime Genetic Updates',
-    description: 'Secure access to new insights as genetic science advances.',
+    title: "Lifetime Genetic Updates",
+    description: "Secure access to new insights as genetic science advances.",
   },
 ];
 
 const bottomFeatures = [
   {
     icon: <IcGeneticFullOwner />,
-    title: 'Full ownership of your genetic data',
+    title: "Full ownership of your genetic data",
   },
   {
     icon: <IcGeneticFullOwner />,
-    title: 'Option to join or opt out of research programs',
+    title: "Option to join or opt out of research programs",
   },
   {
     icon: <IcGeneticDelete />,
-    title: 'Delete your data anytime',
+    title: "Delete your data anytime",
   },
   {
     icon: <IcGeneticConfident />,
-    title: 'Confidential reports only you can access',
+    title: "Confidential reports only you can access",
   },
 ];
 
 const DataSecuritySection: React.FC = React.memo(() => {
+  const { getResponsiveStyle, getScreenSizeCategory } =
+    useResponsiveFontUtils();
+  const isSmallScreen = ["smallMobile", "mobile", "largeMobile"].includes(
+    getScreenSizeCategory()
+  );
   const [expandedIndex, setExpandedIndex] = useState<number>(0);
 
   const memoizedSecurityFeatures = useMemo(() => securityFeatures, []);
@@ -104,7 +110,7 @@ const DataSecuritySection: React.FC = React.memo(() => {
       LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
       setExpandedIndex(expandedIndex === index ? -1 : index);
     },
-    [expandedIndex],
+    [expandedIndex]
   );
 
   return (
@@ -117,7 +123,12 @@ const DataSecuritySection: React.FC = React.memo(() => {
       style={styles.section}
     >
       {/* Security Features Accordion */}
-      <View style={styles.accordionWrap}>
+      <View
+        style={[
+          styles.accordionWrap,
+          isSmallScreen && styles.smallScreenAccordionWrap,
+        ]}
+      >
         {memoizedSecurityFeatures.map((feature, index) => {
           const isExpanded = expandedIndex === index;
           return (
@@ -132,7 +143,14 @@ const DataSecuritySection: React.FC = React.memo(() => {
               >
                 <View style={styles.itemHeader}>
                   <View style={styles.icon}>{feature.icon}</View>
-                  <Text style={styles.itemTitle}>{feature.title}</Text>
+                  <Text
+                    style={[
+                      styles.itemTitle,
+                      getResponsiveStyle("semiBold", 16),
+                    ]}
+                  >
+                    {feature.title}
+                  </Text>
                 </View>
                 <Text
                   style={[
@@ -140,12 +158,17 @@ const DataSecuritySection: React.FC = React.memo(() => {
                     isExpanded ? styles.chevronExpanded : null,
                   ]}
                 >
-                  {isExpanded ? '›' : '›'}
+                  {isExpanded ? "›" : "›"}
                 </Text>
               </TouchableOpacity>
               {isExpanded ? (
                 <View style={styles.answerWrap}>
-                  <Text style={styles.itemDescription}>
+                  <Text
+                    style={[
+                      styles.itemDescription,
+                      getResponsiveStyle("regular", 16),
+                    ]}
+                  >
                     {feature.description}
                   </Text>
                 </View>
@@ -161,7 +184,11 @@ const DataSecuritySection: React.FC = React.memo(() => {
           {memoizedBottomFeatures.map((f, idx) => (
             <View key={`bf-${idx}`} style={styles.bottomItem}>
               <View style={styles.bottomIconWrap}>{f.icon}</View>
-              <Text style={styles.bottomText}>{f.title}</Text>
+              <Text
+                style={[styles.bottomText, getResponsiveStyle("regular", 12)]}
+              >
+                {f.title}
+              </Text>
             </View>
           ))}
         </View>
@@ -175,17 +202,13 @@ const DataSecuritySection: React.FC = React.memo(() => {
           end={{ x: 0, y: 1 }}
           style={styles.cta}
         >
-          <Text style={styles.ctaTitle}>Trust. Privacy. Innovation.</Text>
-          <Text style={styles.ctaSubtitle}>
+          <Text style={[styles.ctaTitle, getResponsiveStyle("semiBold", 20)]}>
+            Trust. Privacy. Innovation.
+          </Text>
+          <Text style={[styles.ctaSubtitle, getResponsiveStyle("regular", 16)]}>
             At Nucleotide, we deliver cutting-edge genetic insights while
             safeguarding your privacy at every step.
           </Text>
-          <PrimaryButton
-            label="Talk to Our Data Privacy Experts"
-            style={styles.ctaButton}
-            labelTextColor={special.coupon}
-            labelStyle={styles.ctaButtonLabel}
-          />
         </LinearGradient>
       </View>
     </Section>
@@ -197,12 +220,12 @@ const styles = StyleSheet.create({
     backgroundColor: special.purpleBg,
   },
   ctaWrap: {
-    width: '100%',
-    alignSelf: 'center',
+    width: "100%",
+    alignSelf: "center",
   },
   accordionWrap: {
-    width: '50%',
-    alignSelf: 'center',
+    width: "50%",
+    alignSelf: "center",
     gap: 12,
     marginTop: 8,
     marginBottom: 16,
@@ -212,7 +235,7 @@ const styles = StyleSheet.create({
     borderColor: semantic.border.light,
     borderRadius: 12,
     backgroundColor: semantic.background.primary,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   itemExpanded: {
     // emulate ring
@@ -224,43 +247,39 @@ const styles = StyleSheet.create({
   itemButton: {
     paddingHorizontal: 16,
     paddingVertical: 14,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   itemHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: 12,
   },
   icon: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   itemTitle: {
-    fontFamily: poppinsWeights.semiBold,
-    fontSize: 16,
     color: semantic.text.primary,
   },
   chevron: {
     color: semantic.text.secondary,
-    fontSize: 22,
-    transform: [{ rotate: '0deg' }],
+    transform: [{ rotate: "0deg" }],
   },
   chevronExpanded: {
-    transform: [{ rotate: '90deg' }],
+    transform: [{ rotate: "90deg" }],
   },
   answerWrap: {
     paddingHorizontal: 16,
     paddingBottom: 14,
   },
   itemDescription: {
-    fontFamily: poppinsWeights.regular,
-    fontSize: 16,
+    color: semantic.text.secondary,
   },
   bottomCard: {
-    width: '70%',
-    alignSelf: 'center',
+    width: "70%",
+    alignSelf: "center",
     backgroundColor: semantic.background.primary,
     borderRadius: 12,
     borderWidth: 1,
@@ -269,62 +288,54 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   bottomGrid: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: 12,
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
   },
   bottomItem: {
     flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: 8,
     minWidth: 0,
   },
   bottomIconWrap: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   bottomText: {
-    fontFamily: poppinsWeights.regular,
-    fontSize: 12,
     color: semantic.text.primary,
     flexShrink: 1,
-    textAlign: 'left',
   },
   cta: {
-    width: '50%',
-    alignSelf: 'center',
+    width: "50%",
+    alignSelf: "center",
     borderRadius: 16,
     paddingVertical: 24,
     paddingHorizontal: 16,
-    alignItems: 'center',
+    alignItems: "center",
     marginTop: 16,
   },
   ctaTitle: {
-    ...fontStyles.subsectionTitle,
     color: semantic.text.inverse,
     marginBottom: 6,
-    textAlign: 'center',
-    fontSize: 20,
-    fontWeight: '600',
   },
   ctaSubtitle: {
-    ...fontStyles.caption,
     color: semantic.text.inverse,
-    opacity: 0.8,
-    textAlign: 'center',
     marginBottom: 16,
-    fontSize: 16,
   },
   ctaButton: {
     backgroundColor: semantic.background.primary,
     borderRadius: 8,
-    alignSelf: 'center',
+    alignSelf: "center",
     marginVertical: 16,
   },
   ctaButtonLabel: {
-    fontWeight: '600',
-    fontSize: 12,
+    color: semantic.text.inverse,
+  },
+  smallScreenAccordionWrap: {
+    width: "100%",
+    paddingHorizontal: 16,
   },
 });
 

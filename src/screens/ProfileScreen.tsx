@@ -8,7 +8,7 @@ import {
   Platform,
 } from "react-native";
 import { semantic, primary } from "../utils/colors";
-import { poppinsWeights } from "../utils/fonts";
+import { useResponsiveFontUtils } from "../hooks";
 import { useAppDispatch } from "../hooks";
 import { setActiveSection } from "../store/slices/navigationSlice";
 import {
@@ -25,6 +25,7 @@ import {
 } from "../utils/iconUtil";
 
 const ProfileScreen: React.FC = () => {
+  const { getResponsiveStyle } = useResponsiveFontUtils();
   const dispatch = useAppDispatch();
   const [activeMenuItem, setActiveMenuItem] = useState("My Orders");
 
@@ -63,16 +64,12 @@ const ProfileScreen: React.FC = () => {
       marginRight: 16,
     },
     avatarText: {
-      fontFamily: poppinsWeights.semiBold,
-      fontSize: 16,
       color: semantic.background.primary,
     },
     userDetails: {
       flex: 1,
     },
     userName: {
-      fontFamily: poppinsWeights.semiBold,
-      fontSize: 16,
       color: semantic.text.primary,
       marginBottom: 8,
     },
@@ -88,13 +85,9 @@ const ProfileScreen: React.FC = () => {
       marginRight: 8,
     },
     userEmail: {
-      fontFamily: poppinsWeights.regular,
-      fontSize: 14,
       color: semantic.text.secondary,
     },
     userPhone: {
-      fontFamily: poppinsWeights.regular,
-      fontSize: 14,
       color: semantic.text.secondary,
     },
     editButton: {
@@ -111,8 +104,6 @@ const ProfileScreen: React.FC = () => {
       marginRight: 8,
     },
     editButtonText: {
-      fontFamily: poppinsWeights.medium,
-      fontSize: 14,
       color: semantic.text.secondary,
     },
     bottomSection: {
@@ -160,20 +151,15 @@ const ProfileScreen: React.FC = () => {
       alignItems: "center",
     },
     menuItemText: {
-      fontFamily: poppinsWeights.regular,
-      fontSize: 16,
       color: semantic.text.secondary,
     },
     activeMenuItemText: {
-      fontFamily: poppinsWeights.medium,
       color: primary.purple,
     },
     contentSection: {
       flex: 1,
     },
     sectionTitle: {
-      fontFamily: poppinsWeights.medium,
-      fontSize: 18,
       color: semantic.text.primary,
       marginBottom: 24,
       borderBottomWidth: 1,
@@ -181,8 +167,6 @@ const ProfileScreen: React.FC = () => {
       padding: 24,
     },
     placeholderText: {
-      fontFamily: poppinsWeights.regular,
-      fontSize: 16,
       color: semantic.text.secondary,
       textAlign: "center",
       marginTop: 40,
@@ -210,8 +194,6 @@ const ProfileScreen: React.FC = () => {
       alignItems: "flex-start",
     },
     orderTitle: {
-      fontFamily: poppinsWeights.semiBold,
-      fontSize: 18,
       color: semantic.text.primary,
       flex: 1,
       marginRight: 12,
@@ -223,21 +205,15 @@ const ProfileScreen: React.FC = () => {
       borderRadius: 6,
     },
     viewDetailsText: {
-      fontFamily: poppinsWeights.medium,
-      fontSize: 16,
       color: semantic.background.primary,
     },
     orderDetails: {
       // marginBottom: 12,
     },
     orderDetailTextBold: {
-      fontFamily: poppinsWeights.semiBold,
-      fontSize: 14,
       color: semantic.text.primary,
     },
     orderDetailText: {
-      fontFamily: poppinsWeights.regular,
-      fontSize: 14,
       color: semantic.text.secondary,
       marginBottom: 4,
     },
@@ -248,8 +224,6 @@ const ProfileScreen: React.FC = () => {
     },
     orderFooter: {},
     deliveryStatus: {
-      fontFamily: poppinsWeights.regular,
-      fontSize: 18,
       color: semantic.text.primary,
       textAlign: "right",
     },
@@ -289,36 +263,88 @@ const ProfileScreen: React.FC = () => {
 
   const renderMyOrders = () => (
     <View style={styles.contentSection}>
-      <Text style={styles.sectionTitle}>My Orders</Text>
+      <Text style={[styles.sectionTitle, getResponsiveStyle("medium", 18)]}>
+        My Orders
+      </Text>
       {orderHistory.map((order) => (
         <View key={order.id} style={styles.orderCard}>
           <View style={styles.orderHeader}>
-            <Text style={styles.orderTitle}>{order.title}</Text>
+            <Text
+              style={[styles.orderTitle, getResponsiveStyle("semiBold", 18)]}
+            >
+              {order.title}
+            </Text>
             <TouchableOpacity
               style={styles.viewDetailsButton}
               onPress={() => handleViewOrderDetails(order.id)}
             >
-              <Text style={styles.viewDetailsText}>View Details</Text>
+              <Text
+                style={[
+                  styles.viewDetailsText,
+                  getResponsiveStyle("medium", 16),
+                ]}
+              >
+                View Details
+              </Text>
             </TouchableOpacity>
           </View>
           <View style={styles.orderDetails}>
-            <Text style={styles.orderDetailText}>
+            <Text
+              style={[
+                styles.orderDetailText,
+                getResponsiveStyle("regular", 14),
+              ]}
+            >
               Quantity :{" "}
-              <Text style={styles.orderDetailTextBold}>{order.quantity}</Text>
+              <Text
+                style={[
+                  styles.orderDetailTextBold,
+                  getResponsiveStyle("semiBold", 14),
+                ]}
+              >
+                {order.quantity}
+              </Text>
             </Text>
-            <Text style={styles.orderDetailText}>
+            <Text
+              style={[
+                styles.orderDetailText,
+                getResponsiveStyle("regular", 14),
+              ]}
+            >
               Total Paid :{" "}
-              <Text style={styles.orderDetailTextBold}>{order.totalPaid}</Text>
+              <Text
+                style={[
+                  styles.orderDetailTextBold,
+                  getResponsiveStyle("semiBold", 14),
+                ]}
+              >
+                {order.totalPaid}
+              </Text>
             </Text>
             <View style={styles.orderDetailRow}>
-              <Text style={styles.orderDetailText}>
+              <Text
+                style={[
+                  styles.orderDetailText,
+                  getResponsiveStyle("regular", 14),
+                ]}
+              >
                 Reference No :{" "}
-                <Text style={styles.orderDetailTextBold}>
+                <Text
+                  style={[
+                    styles.orderDetailTextBold,
+                    getResponsiveStyle("semiBold", 14),
+                  ]}
+                >
                   {order.referenceNo}
                 </Text>
               </Text>
               <View style={styles.orderFooter}>
-                <Text style={styles.deliveryStatus}>
+                <Text
+                  style={[
+                    styles.deliveryStatus,
+                    getResponsiveStyle("regular", 18),
+                  ]}
+                >
                   {order.status} {order.deliverDate}
                 </Text>
               </View>
@@ -331,8 +357,10 @@ const ProfileScreen: React.FC = () => {
 
   const renderMyFamily = () => (
     <View style={styles.contentSection}>
-      <Text style={styles.sectionTitle}>My Family</Text>
-      <Text style={styles.placeholderText}>
+      <Text style={[styles.sectionTitle, getResponsiveStyle("medium", 18)]}>
+        My Family
+      </Text>
+      <Text style={[styles.placeholderText, getResponsiveStyle("regular", 16)]}>
         Family members will be displayed here.
       </Text>
     </View>
@@ -340,8 +368,10 @@ const ProfileScreen: React.FC = () => {
 
   const renderAddress = () => (
     <View style={styles.contentSection}>
-      <Text style={styles.sectionTitle}>Address</Text>
-      <Text style={styles.placeholderText}>
+      <Text style={[styles.sectionTitle, getResponsiveStyle("medium", 18)]}>
+        Address
+      </Text>
+      <Text style={[styles.placeholderText, getResponsiveStyle("regular", 16)]}>
         Address information will be displayed here.
       </Text>
     </View>
@@ -349,8 +379,10 @@ const ProfileScreen: React.FC = () => {
 
   const renderSettings = () => (
     <View style={styles.contentSection}>
-      <Text style={styles.sectionTitle}>Settings</Text>
-      <Text style={styles.placeholderText}>
+      <Text style={[styles.sectionTitle, getResponsiveStyle("medium", 18)]}>
+        Settings
+      </Text>
+      <Text style={[styles.placeholderText, getResponsiveStyle("regular", 16)]}>
         Settings options will be displayed here.
       </Text>
     </View>
@@ -358,8 +390,10 @@ const ProfileScreen: React.FC = () => {
 
   const renderSupport = () => (
     <View style={styles.contentSection}>
-      <Text style={styles.sectionTitle}>Support</Text>
-      <Text style={styles.placeholderText}>
+      <Text style={[styles.sectionTitle, getResponsiveStyle("medium", 18)]}>
+        Support
+      </Text>
+      <Text style={[styles.placeholderText, getResponsiveStyle("regular", 16)]}>
         Support information will be displayed here.
       </Text>
     </View>
@@ -410,25 +444,43 @@ const ProfileScreen: React.FC = () => {
       <View style={styles.topSection}>
         <View style={styles.profileInfo}>
           <View style={styles.avatar}>
-            <Text style={styles.avatarText}>NG</Text>
+            <Text
+              style={[styles.avatarText, getResponsiveStyle("semiBold", 16)]}
+            >
+              NG
+            </Text>
           </View>
           <View style={styles.userDetails}>
-            <Text style={styles.userName}>Nirav Gabani</Text>
+            <Text style={[styles.userName, getResponsiveStyle("semiBold", 16)]}>
+              Nirav Gabani
+            </Text>
             <View style={styles.contactInfo}>
               <View style={styles.contactItem}>
                 <IcMail style={styles.contactIcon} />
-                <Text style={styles.userEmail}>niravgabani@gmail.com</Text>
+                <Text
+                  style={[styles.userEmail, getResponsiveStyle("regular", 14)]}
+                >
+                  niravgabani@gmail.com
+                </Text>
               </View>
               <View style={styles.contactItem}>
                 <IcCalling style={styles.contactIcon} />
-                <Text style={styles.userPhone}>+91 98765 43210</Text>
+                <Text
+                  style={[styles.userPhone, getResponsiveStyle("regular", 14)]}
+                >
+                  +91 98765 43210
+                </Text>
               </View>
             </View>
           </View>
         </View>
         <TouchableOpacity style={styles.editButton}>
           <IcEdit style={styles.editIcon} />
-          <Text style={styles.editButtonText}>Edit Profile</Text>
+          <Text
+            style={[styles.editButtonText, getResponsiveStyle("medium", 14)]}
+          >
+            Edit Profile
+          </Text>
         </TouchableOpacity>
       </View>
 
@@ -449,6 +501,7 @@ const ProfileScreen: React.FC = () => {
             <Text
               style={[
                 styles.menuItemText,
+                getResponsiveStyle("regular", 16),
                 activeMenuItem === "My Orders" && styles.activeMenuItemText,
               ]}
             >
@@ -469,6 +522,7 @@ const ProfileScreen: React.FC = () => {
             <Text
               style={[
                 styles.menuItemText,
+                getResponsiveStyle("regular", 16),
                 activeMenuItem === "My Family" && styles.activeMenuItemText,
               ]}
             >
@@ -489,6 +543,7 @@ const ProfileScreen: React.FC = () => {
             <Text
               style={[
                 styles.menuItemText,
+                getResponsiveStyle("regular", 16),
                 activeMenuItem === "Address" && styles.activeMenuItemText,
               ]}
             >
@@ -509,6 +564,7 @@ const ProfileScreen: React.FC = () => {
             <Text
               style={[
                 styles.menuItemText,
+                getResponsiveStyle("regular", 16),
                 activeMenuItem === "Settings" && styles.activeMenuItemText,
               ]}
             >
@@ -529,6 +585,7 @@ const ProfileScreen: React.FC = () => {
             <Text
               style={[
                 styles.menuItemText,
+                getResponsiveStyle("regular", 16),
                 activeMenuItem === "Support" && styles.activeMenuItemText,
               ]}
             >
@@ -540,7 +597,11 @@ const ProfileScreen: React.FC = () => {
             <View style={styles.menuItemIcon}>
               <IcLogout />
             </View>
-            <Text style={styles.menuItemText}>Logout</Text>
+            <Text
+              style={[styles.menuItemText, getResponsiveStyle("regular", 16)]}
+            >
+              Logout
+            </Text>
           </TouchableOpacity>
         </View>
 

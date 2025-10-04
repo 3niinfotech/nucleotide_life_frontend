@@ -10,7 +10,6 @@ import {
 import { MainTabScreenProps } from "../navigation/types";
 import { semantic } from "../utils/colors";
 import { typography } from "../utils/fonts";
-import { NavigationHeader } from "../components";
 
 type Props = MainTabScreenProps<"Upload">;
 
@@ -64,7 +63,6 @@ const UploadScreen: React.FC<Props> = ({ navigation: _navigation }) => {
 
   return (
     <View style={styles.container}>
-      <NavigationHeader title="Upload DNA" />
       <ScrollView
         style={styles.scrollView}
         contentContainerStyle={styles.content}

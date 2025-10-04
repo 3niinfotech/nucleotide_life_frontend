@@ -1,20 +1,18 @@
 import React, { useState } from "react";
 import {
-  View,
-  Text,
-  StyleSheet,
   ScrollView,
+  StyleSheet,
+  Text,
   TouchableOpacity,
+  View,
 } from "react-native";
 import { useAppDispatch } from "../hooks";
 import { semantic, neutral } from "../utils/colors";
-import { poppinsWeights, typography } from "../utils/fonts";
-import PrimaryButton from "../components/shared/PrimaryButton";
-import { NavigationHeader } from "../components";
+import { useResponsiveFontUtils } from "../hooks";
 import NucleotideSelectionSection from "../components/HomeScreem/NucleotideSelectionSection";
+import TotalContainer from "../components/shared/TotalContainer";
 import RequestOTPModal from "../components/shared/RequestOTPModal";
 import OTPModal from "../components/shared/OTPModal";
-import TotalContainer from "../components/shared/TotalContainer";
 
 // Mock data for cart items
 const cartItems = [
@@ -54,6 +52,7 @@ const paymentMethods = [
 ];
 
 const CheckoutScreen: React.FC = () => {
+  const { getResponsiveStyle } = useResponsiveFontUtils();
   const dispatch = useAppDispatch();
   const [couponCode, setCouponCode] = useState("");
   const [quantities, setQuantities] = useState<Record<number, number>>(
@@ -186,7 +185,9 @@ const CheckoutScreen: React.FC = () => {
   const renderCartItem = (item: (typeof cartItems)[0]) => (
     <View style={[styles.planContainer, { marginTop: 10 }]} key={item.id}>
       <View style={styles.itemNameContainer}>
-        <Text style={styles.itemName}>{item.name}</Text>
+        <Text style={[styles.itemName, getResponsiveStyle("regular", 16)]}>
+          {item.name}
+        </Text>
       </View>
       <View style={styles.planTitleContainer}>
         <View style={styles.quantityContainer}>
@@ -194,24 +195,46 @@ const CheckoutScreen: React.FC = () => {
             style={styles.quantityButton}
             onPress={() => updateQuantity(item.id, quantities[item.id] - 1)}
           >
-            <Text style={styles.quantityButtonText}>-</Text>
+            <Text
+              style={[
+                styles.quantityButtonText,
+                getResponsiveStyle("regular", 25),
+              ]}
+            >
+              -
+            </Text>
           </TouchableOpacity>
-          <Text style={styles.quantityText}>{quantities[item.id]}</Text>
+          <Text
+            style={[styles.quantityText, getResponsiveStyle("regular", 18)]}
+          >
+            {quantities[item.id]}
+          </Text>
           <TouchableOpacity
             style={styles.quantityButton}
             onPress={() => updateQuantity(item.id, quantities[item.id] + 1)}
           >
-            <Text style={styles.quantityButtonText}>+</Text>
+            <Text
+              style={[
+                styles.quantityButtonText,
+                getResponsiveStyle("regular", 25),
+              ]}
+            >
+              +
+            </Text>
           </TouchableOpacity>
         </View>
         <View style={styles.priceInfo}>
-          <Text style={styles.currentPrice}>
+          <Text
+            style={[styles.currentPrice, getResponsiveStyle("regular", 20)]}
+          >
             {formatPrice(
               parseInt(item.currentPrice.replace(/[₹,]/g, "")) *
                 quantities[item.id]
             )}
           </Text>
-          <Text style={styles.originalPrice}>
+          <Text
+            style={[styles.originalPrice, getResponsiveStyle("regular", 14)]}
+          >
             MRP{" "}
             {formatPrice(
               parseInt(item.originalPrice.replace(/[₹,]/g, "")) *
@@ -267,14 +290,36 @@ const CheckoutScreen: React.FC = () => {
         <View style={styles.content}>
           {/* Left Container - Order Summary */}
           <View style={styles.leftContainer}>
-            <Text style={styles.sectionTitle}>Your Order Summary</Text>
+            <Text
+              style={[styles.sectionTitle, getResponsiveStyle("regular", 20)]}
+            >
+              Your Order Summary
+            </Text>
             <View style={styles.divider} />
 
             <View style={styles.planContainer}>
-              <Text style={styles.planTitle}>DNA Kit Plan</Text>
+              <Text
+                style={[styles.planTitle, getResponsiveStyle("regular", 16)]}
+              >
+                DNA Kit Plan
+              </Text>
               <View style={styles.planTitleContainer}>
-                <Text style={styles.columnHeader}>Quantity</Text>
-                <Text style={styles.columnHeader}>Total</Text>
+                <Text
+                  style={[
+                    styles.columnHeader,
+                    getResponsiveStyle("regular", 16),
+                  ]}
+                >
+                  Quantity
+                </Text>
+                <Text
+                  style={[
+                    styles.columnHeader,
+                    getResponsiveStyle("regular", 16),
+                  ]}
+                >
+                  Total
+                </Text>
               </View>
             </View>
             <View style={styles.divider} />
@@ -360,8 +405,6 @@ const styles = StyleSheet.create({
     paddingBottom: 16,
   },
   sectionTitle: {
-    fontSize: 20,
-    fontFamily: poppinsWeights.semiBold,
     color: semantic.text.primary,
     marginBottom: 16,
     paddingHorizontal: 24,
@@ -373,8 +416,6 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   planTitle: {
-    fontSize: 16,
-    fontFamily: poppinsWeights.regular,
     color: semantic.text.secondary,
   },
   planTitleContainer: {
@@ -384,8 +425,6 @@ const styles = StyleSheet.create({
     width: "30%",
   },
   columnHeader: {
-    fontSize: 16,
-    fontFamily: poppinsWeights.regular,
     color: semantic.text.secondary,
     textAlign: "center",
     alignSelf: "center",
@@ -405,8 +444,6 @@ const styles = StyleSheet.create({
     marginRight: 16,
   },
   itemName: {
-    fontSize: 16,
-    fontFamily: poppinsWeights.semiBold,
     color: semantic.text.primary,
     marginBottom: 8,
   },
@@ -427,13 +464,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   quantityButtonText: {
-    fontSize: 25,
-    fontFamily: poppinsWeights.regular,
     color: semantic.text.primary,
   },
   quantityText: {
-    fontSize: 18,
-    fontFamily: poppinsWeights.semiBold,
     color: semantic.text.primary,
     marginHorizontal: 8,
     minWidth: 16,
@@ -443,14 +476,10 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
   },
   currentPrice: {
-    fontSize: 20,
-    fontFamily: poppinsWeights.semiBold,
     color: semantic.text.primary,
     marginBottom: 4,
   },
   originalPrice: {
-    fontSize: 14,
-    fontFamily: poppinsWeights.regular,
     color: semantic.text.light,
     textDecorationLine: "line-through",
   },

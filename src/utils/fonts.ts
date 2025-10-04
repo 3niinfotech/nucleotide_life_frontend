@@ -100,12 +100,14 @@ export const createPoppinsStyle = (
   };
 };
 
-// Utility function to create responsive font sizes based on screen dimensions
+// Enhanced responsive font sizing with better breakpoints and scaling
 export const createResponsiveFontSize = (
   baseSize: number,
-  screenWidth?: number
+  screenWidth?: number,
+  screenHeight?: number,
+  accessibilityScale?: number
 ): number => {
-  // If no screen width provided, use platform-specific scaling
+  // If no screen dimensions provided, use platform-specific scaling
   if (!screenWidth) {
     return Platform.select({
       web: baseSize,
@@ -115,31 +117,44 @@ export const createResponsiveFontSize = (
     });
   }
 
-  // Define breakpoints for different screen sizes
+  // Enhanced breakpoints for better responsive design
   const breakpoints = {
-    mobile: 480,
-    tablet: 768,
-    desktop: 1024,
-    largeDesktop: 1440,
+    smallMobile: 320, // iPhone SE, small Android phones
+    mobile: 375, // Standard mobile phones
+    largeMobile: 414, // iPhone Plus, large Android phones
+    smallTablet: 768, // iPad Mini, small tablets
+    tablet: 1024, // iPad, standard tablets
+    desktop: 1280, // Small desktop screens
+    largeDesktop: 1440, // Large desktop screens
+    xlDesktop: 1920, // Extra large desktop screens
   };
 
-  // Calculate scaling factor based on screen width
+  // Calculate scaling factor based on screen width with more granular control
   let scaleFactor = 1;
 
-  if (screenWidth <= breakpoints.mobile) {
-    // Small mobile screens - reduce font size significantly
-    scaleFactor = 0.75;
-  } else if (screenWidth <= breakpoints.tablet) {
-    // Medium mobile screens - moderate reduction
-    scaleFactor = 0.85;
-  } else if (screenWidth <= breakpoints.desktop) {
-    // Tablet screens - slight reduction
+  if (screenWidth <= breakpoints.smallMobile) {
+    // Very small screens - significant reduction
+    scaleFactor = 0.7;
+  } else if (screenWidth <= breakpoints.mobile) {
+    // Small mobile screens - moderate reduction
+    scaleFactor = 0.8;
+  } else if (screenWidth <= breakpoints.largeMobile) {
+    // Large mobile screens - slight reduction
     scaleFactor = 0.9;
-  } else if (screenWidth <= breakpoints.largeDesktop) {
-    // Desktop screens - normal size
+  } else if (screenWidth <= breakpoints.smallTablet) {
+    // Small tablets - very slight reduction
+    scaleFactor = 0.95;
+  } else if (screenWidth <= breakpoints.tablet) {
+    // Standard tablets - normal size
     scaleFactor = 1;
+  } else if (screenWidth <= breakpoints.desktop) {
+    // Small desktop - normal size
+    scaleFactor = 1;
+  } else if (screenWidth <= breakpoints.largeDesktop) {
+    // Large desktop - slightly larger
+    scaleFactor = 1.05;
   } else {
-    // Large desktop screens - slightly larger
+    // Extra large desktop - larger
     scaleFactor = 1.1;
   }
 
@@ -151,7 +166,20 @@ export const createResponsiveFontSize = (
     default: 1,
   });
 
-  return Math.round(baseSize * scaleFactor * platformAdjustment);
+  // Apply accessibility scaling if provided (for Dynamic Type support)
+  const accessibilityMultiplier = accessibilityScale || 1;
+
+  // Calculate final size
+  const finalSize =
+    baseSize * scaleFactor * platformAdjustment * accessibilityMultiplier;
+
+  // Ensure minimum font size for readability
+  const minSize = Math.max(finalSize, 10);
+
+  // Ensure maximum font size to prevent UI breaking
+  const maxSize = Math.min(minSize, baseSize * 2);
+
+  return Math.round(maxSize);
 };
 
 // Typography styles using Poppins

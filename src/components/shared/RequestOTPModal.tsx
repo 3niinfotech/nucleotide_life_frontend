@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, TextInput, Modal } from "react-native";
 import { semantic, neutral } from "../../utils/colors";
-import { poppinsWeights } from "../../utils/fonts";
+import { useResponsiveFontUtils } from "../../hooks";
 import { IcPhone } from "../../utils/iconUtil";
 import PrimaryButton from "./PrimaryButton";
 
@@ -22,6 +22,7 @@ const RequestOTPModal: React.FC<RequestOTPModalProps> = ({
   onMobileNumberChange,
   onReset,
 }) => {
+  const { getResponsiveStyle } = useResponsiveFontUtils();
   // Reset mobile number when modal is closed
   //   useEffect(() => {
   //     if (!visible) {
@@ -55,14 +56,24 @@ const RequestOTPModal: React.FC<RequestOTPModalProps> = ({
           </View>
 
           {/* Modal Title */}
-          <Text style={styles.modalTitle}>Mobile Verification</Text>
+          <Text style={[styles.modalTitle, getResponsiveStyle("semiBold", 24)]}>
+            Mobile Verification
+          </Text>
 
           <View style={styles.inputContainer}>
-            <Text style={styles.inputLabel}>Mobile Number</Text>
+            <Text
+              style={[styles.inputLabel, getResponsiveStyle("regular", 16)]}
+            >
+              Mobile Number
+            </Text>
             <View style={styles.phoneInputContainer}>
-              <Text style={styles.countryCode}>+91</Text>
+              <Text
+                style={[styles.countryCode, getResponsiveStyle("regular", 16)]}
+              >
+                +91
+              </Text>
               <TextInput
-                style={styles.phoneInput}
+                style={[styles.phoneInput, getResponsiveStyle("regular", 16)]}
                 placeholder="Enter your mobile number"
                 placeholderTextColor={semantic.text.placeholder}
                 value={mobileNumber}
@@ -74,7 +85,12 @@ const RequestOTPModal: React.FC<RequestOTPModalProps> = ({
           </View>
 
           <View style={styles.requestOTPDescriptionContainer}>
-            <Text style={styles.requestOTPDescriptionText}>
+            <Text
+              style={[
+                styles.requestOTPDescriptionText,
+                getResponsiveStyle("regular", 12),
+              ]}
+            >
               Use the same mobile number to log in on both the App and Web
               Reports.
             </Text>
@@ -133,8 +149,6 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   modalTitle: {
-    fontSize: 24,
-    fontFamily: poppinsWeights.semiBold,
     color: semantic.text.primary,
     marginBottom: 16,
     textAlign: "center",
@@ -144,8 +158,6 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   inputLabel: {
-    fontSize: 16,
-    fontFamily: poppinsWeights.regular,
     color: semantic.text.secondary,
     marginBottom: 8,
   },
@@ -159,8 +171,6 @@ const styles = StyleSheet.create({
     backgroundColor: semantic.background.primary,
   },
   countryCode: {
-    fontSize: 16,
-    fontFamily: poppinsWeights.regular,
     color: semantic.text.secondary,
     marginRight: 8,
   },
@@ -168,8 +178,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingVertical: 12,
     paddingHorizontal: 12,
-    fontSize: 16,
-    fontFamily: poppinsWeights.regular,
     color: semantic.text.primary,
     outlineWidth: 0,
   },
@@ -179,8 +187,6 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
   },
   requestOTPDescriptionText: {
-    fontSize: 12,
-    fontFamily: poppinsWeights.regular,
     color: semantic.text.secondary,
     textAlign: "left",
   },

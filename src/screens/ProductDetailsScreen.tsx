@@ -10,13 +10,9 @@ import {
 import { useAppSelector, useAppDispatch } from "../hooks";
 import { semantic, primary } from "../utils/colors";
 import { navigateToCheckout } from "../store/slices/navigationSlice";
-import { poppinsWeights } from "../utils/fonts";
+import { useResponsiveFontUtils } from "../hooks";
 import PrimaryButton from "../components/shared/PrimaryButton";
-import {
-  HowItWorksSection,
-  HealthJourneysSection,
-  NavigationHeader,
-} from "../components";
+import { HowItWorksSection, HealthJourneysSection } from "../components";
 import {
   ProductImg,
   ProductDetail1,
@@ -44,36 +40,6 @@ const productData = {
   bloodCollection: "Blood samples are requied",
 };
 
-// Mock app interface data
-const appSections = [
-  {
-    title: "Diet & Lifestyle",
-    color: "#E3F2FD",
-    items: [
-      { label: "NEW Diet", icon: "👤", isNew: true },
-      { label: "NEW Nutrient", icon: "🍃", isNew: true },
-      { label: "Well-Being", icon: "🧘", isNew: false },
-      { label: "Stress & Sleep", icon: "😴", isNew: false },
-      { label: "Pollution", icon: "🏭", isNew: false },
-      { label: "NEW Skin", icon: "👤", isNew: true },
-    ],
-  },
-  {
-    title: "Talents & Sports Performance",
-    color: "#FFF9C4",
-    items: [
-      { label: "Sports & Fitness", icon: "🏃", isNew: false },
-      { label: "Success Traits", icon: "🏆", isNew: false },
-      { label: "Music & Dance", icon: "🎵", isNew: false },
-    ],
-  },
-  {
-    title: "Discover Your Origins",
-    color: "#F3E5F5",
-    items: [],
-  },
-];
-
 // Thumbnail data
 const thumbnails = [
   { id: 1, type: "product", label: "Product View 1", image: ProductDetail1 },
@@ -83,6 +49,7 @@ const thumbnails = [
 ];
 
 const ProductDetailsScreen: React.FC = () => {
+  const { getResponsiveStyle } = useResponsiveFontUtils();
   const [selectedThumbnail, setSelectedThumbnail] = useState(1);
   const { productId } = useAppSelector((state: any) => state.navigation);
   const dispatch = useAppDispatch();
@@ -149,7 +116,9 @@ const ProductDetailsScreen: React.FC = () => {
         onPress={goToPreviousImage}
         style={[styles.arrowButton]}
       >
-        <Text style={[styles.arrowText]}>←</Text>
+        <Text style={[styles.arrowText, getResponsiveStyle("semiBold", 16)]}>
+          ←
+        </Text>
       </TouchableOpacity>
 
       <ScrollView
@@ -183,7 +152,9 @@ const ProductDetailsScreen: React.FC = () => {
         onPress={goToNextImage}
         style={[styles.arrowButton]}
       >
-        <Text style={[styles.arrowText]}>→</Text>
+        <Text style={[styles.arrowText, getResponsiveStyle("semiBold", 16)]}>
+          →
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -207,54 +178,99 @@ const ProductDetailsScreen: React.FC = () => {
                 }
                 style={styles.productImage}
               />
-              {/* Image counter */}
-              {/* <View style={styles.imageCounter}>
-                <Text style={styles.imageCounterText}>
-                  {selectedThumbnail} of {thumbnails.length}
-                </Text>
-              </View> */}
             </View>
             {renderThumbnails()}
           </View>
 
           {/* Right Section - Product Details */}
           <View style={styles.rightSection}>
-            <Text style={styles.productTitle}>
+            <Text
+              style={[styles.productTitle, getResponsiveStyle("semiBold", 32)]}
+            >
               {productId || productData.title}
             </Text>
 
             <View style={styles.shippingBanner}>
-              <Text style={styles.shippingBannerText}>
+              <Text
+                style={[
+                  styles.shippingBannerText,
+                  getResponsiveStyle("medium", 12),
+                ]}
+              >
                 {productData.shippingBanner}
               </Text>
             </View>
 
             <View style={styles.pricingContainer}>
-              <Text style={styles.originalPrice}>
+              <Text
+                style={[
+                  styles.originalPrice,
+                  getResponsiveStyle("regular", 12),
+                ]}
+              >
                 {productData.originalPrice}
               </Text>
               <View style={styles.priceRow}>
-                <Text style={styles.currentPrice}>{productData.price}</Text>
-                <Text style={styles.perTestText}>{productData.perTest}</Text>
+                <Text
+                  style={[
+                    styles.currentPrice,
+                    getResponsiveStyle("semiBold", 24),
+                  ]}
+                >
+                  {productData.price}
+                </Text>
+                <Text
+                  style={[
+                    styles.perTestText,
+                    getResponsiveStyle("regular", 14),
+                  ]}
+                >
+                  {productData.perTest}
+                </Text>
               </View>
             </View>
 
             <View style={styles.bloodCollectionBanner}>
-              <Text style={styles.bloodCollectionBannerText}>
+              <Text
+                style={[
+                  styles.bloodCollectionBannerText,
+                  getResponsiveStyle("medium", 12),
+                ]}
+              >
                 {productData.bloodCollection}
               </Text>
             </View>
 
-            <Text style={styles.description}>{productData.description}</Text>
+            <Text
+              style={[styles.description, getResponsiveStyle("regular", 14)]}
+            >
+              {productData.description}
+            </Text>
 
             <View style={styles.featuresContainer}>
-              <Text style={styles.featuresTitle}>
+              <Text
+                style={[
+                  styles.featuresTitle,
+                  getResponsiveStyle("regular", 16),
+                ]}
+              >
                 With the Personal Plan, you can:
               </Text>
               {productData.features.map((feature, index) => (
                 <View key={index} style={styles.featureItem}>
-                  <Text style={styles.bulletPoint}>•</Text>
-                  <Text style={styles.featureText}>{feature}</Text>
+                  <Text
+                    style={[styles.bulletPoint, getResponsiveStyle("bold", 20)]}
+                  >
+                    •
+                  </Text>
+                  <Text
+                    style={[
+                      styles.featureText,
+                      getResponsiveStyle("regular", 14),
+                    ]}
+                  >
+                    {feature}
+                  </Text>
                 </View>
               ))}
             </View>
@@ -325,61 +341,6 @@ const styles = StyleSheet.create({
     height: "100%",
     resizeMode: "contain",
   },
-  imageCounter: {
-    position: "absolute",
-    top: 12,
-    right: 12,
-    backgroundColor: "rgba(0, 0, 0, 0.7)",
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 12,
-  },
-  imageCounterText: {
-    color: "#fff",
-    fontSize: 12,
-    fontFamily: poppinsWeights.medium,
-  },
-  // Product Box Styles
-  productBoxContainer: {
-    marginBottom: 20,
-  },
-  productBox: {
-    width: 200,
-    height: 280,
-    backgroundColor: "#2C2C2C",
-    borderRadius: 12,
-    padding: 20,
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  productBoxHeader: {
-    alignItems: "center",
-  },
-  productBoxTitle: {
-    fontSize: 18,
-    fontFamily: poppinsWeights.bold,
-    color: "#FFD700",
-    textAlign: "center",
-  },
-  productBoxSubtitle: {
-    fontSize: 12,
-    fontFamily: poppinsWeights.regular,
-    color: "#FFD700",
-    textAlign: "center",
-    marginTop: 4,
-  },
-  productBoxDesign: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  circularDesign: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    backgroundColor: "#FFD700",
-    opacity: 0.3,
-  },
 
   // Phone Styles
   phoneContainer: {
@@ -401,53 +362,6 @@ const styles = StyleSheet.create({
   appContent: {
     flex: 1,
     padding: 16,
-  },
-  appSection: {
-    marginBottom: 20,
-  },
-  appSectionTitle: {
-    fontSize: 16,
-    fontFamily: poppinsWeights.semiBold,
-    color: semantic.text.primary,
-    marginBottom: 12,
-  },
-  appButtonsGrid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 8,
-  },
-  appButton: {
-    width: "48%",
-    aspectRatio: 1,
-    borderRadius: 8,
-    padding: 8,
-    alignItems: "center",
-    justifyContent: "center",
-    position: "relative",
-  },
-  appButtonIcon: {
-    fontSize: 20,
-    marginBottom: 4,
-  },
-  appButtonText: {
-    fontSize: 12,
-    fontFamily: poppinsWeights.medium,
-    color: semantic.text.primary,
-    textAlign: "center",
-  },
-  newBadge: {
-    position: "absolute",
-    top: 4,
-    right: 4,
-    backgroundColor: "#1976D2",
-    paddingHorizontal: 4,
-    paddingVertical: 2,
-    borderRadius: 4,
-  },
-  newBadgeText: {
-    fontSize: 8,
-    fontFamily: poppinsWeights.bold,
-    color: "#FFF",
   },
 
   // Thumbnails Styles
@@ -474,11 +388,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 2,
     elevation: 2,
-  },
-  thumbnailArrowText: {
-    fontSize: 18,
-    fontFamily: poppinsWeights.bold,
-    color: semantic.text.primary,
   },
   thumbnailsScroll: {
     flex: 1,
@@ -514,22 +423,9 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
-  selectedIndicator: {
-    position: "absolute",
-    bottom: 2,
-    right: 2,
-    width: 12,
-    height: 12,
-    borderRadius: 6,
-    backgroundColor: primary.purple,
-    borderWidth: 2,
-    borderColor: "#fff",
-  },
 
   // Product Details Styles
   productTitle: {
-    fontSize: 32,
-    fontFamily: poppinsWeights.semiBold,
     color: semantic.text.primary,
     marginBottom: 16,
   },
@@ -542,8 +438,6 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
   },
   shippingBannerText: {
-    fontSize: 12,
-    fontFamily: poppinsWeights.medium,
     color: "#2E7D32",
     textAlign: "center",
   },
@@ -556,8 +450,6 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
   },
   bloodCollectionBannerText: {
-    fontSize: 12,
-    fontFamily: poppinsWeights.medium,
     color: semantic.interactive.primary,
     textAlign: "center",
   },
@@ -565,8 +457,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   originalPrice: {
-    fontSize: 12,
-    fontFamily: poppinsWeights.regular,
     color: semantic.text.light,
     textDecorationLine: "line-through",
     marginBottom: 4,
@@ -577,18 +467,12 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   currentPrice: {
-    fontSize: 24,
-    fontFamily: poppinsWeights.semiBold,
     color: semantic.text.primary,
   },
   perTestText: {
-    fontSize: 14,
-    fontFamily: poppinsWeights.regular,
     color: semantic.text.secondary,
   },
   description: {
-    fontSize: 14,
-    fontFamily: poppinsWeights.regular,
     color: semantic.text.primary,
     lineHeight: 24,
     marginBottom: 10,
@@ -597,8 +481,6 @@ const styles = StyleSheet.create({
     marginBottom: 32,
   },
   featuresTitle: {
-    fontSize: 16,
-    fontFamily: poppinsWeights.regular,
     color: semantic.text.primary,
     marginBottom: 16,
   },
@@ -608,16 +490,12 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   bulletPoint: {
-    fontSize: 20,
-    fontFamily: poppinsWeights.bold,
     color: semantic.text.primary,
     marginRight: 8,
     lineHeight: 20,
   },
   featureText: {
     flex: 1,
-    fontSize: 14,
-    fontFamily: poppinsWeights.regular,
     color: semantic.text.primary,
     lineHeight: 20,
   },
@@ -647,15 +525,6 @@ const styles = StyleSheet.create({
   },
   arrowText: {
     color: semantic.text.inverse,
-    fontFamily: poppinsWeights.semiBold,
-    fontSize: 16,
-  },
-  arrowButtonDisabled: {
-    backgroundColor: semantic.background.secondary,
-    opacity: 0.5,
-  },
-  arrowTextDisabled: {
-    color: semantic.text.secondary,
   },
 });
 

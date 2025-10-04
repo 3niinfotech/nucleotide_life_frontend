@@ -1,6 +1,6 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Section, FeatureTile } from '..';
+import React from "react";
+import { View, StyleSheet } from "react-native";
+import { Section, FeatureTile } from "..";
 import {
   IcGeneticComp,
   IcGeneticPre,
@@ -8,16 +8,24 @@ import {
   IcGeneticData,
   IcGeneticLifetime,
   IcGeneticFuture,
-} from '../../utils/iconUtil';
+} from "../../utils/iconUtil";
+import { useResponsiveFontUtils } from "../../hooks";
 
 const WhyChooseNucleotideSection: React.FC = () => {
+  const { getScreenSizeCategory } = useResponsiveFontUtils();
+  const isSmallScreen = ["smallMobile", "mobile", "largeMobile"].includes(
+    getScreenSizeCategory()
+  );
+
   return (
     <Section
       title="Why Choose Nucleotide for Your DNA Journey?"
       subtitle="Experience the most comprehensive DNA analysis with cutting-edge technology and unmatched expertise"
       style={styles.sectionBg}
     >
-      <View style={styles.tileGrid}>
+      <View
+        style={[styles.tileGrid, isSmallScreen && styles.smallScreenTileGrid]}
+      >
         <FeatureTile
           title="Root-Cause Precision"
           description="AI-powered genetic decoding that uncovers the why behind your health risks not just the what."
@@ -55,15 +63,21 @@ const WhyChooseNucleotideSection: React.FC = () => {
 
 const styles = StyleSheet.create({
   sectionBg: {
-    backgroundColor: 'rgba(136,107,249,0.04)',
+    backgroundColor: "rgba(136,107,249,0.04)",
   },
   tileGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
     gap: 16,
-    width: '70%',
-    alignSelf: 'center',
+    width: "70%",
+    alignSelf: "center",
+  },
+  smallScreenTileGrid: {
+    flexDirection: "column",
+    width: "100%",
+    paddingHorizontal: 16,
+    gap: 12,
   },
 });
 

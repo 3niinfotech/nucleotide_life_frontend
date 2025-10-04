@@ -16,6 +16,7 @@ import {
   HealthJourney4,
   HealthJourney5,
 } from "../../utils/imageUtil";
+import { useResponsiveFontUtils } from "../../hooks";
 
 // Mock data for health journeys
 const healthJourneys = [
@@ -67,6 +68,7 @@ const HealthJourneysSection: React.FC<HealthJourneysSectionProps> = ({
     // Handle video play functionality
     console.log("Playing video:", videoId);
   };
+  const { getResponsiveStyle } = useResponsiveFontUtils();
 
   const renderVideoThumbnail = (journey: any) => (
     <TouchableOpacity
@@ -78,8 +80,12 @@ const HealthJourneysSection: React.FC<HealthJourneysSectionProps> = ({
       <Image source={journey.image} style={styles.thumbnailImage} />
       <View style={styles.fullOverlay} />
       <View style={styles.textOverlay}>
-        <Text style={styles.personName}>{journey.name}</Text>
-        <Text style={styles.personTitle}>{journey.title}</Text>
+        <Text style={[styles.personName, getResponsiveStyle("medium", 18)]}>
+          {journey.name}
+        </Text>
+        <Text style={[styles.personTitle, getResponsiveStyle("regular", 14)]}>
+          {journey.title}
+        </Text>
       </View>
     </TouchableOpacity>
   );
@@ -90,8 +96,10 @@ const HealthJourneysSection: React.FC<HealthJourneysSectionProps> = ({
     >
       <View style={styles.content}>
         <View style={styles.header}>
-          <Text style={styles.title}>Health Journeys That Inspire</Text>
-          <Text style={styles.subtitle}>
+          <Text style={[styles.title, getResponsiveStyle("semiBold", 32)]}>
+            Health Journeys That Inspire
+          </Text>
+          <Text style={[styles.subtitle, getResponsiveStyle("regular", 16)]}>
             worldwide sharing stories, shaping health, and building stronger
             communities
           </Text>
@@ -128,15 +136,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    fontSize: 32,
-    fontFamily: poppinsWeights.bold,
     color: semantic.text.primary,
     textAlign: "center",
     marginBottom: 12,
   },
   subtitle: {
-    fontSize: 16,
-    fontFamily: poppinsWeights.regular,
     color: semantic.text.secondary,
     textAlign: "center",
     lineHeight: 24,
@@ -182,11 +186,6 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
-  playIcon: {
-    fontSize: 16,
-    color: primary.purple,
-    marginLeft: 2, // Slight adjustment to center the play icon
-  },
   fullOverlay: {
     position: "absolute",
     top: 0,
@@ -203,15 +202,11 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   personName: {
-    fontSize: 18,
-    fontFamily: poppinsWeights.medium,
     color: semantic.background.primary,
     marginBottom: 2,
   },
   personTitle: {
-    fontSize: 14,
     lineHeight: 16,
-    fontFamily: poppinsWeights.regular,
     color: "rgba(255, 255, 255, 0.9)",
   },
 });

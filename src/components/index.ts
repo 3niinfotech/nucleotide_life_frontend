@@ -1,5 +1,4 @@
 export { default as Footer } from "./Footer/Footer";
-export { default as NavigationHeader } from "./NavigationHeader/NavigationHeader";
 export { default as NavigationMenu } from "./NavigationMenu/NavigationMenu";
 export { default as ContentRenderer } from "./ContentRenderer";
 export { default as Section } from "./shared/Section.tsx";

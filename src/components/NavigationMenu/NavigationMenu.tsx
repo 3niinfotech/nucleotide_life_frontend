@@ -15,10 +15,11 @@ import {
   openRequestOTPModal,
 } from "../../store/slices/navigationSlice";
 import { semantic, primary } from "../../utils/colors";
-import { poppinsWeights } from "../../utils/fonts";
+import { useResponsiveFontUtils } from "../../hooks";
 import { IcAppIcon } from "../../utils/iconUtil";
 
 const NavigationMenu: React.FC = () => {
+  const { getResponsiveStyle } = useResponsiveFontUtils();
   const { activeSection, isMenuOpen } = useAppSelector(
     (state: any) => state.navigation
   );
@@ -78,6 +79,7 @@ const NavigationMenu: React.FC = () => {
                   <Text
                     style={[
                       styles.navText,
+                      getResponsiveStyle("regular", 16),
                       activeSection === item.id && styles.activeNavText,
                     ]}
                   >
@@ -110,19 +112,40 @@ const NavigationMenu: React.FC = () => {
               style={styles.activateButton}
               onPress={handleActivateKit}
             >
-              <Text style={styles.activateButtonText}>Activate Kit</Text>
+              <Text
+                style={[
+                  styles.activateButtonText,
+                  getResponsiveStyle("medium", 14),
+                ]}
+              >
+                Activate Kit
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.orderButton}
               onPress={handleOrderKit}
             >
-              <Text style={styles.orderButtonText}>Order DNA Kit</Text>
+              <Text
+                style={[
+                  styles.orderButtonText,
+                  getResponsiveStyle("medium", 14),
+                ]}
+              >
+                Order DNA Kit
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.profileButton}
               onPress={handleNavigateToProfile}
             >
-              <Text style={styles.profileButtonText}>NG</Text>
+              <Text
+                style={[
+                  styles.profileButtonText,
+                  getResponsiveStyle("medium", 16),
+                ]}
+              >
+                NG
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -222,13 +245,10 @@ const styles = StyleSheet.create({
     position: "relative",
   },
   navText: {
-    fontFamily: poppinsWeights.regular,
-    fontSize: 16,
     color: semantic.text.secondary,
   },
   activeNavText: {
     color: primary.purple,
-    fontFamily: poppinsWeights.medium,
   },
   activeUnderline: {
     position: "absolute",
@@ -301,8 +321,6 @@ const styles = StyleSheet.create({
     borderColor: semantic.border.light,
   },
   activateButtonText: {
-    fontFamily: poppinsWeights.medium,
-    fontSize: 14,
     color: semantic.text.secondary,
   },
   orderButton: {
@@ -312,8 +330,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   orderButtonText: {
-    fontFamily: poppinsWeights.medium,
-    fontSize: 14,
     color: semantic.text.inverse,
   },
   profileButton: {
@@ -324,8 +340,6 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
   profileButtonText: {
-    fontFamily: poppinsWeights.medium,
-    fontSize: 16,
     color: semantic.background.primary,
   },
 });

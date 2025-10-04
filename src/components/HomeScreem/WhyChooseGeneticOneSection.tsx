@@ -1,6 +1,6 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Section, FeatureTile } from '..';
+import React from "react";
+import { View, StyleSheet } from "react-native";
+import { Section, FeatureTile } from "..";
 import {
   IcGeneticComp,
   IcGeneticComp2,
@@ -8,15 +8,23 @@ import {
   IcGeneticFuture,
   IcGeneticLifetime,
   IcGeneticPre,
-} from '../../utils/iconUtil';
+} from "../../utils/iconUtil";
+import { useResponsiveFontUtils } from "../../hooks";
 
 const WhyChooseGeneticOneSection: React.FC = () => {
+  const { getScreenSizeCategory } = useResponsiveFontUtils();
+  const isSmallScreen = ["smallMobile", "mobile", "largeMobile"].includes(
+    getScreenSizeCategory()
+  );
+
   return (
     <Section
       title="Why to Choose Genetic One?"
       subtitle="Experience the most comprehensive DNA analysis with cutting-edge technology and unmatched privacy protection"
     >
-      <View style={styles.tileGrid}>
+      <View
+        style={[styles.tileGrid, isSmallScreen && styles.smallScreenTileGrid]}
+      >
         <FeatureTile
           title="Comprehensive DNA Insights"
           description="600+ diseases, 635+ drug responses, vitamins, and cognitive markers in one test"
@@ -54,12 +62,18 @@ const WhyChooseGeneticOneSection: React.FC = () => {
 
 const styles = StyleSheet.create({
   tileGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
     gap: 16,
-    width: '70%',
-    alignSelf: 'center',
+    width: "70%",
+    alignSelf: "center",
+  },
+  smallScreenTileGrid: {
+    flexDirection: "column",
+    width: "100%",
+    paddingHorizontal: 16,
+    gap: 12,
   },
 });
 

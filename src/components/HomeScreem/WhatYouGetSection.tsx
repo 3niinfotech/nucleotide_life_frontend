@@ -11,16 +11,27 @@ import {
   IcGeneticCognitive,
   IcGeneticFutureProof,
 } from "../../utils/iconUtil";
-import { poppinsWeights } from "../../utils/fonts";
+import { useResponsiveFontUtils } from "../../hooks";
 
 const WhatYouGetSection: React.FC = () => {
+  const { getResponsiveStyle, getScreenSizeCategory } =
+    useResponsiveFontUtils();
+  const isSmallScreen = ["smallMobile", "mobile", "largeMobile"].includes(
+    getScreenSizeCategory()
+  );
+
   return (
     <Section
       title="What You Get with Genetic One"
       subtitle="A comprehensive genetic analysis that provides actionable insights across multiple health dimensions"
       style={styles.sectionBg}
     >
-      <View style={styles.featuresShowcase}>
+      <View
+        style={[
+          styles.featuresShowcase,
+          isSmallScreen && styles.smallScreenFeaturesShowcase,
+        ]}
+      >
         <View style={styles.featuresCol}>
           <View style={styles.featureRowDivider}>
             <View style={styles.featureItem}>
@@ -28,11 +39,21 @@ const WhatYouGetSection: React.FC = () => {
                 <View style={styles.featureIcon}>
                   <IcGeneticDisease width={36} height={36} />
                 </View>
-                <Text style={styles.featureTitle}>
+                <Text
+                  style={[
+                    styles.featureTitle,
+                    getResponsiveStyle("semiBold", isSmallScreen ? 16 : 20),
+                  ]}
+                >
                   400+ Disease Risk Insights
                 </Text>
               </View>
-              <Text style={styles.featureDescription}>
+              <Text
+                style={[
+                  styles.featureDescription,
+                  getResponsiveStyle("regular", isSmallScreen ? 14 : 16),
+                ]}
+              >
                 Across 19 medical categories including Cardio, Neuro, Endocrine,
                 and more.
               </Text>
@@ -44,11 +65,21 @@ const WhatYouGetSection: React.FC = () => {
                 <View style={styles.featureIcon}>
                   <IcGeneticPill width={36} height={36} />
                 </View>
-                <Text style={styles.featureTitle}>
+                <Text
+                  style={[
+                    styles.featureTitle,
+                    getResponsiveStyle("semiBold", isSmallScreen ? 16 : 20),
+                  ]}
+                >
                   635+ Drug Response Reports
                 </Text>
               </View>
-              <Text style={styles.featureDescription}>
+              <Text
+                style={[
+                  styles.featureDescription,
+                  getResponsiveStyle("regular", isSmallScreen ? 14 : 16),
+                ]}
+              >
                 Pharmacogenomic guidance for safer, personalized prescriptions.
               </Text>
             </View>
@@ -59,11 +90,21 @@ const WhatYouGetSection: React.FC = () => {
                 <View style={styles.featureIcon}>
                   <IcGeneticPersonalized width={36} height={36} />
                 </View>
-                <Text style={styles.featureTitle}>
+                <Text
+                  style={[
+                    styles.featureTitle,
+                    getResponsiveStyle("semiBold", 20),
+                  ]}
+                >
                   Personalized DNA Dashboard
                 </Text>
               </View>
-              <Text style={styles.featureDescription}>
+              <Text
+                style={[
+                  styles.featureDescription,
+                  getResponsiveStyle("regular", 16),
+                ]}
+              >
                 Interactive portal with seamless navigation + clinician-ready,
                 detailed PDF reports
               </Text>
@@ -71,21 +112,23 @@ const WhatYouGetSection: React.FC = () => {
           </View>
         </View>
 
-        <View style={styles.featuresCenter}>
-          <View style={styles.mobilePreview}>
-            <Image
-              source={Images.geneticOneImage}
-              style={styles.previewImage}
-              // resizeMode="contain"
-            />
+        {!isSmallScreen && (
+          <View style={styles.featuresCenter}>
+            <View style={styles.mobilePreview}>
+              <Image
+                source={Images.geneticOneImage}
+                style={styles.previewImage}
+                // resizeMode="contain"
+              />
+            </View>
+            <View style={styles.centerCta}>
+              <PrimaryButton
+                label="View Sample Report"
+                style={styles.inlineButton}
+              />
+            </View>
           </View>
-          <View style={styles.centerCta}>
-            <PrimaryButton
-              label="View Sample Report"
-              style={styles.inlineButton}
-            />
-          </View>
-        </View>
+        )}
 
         <View style={styles.featuresCol}>
           <View style={styles.featureRowDivider}>
@@ -94,9 +137,21 @@ const WhatYouGetSection: React.FC = () => {
                 <View style={styles.featureIcon}>
                   <IcGeneticVitamin width={36} height={36} />
                 </View>
-                <Text style={styles.featureTitle}>Vitamin Profiling</Text>
+                <Text
+                  style={[
+                    styles.featureTitle,
+                    getResponsiveStyle("semiBold", 20),
+                  ]}
+                >
+                  Vitamin Profiling
+                </Text>
               </View>
-              <Text style={styles.featureDescription}>
+              <Text
+                style={[
+                  styles.featureDescription,
+                  getResponsiveStyle("regular", 16),
+                ]}
+              >
                 Genetic needs for Vitamin D, B6, B9, B12, and C with diet &
                 supplement advice.
               </Text>
@@ -108,9 +163,21 @@ const WhatYouGetSection: React.FC = () => {
                 <View style={styles.featureIcon}>
                   <IcGeneticCognitive width={36} height={36} />
                 </View>
-                <Text style={styles.featureTitle}>IQ & Cognitive Insights</Text>
+                <Text
+                  style={[
+                    styles.featureTitle,
+                    getResponsiveStyle("semiBold", 20),
+                  ]}
+                >
+                  IQ & Cognitive Insights
+                </Text>
               </View>
-              <Text style={styles.featureDescription}>
+              <Text
+                style={[
+                  styles.featureDescription,
+                  getResponsiveStyle("regular", 16),
+                ]}
+              >
                 Discover your potential in memory, learning, and brain
                 development.
               </Text>
@@ -122,9 +189,21 @@ const WhatYouGetSection: React.FC = () => {
                 <View style={styles.featureIcon}>
                   <IcGeneticFutureProof width={36} height={36} />
                 </View>
-                <Text style={styles.featureTitle}>Future–Proof Value</Text>
+                <Text
+                  style={[
+                    styles.featureTitle,
+                    getResponsiveStyle("semiBold", 20),
+                  ]}
+                >
+                  Future–Proof Value
+                </Text>
               </View>
-              <Text style={styles.featureDescription}>
+              <Text
+                style={[
+                  styles.featureDescription,
+                  getResponsiveStyle("regular", 16),
+                ]}
+              >
                 One DNA sample unlocks lifetime updates & add‑on reports as
                 science evolves.
               </Text>
@@ -199,17 +278,19 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   featureTitle: {
-    fontSize: 20,
-    fontFamily: poppinsWeights.semiBold,
     color: semantic.text.primary,
     marginBottom: 0,
     alignSelf: "center",
     textAlign: "center",
   },
   featureDescription: {
-    fontSize: 14,
-    fontFamily: poppinsWeights.regular,
     color: semantic.text.secondary,
+  },
+  smallScreenFeaturesShowcase: {
+    flexDirection: "column",
+    width: "100%",
+    paddingHorizontal: 16,
+    gap: 16,
   },
 });
 

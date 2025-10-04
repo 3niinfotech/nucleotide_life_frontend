@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { Carousel, PrimaryButton } from "../index";
 import { semantic, status } from "../../utils/colors";
-import { poppinsWeights } from "../../utils/fonts";
+import { useResponsiveFontUtils } from "../../hooks";
 import {
   SliderGeneticOne,
   SliderGeneticOnePlus,
@@ -11,37 +11,82 @@ import {
 } from "../../utils/imageUtil";
 
 const HeroCarousel: React.FC = React.memo(() => {
+  const { getResponsiveStyle, getScreenSizeCategory } =
+    useResponsiveFontUtils();
+  const isSmallScreen = ["smallMobile", "mobile", "largeMobile"].includes(
+    getScreenSizeCategory()
+  );
+
   const slides = useMemo(
     () => [
-      <View key="slide-hero-1" style={styles.heroContainer}>
-        <View style={styles.heroContent}>
+      <View
+        key="slide-hero-1"
+        style={[
+          styles.heroContainer,
+          isSmallScreen && styles.smallScreenHeroContainer,
+        ]}
+      >
+        <View
+          style={[
+            styles.heroContent,
+            isSmallScreen && styles.smallScreenHeroContent,
+          ]}
+        >
           <View style={styles.heroTextBlock}>
             <View style={styles.heroBadge}>
               <View style={styles.heroBadgeDot} />
-              <Text style={styles.heroBadgeText}>
+              <Text
+                style={[
+                  styles.heroBadgeText,
+                  getResponsiveStyle("medium", isSmallScreen ? 10 : 12),
+                ]}
+              >
                 Genetic One (Available Now)
               </Text>
             </View>
-            <Text style={styles.heroHeadingLine}>
+            <Text
+              style={[
+                styles.heroHeadingLine,
+                getResponsiveStyle("semiBold", isSmallScreen ? 24 : 48),
+              ]}
+            >
               Start Your DNA Journey with Genetic One by Nucleotide
             </Text>
-            {/* <Text style={styles.heroHeadingLine}>with Genetic One by</Text>
-            <Text style={styles.heroHeadingBrand}>Nucleotide</Text> */}
-            <Text style={styles.heroDescription}>
+            <Text
+              style={[
+                styles.heroDescription,
+                getResponsiveStyle("regular", isSmallScreen ? 14 : 16),
+              ]}
+            >
               Our flagship test that decodes your DNA to reveal disease risk,
               drug response, vitamin needs, and cognitive insights.
             </Text>
-            <View style={styles.bulletRow}>
+            <View
+              style={[
+                styles.bulletRow,
+                isSmallScreen && styles.smallScreenBulletRow,
+              ]}
+            >
               <View style={styles.bulletCol}>
                 <View style={styles.bulletItem}>
                   <View style={styles.bulletDot} />
-                  <Text style={styles.bulletText}>
+                  <Text
+                    style={[
+                      styles.bulletText,
+                      getResponsiveStyle("regular", isSmallScreen ? 12 : 14),
+                    ]}
+                  >
                     600+ diseases across 19 categories
                   </Text>
                 </View>
                 <View style={styles.bulletItem}>
                   <View style={styles.bulletDot} />
-                  <Text style={styles.bulletText}>
+                  <Text
+                    style={[
+                      styles.bulletText,
+                      getResponsiveStyle("regular", isSmallScreen ? 12 : 14),
+                    ]}
+                  >
                     635+ drug metabolism insights (Pharmacogenomics)
                   </Text>
                 </View>
@@ -49,13 +94,23 @@ const HeroCarousel: React.FC = React.memo(() => {
               <View style={styles.bulletCol}>
                 <View style={styles.bulletItem}>
                   <View style={styles.bulletDot} />
-                  <Text style={styles.bulletText}>
+                  <Text
+                    style={[
+                      styles.bulletText,
+                      getResponsiveStyle("regular", isSmallScreen ? 12 : 14),
+                    ]}
+                  >
                     Vitamin profiling for essential nutrients
                   </Text>
                 </View>
                 <View style={styles.bulletItem}>
                   <View style={styles.bulletDot} />
-                  <Text style={styles.bulletText}>
+                  <Text
+                    style={[
+                      styles.bulletText,
+                      getResponsiveStyle("regular", isSmallScreen ? 12 : 14),
+                    ]}
+                  >
                     IQ & Intelligence markers across cognition
                   </Text>
                 </View>
@@ -65,13 +120,26 @@ const HeroCarousel: React.FC = React.memo(() => {
               <PrimaryButton label="Order Genetic One" />
             </View>
           </View>
-          <View style={styles.heroMedia}>
-            <Image source={SliderGeneticOne} style={styles.heroImage} />
-          </View>
+          {!isSmallScreen && (
+            <View style={styles.heroMedia}>
+              <Image source={SliderGeneticOne} style={styles.heroImage} />
+            </View>
+          )}
         </View>
       </View>,
-      <View key="slide-hero-2" style={styles.heroContainer}>
-        <View style={styles.heroContent}>
+      <View
+        key="slide-hero-2"
+        style={[
+          styles.heroContainer,
+          isSmallScreen && styles.smallScreenHeroContainer,
+        ]}
+      >
+        <View
+          style={[
+            styles.heroContent,
+            isSmallScreen && styles.smallScreenHeroContent,
+          ]}
+        >
           <View style={styles.heroTextBlock}>
             <View
               style={[
@@ -84,27 +152,55 @@ const HeroCarousel: React.FC = React.memo(() => {
                 style={[
                   styles.heroBadgeText,
                   { color: semantic.interactive.orange },
+                  getResponsiveStyle("medium", isSmallScreen ? 10 : 12),
                 ]}
               >
                 Genetic One Plus (Coming Soon)
               </Text>
             </View>
-            <Text style={styles.heroHeadingLine}>Full Genome. Full Power</Text>
-            <Text style={styles.heroDescription}>
+            <Text
+              style={[
+                styles.heroHeadingLine,
+                getResponsiveStyle("semiBold", isSmallScreen ? 24 : 48),
+              ]}
+            >
+              Full Genome. Full Power
+            </Text>
+            <Text
+              style={[
+                styles.heroDescription,
+                getResponsiveStyle("regular", isSmallScreen ? 14 : 16),
+              ]}
+            >
               Genetic One Plus is our advanced whole-genome sequencing service
               that covers every letter of your DNA for unmatched precision.
             </Text>
-            <View style={styles.bulletRow}>
+            <View
+              style={[
+                styles.bulletRow,
+                isSmallScreen && styles.smallScreenBulletRow,
+              ]}
+            >
               <View style={styles.bulletCol}>
                 <View style={styles.bulletItem}>
                   <View style={styles.bulletDot} />
-                  <Text style={styles.bulletText}>
+                  <Text
+                    style={[
+                      styles.bulletText,
+                      getResponsiveStyle("regular", isSmallScreen ? 12 : 14),
+                    ]}
+                  >
                     Entire genome decoded - 3+ billion base pairs
                   </Text>
                 </View>
                 <View style={styles.bulletItem}>
                   <View style={styles.bulletDot} />
-                  <Text style={styles.bulletText}>
+                  <Text
+                    style={[
+                      styles.bulletText,
+                      getResponsiveStyle("regular", isSmallScreen ? 12 : 14),
+                    ]}
+                  >
                     Covers rare & complex genetic conditions
                   </Text>
                 </View>
@@ -112,13 +208,23 @@ const HeroCarousel: React.FC = React.memo(() => {
               <View style={styles.bulletCol}>
                 <View style={styles.bulletItem}>
                   <View style={styles.bulletDot} />
-                  <Text style={styles.bulletText}>
+                  <Text
+                    style={[
+                      styles.bulletText,
+                      getResponsiveStyle("regular", isSmallScreen ? 12 : 14),
+                    ]}
+                  >
                     Lifetime re-analysis as science evolves
                   </Text>
                 </View>
                 <View style={styles.bulletItem}>
                   <View style={styles.bulletDot} />
-                  <Text style={styles.bulletText}>
+                  <Text
+                    style={[
+                      styles.bulletText,
+                      getResponsiveStyle("regular", isSmallScreen ? 12 : 14),
+                    ]}
+                  >
                     Highest resolution for clinical-grade insights
                   </Text>
                 </View>
@@ -128,13 +234,26 @@ const HeroCarousel: React.FC = React.memo(() => {
               <PrimaryButton label="Order Genetic One Today" />
             </View>
           </View>
-          <View style={styles.heroMedia}>
-            <Image source={SliderGeneticOnePlus} style={styles.heroImage} />
-          </View>
+          {!isSmallScreen && (
+            <View style={styles.heroMedia}>
+              <Image source={SliderGeneticOnePlus} style={styles.heroImage} />
+            </View>
+          )}
         </View>
       </View>,
-      <View key="slide-hero-3" style={styles.heroContainer}>
-        <View style={styles.heroContent}>
+      <View
+        key="slide-hero-3"
+        style={[
+          styles.heroContainer,
+          isSmallScreen && styles.smallScreenHeroContainer,
+        ]}
+      >
+        <View
+          style={[
+            styles.heroContent,
+            isSmallScreen && styles.smallScreenHeroContent,
+          ]}
+        >
           <View style={styles.heroTextBlock}>
             <View
               style={[
@@ -147,17 +266,26 @@ const HeroCarousel: React.FC = React.memo(() => {
                 style={[
                   styles.heroBadgeText,
                   { color: semantic.interactive.orange },
+                  getResponsiveStyle("medium", 12),
                 ]}
               >
                 Gut Microbiome (Coming Soon)
               </Text>
             </View>
-            <Text style={styles.heroHeadingLine}>
+            <Text
+              style={[
+                styles.heroHeadingLine,
+                getResponsiveStyle("semiBold", 48),
+              ]}
+            >
               Your Gut, Your Second Brain
             </Text>
-            {/* <Text style={styles.heroHeadingLine}>with Genetic One by</Text>
-            <Text style={styles.heroHeadingBrand}>Nucleotide</Text> */}
-            <Text style={styles.heroDescription}>
+            <Text
+              style={[
+                styles.heroDescription,
+                getResponsiveStyle("regular", 16),
+              ]}
+            >
               Discover how your microbiome impacts digestion, immunity, mood,
               and chronic disease risk.
             </Text>
@@ -165,13 +293,23 @@ const HeroCarousel: React.FC = React.memo(() => {
               <View style={styles.bulletCol}>
                 <View style={styles.bulletItem}>
                   <View style={styles.bulletDot} />
-                  <Text style={styles.bulletText}>
+                  <Text
+                    style={[
+                      styles.bulletText,
+                      getResponsiveStyle("regular", 14),
+                    ]}
+                  >
                     Gut diversity & barrier integrity
                   </Text>
                 </View>
                 <View style={styles.bulletItem}>
                   <View style={styles.bulletDot} />
-                  <Text style={styles.bulletText}>
+                  <Text
+                    style={[
+                      styles.bulletText,
+                      getResponsiveStyle("regular", 14),
+                    ]}
+                  >
                     Dysbiosis detection with probiotic/prebiotic guidance
                   </Text>
                 </View>
@@ -179,13 +317,23 @@ const HeroCarousel: React.FC = React.memo(() => {
               <View style={styles.bulletCol}>
                 <View style={styles.bulletItem}>
                   <View style={styles.bulletDot} />
-                  <Text style={styles.bulletText}>
+                  <Text
+                    style={[
+                      styles.bulletText,
+                      getResponsiveStyle("regular", 14),
+                    ]}
+                  >
                     SCFA (short-chain fatty acids) potential
                   </Text>
                 </View>
                 <View style={styles.bulletItem}>
                   <View style={styles.bulletDot} />
-                  <Text style={styles.bulletText}>
+                  <Text
+                    style={[
+                      styles.bulletText,
+                      getResponsiveStyle("regular", 14),
+                    ]}
+                  >
                     - Links to mood, digestion, and inflammation
                   </Text>
                 </View>
@@ -200,8 +348,19 @@ const HeroCarousel: React.FC = React.memo(() => {
           </View>
         </View>
       </View>,
-      <View key="slide-hero-4" style={styles.heroContainer}>
-        <View style={styles.heroContent}>
+      <View
+        key="slide-hero-4"
+        style={[
+          styles.heroContainer,
+          isSmallScreen && styles.smallScreenHeroContainer,
+        ]}
+      >
+        <View
+          style={[
+            styles.heroContent,
+            isSmallScreen && styles.smallScreenHeroContent,
+          ]}
+        >
           <View style={styles.heroTextBlock}>
             <View
               style={[
@@ -214,17 +373,26 @@ const HeroCarousel: React.FC = React.memo(() => {
                 style={[
                   styles.heroBadgeText,
                   { color: semantic.interactive.orange },
+                  getResponsiveStyle("medium", 12),
                 ]}
               >
                 Blood & Urine Biomarkers (Coming Soon)
               </Text>
             </View>
-            <Text style={styles.heroHeadingLine}>
+            <Text
+              style={[
+                styles.heroHeadingLine,
+                getResponsiveStyle("semiBold", 48),
+              ]}
+            >
               Decode Your Body’s Daily Signals
             </Text>
-            {/* <Text style={styles.heroHeadingLine}>with Genetic One by</Text>
-          <Text style={styles.heroHeadingBrand}>Nucleotide</Text> */}
-            <Text style={styles.heroDescription}>
+            <Text
+              style={[
+                styles.heroDescription,
+                getResponsiveStyle("regular", 16),
+              ]}
+            >
               Track key biomarkers for metabolic health, inflammation, and
               nutrient balance.
             </Text>
@@ -232,13 +400,23 @@ const HeroCarousel: React.FC = React.memo(() => {
               <View style={styles.bulletCol}>
                 <View style={styles.bulletItem}>
                   <View style={styles.bulletDot} />
-                  <Text style={styles.bulletText}>
+                  <Text
+                    style={[
+                      styles.bulletText,
+                      getResponsiveStyle("regular", 14),
+                    ]}
+                  >
                     Lipids, glucose & hormonal health
                   </Text>
                 </View>
                 <View style={styles.bulletItem}>
                   <View style={styles.bulletDot} />
-                  <Text style={styles.bulletText}>
+                  <Text
+                    style={[
+                      styles.bulletText,
+                      getResponsiveStyle("regular", 14),
+                    ]}
+                  >
                     Vitamin & micronutrient status
                   </Text>
                 </View>
@@ -246,13 +424,23 @@ const HeroCarousel: React.FC = React.memo(() => {
               <View style={styles.bulletCol}>
                 <View style={styles.bulletItem}>
                   <View style={styles.bulletDot} />
-                  <Text style={styles.bulletText}>
+                  <Text
+                    style={[
+                      styles.bulletText,
+                      getResponsiveStyle("regular", 14),
+                    ]}
+                  >
                     Oxidative stress & inflammation markers
                   </Text>
                 </View>
                 <View style={styles.bulletItem}>
                   <View style={styles.bulletDot} />
-                  <Text style={styles.bulletText}>
+                  <Text
+                    style={[
+                      styles.bulletText,
+                      getResponsiveStyle("regular", 14),
+                    ]}
+                  >
                     Integrates with lifestyle and activity data
                   </Text>
                 </View>
@@ -309,19 +497,12 @@ const styles = StyleSheet.create({
   },
   heroHeadingLine: {
     color: semantic.text.primary,
-    fontSize: 48,
-    fontFamily: poppinsWeights.semiBold,
-    lineHeight: 56,
   },
   heroHeadingBrand: {
-    fontSize: 48,
-    fontFamily: poppinsWeights.semiBold,
     color: semantic.text.primary,
     marginBottom: 8,
   },
   heroDescription: {
-    fontSize: 16,
-    fontFamily: poppinsWeights.regular,
     color: semantic.text.secondary,
     marginTop: 8,
   },
@@ -356,9 +537,7 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   heroBadgeText: {
-    fontSize: 12,
     color: status.success,
-    fontFamily: poppinsWeights.medium,
   },
   bulletRow: {
     flexDirection: "row",
@@ -382,9 +561,20 @@ const styles = StyleSheet.create({
     textAlignVertical: "center",
   },
   bulletText: {
-    fontSize: 14,
-    fontFamily: poppinsWeights.regular,
     color: semantic.text.secondary,
+  },
+  smallScreenHeroContainer: {
+    width: "100%",
+    paddingVertical: 30,
+    paddingHorizontal: 16,
+  },
+  smallScreenHeroContent: {
+    flexDirection: "column",
+    gap: 16,
+  },
+  smallScreenBulletRow: {
+    flexDirection: "column",
+    gap: 8,
   },
 });
 

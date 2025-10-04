@@ -7,7 +7,7 @@ import {
   TextInput,
 } from "react-native";
 import { semantic, primary } from "../../utils/colors";
-import { poppinsWeights } from "../../utils/fonts";
+import { useResponsiveFontUtils } from "../../hooks";
 
 interface OrderMember {
   id: string;
@@ -24,6 +24,7 @@ const OrderMemberSection: React.FC<OrderMemberSectionProps> = ({
   onAddMember,
   onConfirmMembers,
 }) => {
+  const { getResponsiveStyle } = useResponsiveFontUtils();
   const [orderMembers, setOrderMembers] = useState<OrderMember[]>([
     { id: "1", testName: "Blood Test For - 1", selectedMember: "" },
     { id: "2", testName: "Blood Test For - 2", selectedMember: "" },
@@ -39,7 +40,9 @@ const OrderMemberSection: React.FC<OrderMemberSectionProps> = ({
 
   const renderMemberDropdown = (member: OrderMember) => (
     <View key={member.id} style={styles.memberItem}>
-      <Text style={styles.testName}>{member.testName}</Text>
+      <Text style={[styles.testName, getResponsiveStyle("medium", 16)]}>
+        {member.testName}
+      </Text>
       <View style={styles.dropdownContainer}>
         <TextInput
           style={styles.dropdownInput}
@@ -53,7 +56,9 @@ const OrderMemberSection: React.FC<OrderMemberSectionProps> = ({
           }}
         />
         <TouchableOpacity style={styles.dropdownArrow}>
-          <Text style={styles.arrowIcon}>▼</Text>
+          <Text style={[styles.arrowIcon, getResponsiveStyle("regular", 12)]}>
+            ▼
+          </Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -62,10 +67,20 @@ const OrderMemberSection: React.FC<OrderMemberSectionProps> = ({
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.sectionTitle}>Select Order For</Text>
+        <Text style={[styles.sectionTitle, getResponsiveStyle("semiBold", 18)]}>
+          Select Order For
+        </Text>
         <TouchableOpacity style={styles.addButton} onPress={onAddMember}>
-          <Text style={styles.addButtonIcon}>+</Text>
-          <Text style={styles.addButtonText}>Add Member</Text>
+          <Text
+            style={[styles.addButtonIcon, getResponsiveStyle("semiBold", 16)]}
+          >
+            +
+          </Text>
+          <Text
+            style={[styles.addButtonText, getResponsiveStyle("semiBold", 14)]}
+          >
+            Add Member
+          </Text>
         </TouchableOpacity>
       </View>
       <View style={styles.divider} />
@@ -75,7 +90,11 @@ const OrderMemberSection: React.FC<OrderMemberSectionProps> = ({
       </View>
 
       <TouchableOpacity style={styles.confirmButton} onPress={onConfirmMembers}>
-        <Text style={styles.confirmButtonText}>Confirm Members</Text>
+        <Text
+          style={[styles.confirmButtonText, getResponsiveStyle("semiBold", 16)]}
+        >
+          Confirm Members
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -93,8 +112,6 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   sectionTitle: {
-    fontSize: 18,
-    fontFamily: poppinsWeights.semiBold,
     color: semantic.text.primary,
   },
   divider: {
@@ -111,14 +128,10 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   addButtonIcon: {
-    fontSize: 16,
-    fontFamily: poppinsWeights.semiBold,
     color: semantic.text.inverse,
     marginRight: 6,
   },
   addButtonText: {
-    fontSize: 14,
-    fontFamily: poppinsWeights.semiBold,
     color: semantic.text.inverse,
   },
   membersContainer: {
@@ -129,8 +142,6 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   testName: {
-    fontSize: 16,
-    fontFamily: poppinsWeights.medium,
     color: semantic.text.primary,
     marginBottom: 8,
   },
@@ -143,8 +154,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 12,
     paddingVertical: 12,
-    fontSize: 14,
-    fontFamily: poppinsWeights.regular,
     color: semantic.text.primary,
     backgroundColor: semantic.background.primary,
   },
@@ -157,7 +166,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   arrowIcon: {
-    fontSize: 12,
     color: semantic.text.secondary,
   },
   confirmButton: {
@@ -169,8 +177,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   confirmButtonText: {
-    fontSize: 16,
-    fontFamily: poppinsWeights.semiBold,
     color: semantic.text.inverse,
   },
 });

@@ -8,7 +8,7 @@ import {
   Image,
 } from "react-native";
 import { semantic, primary } from "../../utils/colors";
-import { poppinsWeights } from "../../utils/fonts";
+import { useResponsiveFontUtils } from "../../hooks";
 import { Images } from "../../utils/imageUtil";
 import { IcTruck } from "../../utils/iconUtil";
 
@@ -33,45 +33,64 @@ const TotalContainer: React.FC<TotalContainerProps> = ({
   onProceedToCheckout,
   formatPrice,
 }) => {
+  const { getResponsiveStyle } = useResponsiveFontUtils();
   return (
     <View style={styles.rightContainer}>
       <View style={styles.priceDetails}>
         <View style={styles.priceRow}>
-          <Text style={styles.priceLabel}>Subtotal:</Text>
+          <Text style={[styles.priceLabel, getResponsiveStyle("regular", 12)]}>
+            Subtotal:
+          </Text>
           <Text style={styles.priceValue}>{formatPrice(subtotal)}</Text>
         </View>
 
         <View style={styles.priceRow}>
-          <Text style={styles.priceLabel}>You Save:</Text>
+          <Text style={[styles.priceLabel, getResponsiveStyle("regular", 12)]}>
+            You Save:
+          </Text>
           <Text style={styles.savingsValue}>- {formatPrice(savings)}</Text>
         </View>
 
         <View style={styles.divider} />
 
         <View style={styles.priceRow}>
-          <Text style={styles.grandTotalLabel}>Grand Total:</Text>
+          <Text
+            style={[styles.grandTotalLabel, getResponsiveStyle("regular", 12)]}
+          >
+            Grand Total:
+          </Text>
           <Text style={styles.grandTotalValue}>{formatPrice(grandTotal)}</Text>
         </View>
       </View>
 
-      <Text style={styles.freeShippingText}>Free shipping on all orders</Text>
+      <Text
+        style={[styles.freeShippingText, getResponsiveStyle("regular", 12)]}
+      >
+        Free shipping on all orders
+      </Text>
 
       <View style={styles.deliveryEstimate}>
         <IcTruck style={styles.truckIcon} />
-        <Text style={styles.deliveryText}>Estimated Delivery: 5-7 days</Text>
+        <Text style={[styles.deliveryText, getResponsiveStyle("regular", 12)]}>
+          Estimated Delivery: 5-7 days
+        </Text>
       </View>
 
       {/* Coupon Code Section */}
       <View style={styles.couponSection}>
         <TextInput
-          style={styles.couponInput}
+          style={[styles.couponInput, getResponsiveStyle("regular", 16)]}
           placeholder="Enter valid coupon code"
           value={couponCode}
           onChangeText={onCouponCodeChange}
           placeholderTextColor={semantic.text.light}
         />
         <TouchableOpacity style={styles.applyButton} onPress={onApplyCoupon}>
-          <Text style={styles.applyButtonText}>Apply Code</Text>
+          <Text
+            style={[styles.applyButtonText, getResponsiveStyle("regular", 16)]}
+          >
+            Apply Code
+          </Text>
         </TouchableOpacity>
       </View>
 
@@ -80,12 +99,20 @@ const TotalContainer: React.FC<TotalContainerProps> = ({
         style={styles.checkoutButton}
         onPress={onProceedToCheckout}
       >
-        <Text style={styles.checkoutButtonText}>Proceed to Secure Payment</Text>
+        <Text
+          style={[styles.checkoutButtonText, getResponsiveStyle("regular", 16)]}
+        >
+          Proceed to Secure Payment
+        </Text>
       </TouchableOpacity>
 
       {/* Payment Methods */}
       <View style={styles.paymentSection}>
-        <Text style={styles.securePaymentsText}>Secure Payments with</Text>
+        <Text
+          style={[styles.securePaymentsText, getResponsiveStyle("regular", 12)]}
+        >
+          Secure Payments with
+        </Text>
         <View style={styles.paymentMethodsContainer}>
           <Image
             source={Images.paymentOption}
@@ -125,28 +152,18 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   priceLabel: {
-    fontSize: 16,
-    fontFamily: poppinsWeights.medium,
     color: semantic.text.primary,
   },
   priceValue: {
-    fontSize: 16,
-    fontFamily: poppinsWeights.medium,
     color: semantic.text.primary,
   },
   savingsValue: {
-    fontSize: 16,
-    fontFamily: poppinsWeights.medium,
     color: "#FF6B35",
   },
   grandTotalLabel: {
-    fontSize: 16,
-    fontFamily: poppinsWeights.semiBold,
     color: semantic.text.primary,
   },
   grandTotalValue: {
-    fontSize: 16,
-    fontFamily: poppinsWeights.medium,
     color: semantic.text.primary,
   },
   divider: {
@@ -155,8 +172,6 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   freeShippingText: {
-    fontSize: 14,
-    fontFamily: poppinsWeights.regular,
     color: semantic.text.secondary,
     marginBottom: 8,
     textAlign: "left",
@@ -171,8 +186,6 @@ const styles = StyleSheet.create({
     marginRight: 6,
   },
   deliveryText: {
-    fontSize: 14,
-    fontFamily: poppinsWeights.regular,
     color: semantic.text.secondary,
   },
   couponSection: {
@@ -188,8 +201,6 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 0,
     paddingHorizontal: 12,
     paddingVertical: 10,
-    fontSize: 14,
-    fontFamily: poppinsWeights.regular,
     color: semantic.text.primary,
   },
   applyButton: {
@@ -201,8 +212,6 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 0,
   },
   applyButtonText: {
-    fontSize: 16,
-    fontFamily: poppinsWeights.semiBold,
     color: semantic.text.inverse,
   },
   checkoutButton: {
@@ -212,8 +221,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   checkoutButtonText: {
-    fontSize: 16,
-    fontFamily: poppinsWeights.semiBold,
     color: "#FFFFFF",
     textAlign: "center",
   },
@@ -221,8 +228,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   securePaymentsText: {
-    fontSize: 14,
-    fontFamily: poppinsWeights.regular,
     color: semantic.text.primary,
   },
   paymentMethodsContainer: {

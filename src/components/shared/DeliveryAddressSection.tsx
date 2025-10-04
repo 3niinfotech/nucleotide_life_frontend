@@ -7,7 +7,7 @@ import {
   ScrollView,
 } from "react-native";
 import { semantic, primary } from "../../utils/colors";
-import { poppinsWeights } from "../../utils/fonts";
+import { useResponsiveFontUtils } from "../../hooks";
 import { IcLocation, IcCalling } from "../../utils/iconUtil";
 
 interface Address {
@@ -25,6 +25,7 @@ interface DeliveryAddressSectionProps {
 const DeliveryAddressSection: React.FC<DeliveryAddressSectionProps> = ({
   onAddNewAddress,
 }) => {
+  const { getResponsiveStyle } = useResponsiveFontUtils();
   const [selectedAddressId, setSelectedAddressId] = useState("1");
 
   // Mock address data
@@ -77,7 +78,11 @@ const DeliveryAddressSection: React.FC<DeliveryAddressSectionProps> = ({
           </View>
           <View style={styles.addressInfo}>
             <View style={styles.nameRow}>
-              <Text style={styles.addressName}>{address.name}</Text>
+              <Text
+                style={[styles.addressName, getResponsiveStyle("semiBold", 16)]}
+              >
+                {address.name}
+              </Text>
               <View
                 style={[
                   styles.labelTag,
@@ -89,6 +94,7 @@ const DeliveryAddressSection: React.FC<DeliveryAddressSectionProps> = ({
                 <Text
                   style={[
                     styles.labelText,
+                    getResponsiveStyle("medium", 12),
                     isSelected
                       ? styles.selectedLabelText
                       : styles.unselectedLabelText,
@@ -100,11 +106,19 @@ const DeliveryAddressSection: React.FC<DeliveryAddressSectionProps> = ({
             </View>
             <View style={styles.addressRow}>
               <IcLocation style={styles.locationIcon} />
-              <Text style={styles.addressText}>{address.address}</Text>
+              <Text
+                style={[styles.addressText, getResponsiveStyle("regular", 14)]}
+              >
+                {address.address}
+              </Text>
             </View>
             <View style={styles.phoneRow}>
               <IcCalling style={styles.phoneIcon} />
-              <Text style={styles.phoneText}>{address.phone}</Text>
+              <Text
+                style={[styles.phoneText, getResponsiveStyle("regular", 14)]}
+              >
+                {address.phone}
+              </Text>
             </View>
           </View>
         </View>
@@ -115,10 +129,20 @@ const DeliveryAddressSection: React.FC<DeliveryAddressSectionProps> = ({
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.sectionTitle}>Select Delivery Address</Text>
+        <Text style={[styles.sectionTitle, getResponsiveStyle("semiBold", 18)]}>
+          Select Delivery Address
+        </Text>
         <TouchableOpacity style={styles.addButton} onPress={onAddNewAddress}>
-          <Text style={styles.addButtonIcon}>+</Text>
-          <Text style={styles.addButtonText}>Add a New Address</Text>
+          <Text
+            style={[styles.addButtonIcon, getResponsiveStyle("semiBold", 16)]}
+          >
+            +
+          </Text>
+          <Text
+            style={[styles.addButtonText, getResponsiveStyle("semiBold", 14)]}
+          >
+            Add a New Address
+          </Text>
         </TouchableOpacity>
       </View>
       <View style={styles.divider} />
@@ -145,8 +169,6 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   sectionTitle: {
-    fontSize: 18,
-    fontFamily: poppinsWeights.semiBold,
     color: semantic.text.primary,
   },
   divider: {
@@ -163,14 +185,10 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   addButtonIcon: {
-    fontSize: 16,
-    fontFamily: poppinsWeights.semiBold,
     color: semantic.text.inverse,
     marginRight: 6,
   },
   addButtonText: {
-    fontSize: 14,
-    fontFamily: poppinsWeights.semiBold,
     color: semantic.text.inverse,
   },
   addressesContainer: {
@@ -224,8 +242,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   addressName: {
-    fontSize: 16,
-    fontFamily: poppinsWeights.semiBold,
     color: semantic.text.primary,
     marginRight: 12,
   },
@@ -240,10 +256,7 @@ const styles = StyleSheet.create({
   unselectedLabelTag: {
     backgroundColor: semantic.border.light,
   },
-  labelText: {
-    fontSize: 12,
-    fontFamily: poppinsWeights.medium,
-  },
+  labelText: {},
   selectedLabelText: {
     color: semantic.text.inverse,
   },
@@ -261,8 +274,6 @@ const styles = StyleSheet.create({
   },
   addressText: {
     flex: 1,
-    fontSize: 14,
-    fontFamily: poppinsWeights.regular,
     color: semantic.text.secondary,
     lineHeight: 20,
   },
@@ -274,8 +285,6 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   phoneText: {
-    fontSize: 14,
-    fontFamily: poppinsWeights.regular,
     color: semantic.text.secondary,
   },
 });

@@ -8,8 +8,8 @@ import {
 } from "react-native";
 import { useAppDispatch } from "../hooks";
 import { semantic, neutral } from "../utils/colors";
-import { poppinsWeights } from "../utils/fonts";
-import { NavigationHeader, NewAddressModal } from "../components";
+import { useResponsiveFontUtils } from "../hooks";
+import { NewAddressModal } from "../components";
 import DeliveryAddressSection from "../components/shared/DeliveryAddressSection";
 import OrderMemberSection from "../components/shared/OrderMemberSection";
 import TotalContainer from "../components/shared/TotalContainer";
@@ -205,7 +205,6 @@ const styles = StyleSheet.create({
   },
   backText: {
     fontSize: 16,
-    fontFamily: poppinsWeights.medium,
     color: semantic.text.primary,
   },
   sectionContainer: {

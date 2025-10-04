@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -7,13 +7,14 @@ import {
   LayoutAnimation,
   Platform,
   UIManager,
-} from 'react-native';
-import { semantic } from '../../utils/colors';
-import { poppinsWeights, typography } from '../../utils/fonts';
-import { Section } from '..';
+} from "react-native";
+import { semantic } from "../../utils/colors";
+import { typography } from "../../utils/fonts";
+import { Section } from "..";
+import { useResponsiveFontUtils } from "../../hooks";
 
 if (
-  Platform.OS === 'android' &&
+  Platform.OS === "android" &&
   UIManager.setLayoutAnimationEnabledExperimental
 ) {
   UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -21,57 +22,61 @@ if (
 
 const FAQSection: React.FC = () => {
   const [expandedFAQ, setExpandedFAQ] = useState<number>(0);
-
+  const { getResponsiveStyle, getScreenSizeCategory } =
+    useResponsiveFontUtils();
+  const isSmallScreen = ["smallMobile", "mobile", "largeMobile"].includes(
+    getScreenSizeCategory()
+  );
   const faqs = [
     {
-      question: 'What is Genetic One by Nucleotide?',
+      question: "What is Genetic One by Nucleotide?",
       answer:
-        'Genetic One is our premium DNA test that analyzes your genetic blueprint to provide personalized insights on health risks, drug response, vitamin needs, and cognitive traits.',
+        "Genetic One is our premium DNA test that analyzes your genetic blueprint to provide personalized insights on health risks, drug response, vitamin needs, and cognitive traits.",
     },
     {
-      question: 'Is this a medical diagnosis?',
+      question: "Is this a medical diagnosis?",
       answer:
-        'No, our reports provide genetic insights and predispositions, not medical diagnoses. Always consult healthcare professionals for medical decisions.',
+        "No, our reports provide genetic insights and predispositions, not medical diagnoses. Always consult healthcare professionals for medical decisions.",
     },
     {
-      question: 'What kind of information will I receive?',
+      question: "What kind of information will I receive?",
       answer:
-        'You will receive comprehensive reports on disease risks, drug responses, vitamin needs, cognitive traits, and personalized health recommendations.',
+        "You will receive comprehensive reports on disease risks, drug responses, vitamin needs, cognitive traits, and personalized health recommendations.",
     },
     {
-      question: 'Who can take the test?',
+      question: "Who can take the test?",
       answer:
-        'Adults 18 years and older can take the test. For minors, parental consent is required.',
+        "Adults 18 years and older can take the test. For minors, parental consent is required.",
     },
     {
-      question: 'How do I order and provide my sample?',
+      question: "How do I order and provide my sample?",
       answer:
-        'Order online, receive your kit, provide a saliva sample at home, and schedule free pickup. Results are delivered digitally.',
+        "Order online, receive your kit, provide a saliva sample at home, and schedule free pickup. Results are delivered digitally.",
     },
     {
-      question: 'How long does it take to get results?',
+      question: "How long does it take to get results?",
       answer:
-        'Results are typically available within 3-4 weeks after we receive your sample at our laboratory.',
+        "Results are typically available within 3-4 weeks after we receive your sample at our laboratory.",
     },
     {
-      question: 'How is my DNA data kept safe?',
+      question: "How is my DNA data kept safe?",
       answer:
-        'We use military-grade encryption, secure storage, and strict access controls. Your data is anonymized and you maintain full control.',
+        "We use military-grade encryption, secure storage, and strict access controls. Your data is anonymized and you maintain full control.",
     },
     {
-      question: 'Do I need to give another sample for future reports?',
+      question: "Do I need to give another sample for future reports?",
       answer:
-        'No, your DNA never changes. One sample provides lifetime access to current and future genetic insights as science advances.',
+        "No, your DNA never changes. One sample provides lifetime access to current and future genetic insights as science advances.",
     },
     {
-      question: 'Can I delete my genetic data later?',
+      question: "Can I delete my genetic data later?",
       answer:
-        'Yes, you have complete control over your data and can request deletion at any time through your account settings.',
+        "Yes, you have complete control over your data and can request deletion at any time through your account settings.",
     },
     {
-      question: 'Can healthcare providers use these reports?',
+      question: "Can healthcare providers use these reports?",
       answer:
-        'Yes, our reports are designed to be clinician-friendly and can support discussions with your healthcare provider.',
+        "Yes, our reports are designed to be clinician-friendly and can support discussions with your healthcare provider.",
     },
   ];
 
@@ -85,7 +90,7 @@ const FAQSection: React.FC = () => {
       title="Frequently Asked Questions"
       subtitle="Everything you need to know about Genetic One by Nucleotide"
     >
-      <View style={styles.list}>
+      <View style={[styles.list, isSmallScreen && styles.smallScreenList]}>
         {faqs.map((faq, index) => {
           const isExpanded = expandedFAQ === index;
           return (
@@ -101,19 +106,27 @@ const FAQSection: React.FC = () => {
                 activeOpacity={0.8}
                 style={styles.itemButton}
               >
-                <Text style={styles.question}>{faq.question}</Text>
+                <Text
+                  style={[styles.question, getResponsiveStyle("semiBold", 18)]}
+                >
+                  {faq.question}
+                </Text>
                 <Text
                   style={[
                     styles.chevron,
                     isExpanded ? styles.chevronExpanded : null,
                   ]}
                 >
-                  {isExpanded ? '›' : '›'}
+                  {isExpanded ? "›" : "›"}
                 </Text>
               </TouchableOpacity>
               {isExpanded ? (
                 <View style={styles.answerWrap}>
-                  <Text style={styles.answer}>{faq.answer}</Text>
+                  <Text
+                    style={[styles.answer, getResponsiveStyle("regular", 16)]}
+                  >
+                    {faq.answer}
+                  </Text>
                 </View>
               ) : null}
             </View>
@@ -125,25 +138,9 @@ const FAQSection: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-  section: {},
-  header: {
-    alignItems: 'center',
-    marginBottom: 12,
-  },
-  title: {
-    ...typography.h3,
-    color: semantic.text.primary,
-    textAlign: 'center',
-  },
-  subtitle: {
-    ...typography.body,
-    color: semantic.text.secondary,
-    textAlign: 'center',
-    marginTop: 4,
-  },
   list: {
-    width: '70%',
-    alignSelf: 'center',
+    width: "70%",
+    alignSelf: "center",
     gap: 12,
     marginTop: 8,
   },
@@ -152,42 +149,42 @@ const styles = StyleSheet.create({
     borderColor: semantic.border.light,
     borderRadius: 12,
     backgroundColor: semantic.background.primary,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   itemExpanded: {
-    backgroundColor: 'rgba(0,0,0,0.02)',
+    backgroundColor: "rgba(0,0,0,0.02)",
   },
   itemButton: {
     paddingHorizontal: 16,
     paddingVertical: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   question: {
     color: semantic.text.primary,
-    fontFamily: poppinsWeights.semiBold,
-    fontSize: 18,
     flex: 1,
     paddingRight: 12,
   },
   chevron: {
     fontSize: 22,
     tintColor: semantic.text.secondary,
-    transform: [{ rotate: '0deg' }],
+    transform: [{ rotate: "0deg" }],
   },
   chevronExpanded: {
-    transform: [{ rotate: '90deg' }],
+    transform: [{ rotate: "90deg" }],
   },
   answerWrap: {
     paddingHorizontal: 16,
     paddingBottom: 14,
   },
   answer: {
-    fontFamily: poppinsWeights.regular,
-    fontSize: 16,
     color: semantic.text.secondary,
     lineHeight: 18,
+  },
+  smallScreenList: {
+    width: "100%",
+    paddingHorizontal: 16,
   },
 });
 

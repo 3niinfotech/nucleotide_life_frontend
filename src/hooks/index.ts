@@ -7,4 +7,11 @@ export {
   useTypography,
   useFontWeights,
   useFontSizes,
+  useAccessibilityFonts,
 } from "./useFonts";
+export { useResponsiveFontUtils } from "./useResponsiveFontUtils";
+export {
+  useResponsive,
+  usePlatform,
+  useResponsiveStyles,
+} from "./useResponsive";

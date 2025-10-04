@@ -9,7 +9,7 @@ import {
   Platform,
 } from "react-native";
 import { semantic } from "../../utils/colors";
-import { poppinsWeights } from "../../utils/fonts";
+import { useResponsiveFontUtils } from "../../hooks";
 
 type Props = {
   label: string;
@@ -35,13 +35,18 @@ const PrimaryButton: React.FC<Props> = React.memo(
     loading = false,
     testID,
   }) => {
+    const { getResponsiveTypography } = useResponsiveFontUtils();
+    const responsiveTypography = getResponsiveTypography();
+
     const textStyle = useMemo(() => {
       const baseStyle =
-        variant === "primary" ? styles.primaryText : styles.secondaryText;
+        variant === "primary"
+          ? [styles.primaryText, responsiveTypography.button]
+          : [styles.secondaryText, responsiveTypography.button];
       const colorStyle = labelTextColor ? { color: labelTextColor } : {};
       const disabledStyle = disabled ? { opacity: 0.6 } : {};
-      return [baseStyle, colorStyle, disabledStyle, labelStyle];
-    }, [variant, labelTextColor, disabled, labelStyle]);
+      return [...baseStyle, colorStyle, disabledStyle, labelStyle];
+    }, [variant, labelTextColor, disabled, labelStyle, responsiveTypography]);
 
     const containerStyle = useMemo(
       () => [
@@ -89,16 +94,9 @@ const styles = StyleSheet.create({
   primary: {
     backgroundColor: semantic.interactive.primary,
     borderColor: semantic.interactive.primary,
-    // shadowColor: semantic.shadow.light,
-    // shadowOffset: { width: 0, height: 2 },
-    // shadowOpacity: 0.1,
-    // shadowRadius: 4,
-    // elevation: 2,
   },
   primaryText: {
     color: semantic.text.inverse,
-    fontSize: 16,
-    fontFamily: poppinsWeights.semiBold,
   },
   secondary: {
     backgroundColor: semantic.interactive.secondary,
@@ -106,8 +104,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   secondaryText: {
-    fontSize: 16,
-    fontFamily: poppinsWeights.medium,
     color: semantic.text.primary,
   },
   disabled: {

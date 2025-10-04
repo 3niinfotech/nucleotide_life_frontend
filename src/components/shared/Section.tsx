@@ -1,8 +1,8 @@
-import React, { useMemo } from 'react';
-import { View, Text, StyleSheet, StyleProp, ViewStyle } from 'react-native';
-import { semantic } from '../../utils/colors';
-import { poppinsWeights } from '../../utils/fonts';
-import PrimaryButton from './PrimaryButton';
+import React, { useMemo } from "react";
+import { View, Text, StyleSheet, StyleProp, ViewStyle } from "react-native";
+import { semantic } from "../../utils/colors";
+import { useResponsiveFontUtils } from "../../hooks";
+import PrimaryButton from "./PrimaryButton";
 
 type Props = {
   title?: string;
@@ -16,12 +16,32 @@ type Props = {
 
 const Section: React.FC<Props> = React.memo(
   ({ title, subtitle, ctaLabel, onPressCta, children, style, testID }) => {
+    const { getResponsiveStyle } = useResponsiveFontUtils();
+
     const hasHeader = useMemo(
       () => !!(title || subtitle || ctaLabel),
-      [title, subtitle, ctaLabel],
+      [title, subtitle, ctaLabel]
     );
 
     const containerStyle = useMemo(() => [styles.section, style], [style]);
+
+    const titleStyle = useMemo(
+      () => [
+        styles.title,
+        getResponsiveStyle("semiBold", 48),
+        { color: semantic.text.primary },
+      ],
+      [getResponsiveStyle]
+    );
+
+    const subtitleStyle = useMemo(
+      () => [
+        styles.subtitle,
+        getResponsiveStyle("regular", 18),
+        { color: semantic.text.secondary },
+      ],
+      [getResponsiveStyle]
+    );
 
     return (
       <View style={containerStyle} testID={testID}>
@@ -29,11 +49,11 @@ const Section: React.FC<Props> = React.memo(
           <View style={styles.headerRow}>
             <View style={styles.textContainer}>
               {!!title && (
-                <Text style={styles.title} accessibilityRole="header">
+                <Text style={titleStyle} accessibilityRole="header">
                   {title}
                 </Text>
               )}
-              {!!subtitle && <Text style={styles.subtitle}>{subtitle}</Text>}
+              {!!subtitle && <Text style={subtitleStyle}>{subtitle}</Text>}
             </View>
             {!!ctaLabel && (
               <PrimaryButton
@@ -47,7 +67,7 @@ const Section: React.FC<Props> = React.memo(
         {children}
       </View>
     );
-  },
+  }
 );
 
 const styles = StyleSheet.create({
@@ -56,33 +76,25 @@ const styles = StyleSheet.create({
     gap: 16,
   },
   headerRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
     gap: 16,
     marginBottom: 8,
     paddingHorizontal: 24,
   },
   textContainer: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: "center",
   },
   title: {
-    color: semantic.text.primary,
-    textAlign: 'center',
-    fontSize: 48,
-    lineHeight: 56,
-    fontFamily: poppinsWeights.semiBold,
+    textAlign: "center",
   },
   subtitle: {
-    color: semantic.text.secondary,
     marginTop: 10,
     marginBottom: 10,
-    textAlign: 'center',
-    fontSize: 18,
-    lineHeight: 26,
-    maxWidth: '70%',
-    fontFamily: poppinsWeights.regular,
+    textAlign: "center",
+    maxWidth: "70%",
   },
 });
 

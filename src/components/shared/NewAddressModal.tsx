@@ -9,7 +9,7 @@ import {
   ScrollView,
 } from "react-native";
 import { semantic, primary } from "../../utils/colors";
-import { poppinsWeights } from "../../utils/fonts";
+import { useResponsiveFontUtils } from "../../hooks";
 import { IcAddAddress } from "../../utils/iconUtil";
 
 interface NewAddressModalProps {
@@ -38,6 +38,7 @@ const NewAddressModal: React.FC<NewAddressModalProps> = ({
   onClose,
   onSave,
 }) => {
+  const { getResponsiveStyle } = useResponsiveFontUtils();
   const [formData, setFormData] = useState<AddressData>({
     firstName: "",
     lastName: "",
@@ -136,14 +137,22 @@ const NewAddressModal: React.FC<NewAddressModalProps> = ({
             </View>
 
             {/* Title */}
-            <Text style={styles.modalTitle}>New Address Details</Text>
+            <Text
+              style={[styles.modalTitle, getResponsiveStyle("semiBold", 24)]}
+            >
+              New Address Details
+            </Text>
 
             {/* Form Fields */}
             <View style={styles.formContainer}>
               {/* Personal Information - Two Columns */}
               <View style={styles.rowContainer}>
                 <View style={styles.halfWidth}>
-                  <Text style={styles.label}>First Name</Text>
+                  <Text
+                    style={[styles.label, getResponsiveStyle("regular", 12)]}
+                  >
+                    First Name
+                  </Text>
                   <TextInput
                     style={styles.input}
                     placeholder="Enter your first name"
@@ -155,7 +164,11 @@ const NewAddressModal: React.FC<NewAddressModalProps> = ({
                   />
                 </View>
                 <View style={styles.halfWidth}>
-                  <Text style={styles.label}>Last Name</Text>
+                  <Text
+                    style={[styles.label, getResponsiveStyle("regular", 12)]}
+                  >
+                    Last Name
+                  </Text>
                   <TextInput
                     style={styles.input}
                     placeholder="Enter your last name"
@@ -171,7 +184,11 @@ const NewAddressModal: React.FC<NewAddressModalProps> = ({
               {/* Contact Information - Two Columns */}
               <View style={styles.rowContainer}>
                 <View style={styles.halfWidth}>
-                  <Text style={styles.label}>Email Address</Text>
+                  <Text
+                    style={[styles.label, getResponsiveStyle("regular", 12)]}
+                  >
+                    Email Address
+                  </Text>
                   <TextInput
                     style={styles.input}
                     placeholder="Enter your email address"
@@ -183,7 +200,11 @@ const NewAddressModal: React.FC<NewAddressModalProps> = ({
                   />
                 </View>
                 <View style={styles.halfWidth}>
-                  <Text style={styles.label}>Mobile Number</Text>
+                  <Text
+                    style={[styles.label, getResponsiveStyle("regular", 12)]}
+                  >
+                    Mobile Number
+                  </Text>
                   <View style={styles.mobileInputContainer}>
                     <View style={styles.countryCodeContainer}>
                       <Text style={styles.countryCode}>+91</Text>
@@ -204,7 +225,9 @@ const NewAddressModal: React.FC<NewAddressModalProps> = ({
 
               {/* Save Address As - Radio Buttons */}
               <View style={styles.radioSection}>
-                <Text style={styles.label}>Save Address As</Text>
+                <Text style={[styles.label, getResponsiveStyle("regular", 12)]}>
+                  Save Address As
+                </Text>
                 <View style={styles.radioContainer}>
                   {["Work", "Home", "Other"].map((type) => (
                     <TouchableOpacity
@@ -242,7 +265,7 @@ const NewAddressModal: React.FC<NewAddressModalProps> = ({
 
               {/* Street Address - Single Column */}
               <View style={styles.fullWidth}>
-                <Text style={styles.label}>
+                <Text style={[styles.label, getResponsiveStyle("regular", 12)]}>
                   Street Address / House No. / Apartment
                 </Text>
                 <TextInput
@@ -260,7 +283,9 @@ const NewAddressModal: React.FC<NewAddressModalProps> = ({
 
               {/* Landmark - Single Column */}
               <View style={styles.fullWidth}>
-                <Text style={styles.label}>Landmark (Optional)</Text>
+                <Text style={[styles.label, getResponsiveStyle("regular", 12)]}>
+                  Landmark (Optional)
+                </Text>
                 <TextInput
                   style={styles.input}
                   placeholder="E.g., near hospital, mall, park"
@@ -273,7 +298,11 @@ const NewAddressModal: React.FC<NewAddressModalProps> = ({
               {/* Location Details - Two Columns */}
               <View style={styles.rowContainer}>
                 <View style={styles.halfWidth}>
-                  <Text style={styles.label}>City / Town</Text>
+                  <Text
+                    style={[styles.label, getResponsiveStyle("regular", 12)]}
+                  >
+                    City / Town
+                  </Text>
                   <TextInput
                     style={styles.input}
                     placeholder="Enter your city / town"
@@ -283,7 +312,11 @@ const NewAddressModal: React.FC<NewAddressModalProps> = ({
                   />
                 </View>
                 <View style={styles.halfWidth}>
-                  <Text style={styles.label}>State / Province</Text>
+                  <Text
+                    style={[styles.label, getResponsiveStyle("regular", 12)]}
+                  >
+                    State / Province
+                  </Text>
                   <TextInput
                     style={styles.input}
                     placeholder="Enter your state / province"
@@ -296,7 +329,11 @@ const NewAddressModal: React.FC<NewAddressModalProps> = ({
 
               <View style={styles.rowContainer}>
                 <View style={styles.halfWidth}>
-                  <Text style={styles.label}>Postal / Zip Code</Text>
+                  <Text
+                    style={[styles.label, getResponsiveStyle("regular", 12)]}
+                  >
+                    Postal / Zip Code
+                  </Text>
                   <TextInput
                     style={styles.input}
                     placeholder="Enter postal / zip code"
@@ -309,7 +346,11 @@ const NewAddressModal: React.FC<NewAddressModalProps> = ({
                   />
                 </View>
                 <View style={styles.halfWidth}>
-                  <Text style={styles.label}>Country</Text>
+                  <Text
+                    style={[styles.label, getResponsiveStyle("regular", 12)]}
+                  >
+                    Country
+                  </Text>
                   <View style={styles.selectContainer}>
                     <TextInput
                       style={styles.selectInput}
@@ -337,7 +378,12 @@ const NewAddressModal: React.FC<NewAddressModalProps> = ({
                     <Text style={styles.checkmark}>✓</Text>
                   )}
                 </View>
-                <Text style={styles.checkboxLabel}>
+                <Text
+                  style={[
+                    styles.checkboxLabel,
+                    getResponsiveStyle("regular", 12),
+                  ]}
+                >
                   Save this address for future orders
                 </Text>
               </TouchableOpacity>
@@ -349,10 +395,24 @@ const NewAddressModal: React.FC<NewAddressModalProps> = ({
                 style={styles.cancelButton}
                 onPress={handleCancel}
               >
-                <Text style={styles.cancelButtonText}>Cancel</Text>
+                <Text
+                  style={[
+                    styles.cancelButtonText,
+                    getResponsiveStyle("regular", 16),
+                  ]}
+                >
+                  Cancel
+                </Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
-                <Text style={styles.saveButtonText}>Save Address</Text>
+                <Text
+                  style={[
+                    styles.saveButtonText,
+                    getResponsiveStyle("regular", 16),
+                  ]}
+                >
+                  Save Address
+                </Text>
               </TouchableOpacity>
             </View>
           </ScrollView>
@@ -404,18 +464,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
   },
-  iconText: {
-    fontSize: 24,
-    color: semantic.text.inverse,
-  },
-  iconEquals: {
-    fontSize: 16,
-    color: semantic.text.inverse,
-    marginLeft: 4,
-  },
+
   modalTitle: {
-    fontSize: 24,
-    fontFamily: poppinsWeights.semiBold,
     color: semantic.text.primary,
     textAlign: "center",
     marginBottom: 32,
@@ -437,8 +487,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   label: {
-    fontSize: 12,
-    fontFamily: poppinsWeights.regular,
     color: semantic.text.primary,
     marginBottom: 2,
   },
@@ -448,8 +496,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 12,
     paddingVertical: 12,
-    fontSize: 14,
-    fontFamily: poppinsWeights.regular,
     color: semantic.text.primary,
     backgroundColor: semantic.background.primary,
   },
@@ -468,16 +514,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   countryCode: {
-    fontSize: 14,
-    fontFamily: poppinsWeights.medium,
     color: semantic.text.primary,
   },
   mobileInput: {
     flex: 1,
     paddingHorizontal: 12,
     paddingVertical: 12,
-    fontSize: 14,
-    fontFamily: poppinsWeights.regular,
     color: semantic.text.primary,
   },
   radioSection: {
@@ -520,8 +562,6 @@ const styles = StyleSheet.create({
     backgroundColor: primary.purple,
   },
   radioLabel: {
-    fontSize: 14,
-    fontFamily: poppinsWeights.regular,
     color: semantic.text.primary,
   },
   selectedRadioLabel: {
@@ -537,8 +577,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 12,
     paddingRight: 40,
-    fontSize: 14,
-    fontFamily: poppinsWeights.regular,
     color: semantic.text.primary,
     backgroundColor: semantic.background.primary,
   },
@@ -547,7 +585,6 @@ const styles = StyleSheet.create({
     right: 12,
     top: "50%",
     transform: [{ translateY: -8 }],
-    fontSize: 12,
     color: semantic.text.tertiary,
   },
   checkboxContainer: {
@@ -568,11 +605,9 @@ const styles = StyleSheet.create({
   checkmark: {
     fontSize: 12,
     color: primary.purple,
-    fontFamily: poppinsWeights.bold,
   },
   checkboxLabel: {
     fontSize: 14,
-    fontFamily: poppinsWeights.regular,
     color: semantic.text.primary,
     flex: 1,
   },
@@ -589,8 +624,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   cancelButtonText: {
-    fontSize: 16,
-    fontFamily: poppinsWeights.medium,
     color: semantic.text.secondary,
   },
   saveButton: {
@@ -601,8 +634,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   saveButtonText: {
-    fontSize: 16,
-    fontFamily: poppinsWeights.medium,
     color: semantic.text.inverse,
   },
 });

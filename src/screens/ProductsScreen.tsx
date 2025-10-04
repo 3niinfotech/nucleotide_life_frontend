@@ -9,7 +9,6 @@ import {
 import { MainTabScreenProps } from "../navigation/types";
 import { semantic } from "../utils/colors";
 import { typography } from "../utils/fonts";
-import { NavigationHeader } from "../components";
 
 type Props = MainTabScreenProps<"Products">;
 
@@ -57,7 +56,6 @@ const ProductsScreen: React.FC<Props> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <NavigationHeader title="Products" />
       <ScrollView
         style={styles.scrollView}
         contentContainerStyle={styles.content}

@@ -27,7 +27,6 @@ type Props = MainTabScreenProps<"Home">;
 const HomeScreen: React.FC<Props> = ({ navigation: _navigation }) => {
   return (
     <View style={styles.container}>
-      {/* <NavigationHeader title="Home" /> */}
       <ScrollView
         style={styles.scrollView}
         contentContainerStyle={styles.content}
@@ -244,17 +243,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 15,
   },
-  hiwStepText: {
-    ...typography.caption,
-    color: semantic.interactive.primary,
-    fontWeight: "bold",
-    fontSize: 20,
-  },
-  hiwTitle: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: semantic.text.primary,
-  },
+
   hiwBullets: {
     gap: 6,
     // marginBottom: 25,
@@ -336,19 +325,6 @@ const styles = StyleSheet.create({
   },
   featureTextBlock: {
     flex: 1,
-  },
-  featureTitle: {
-    fontSize: 20,
-    fontWeight: "600",
-    color: semantic.text.primary,
-    marginBottom: 0,
-    alignSelf: "center",
-    textAlign: "center",
-  },
-  featureDescription: {
-    fontSize: 16,
-    fontWeight: "400",
-    color: semantic.text.secondary,
   },
   // Pricing styles
   couponBanner: {

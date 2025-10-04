@@ -4,7 +4,7 @@ import { useAppDispatch } from "../../hooks";
 import { navigateToProductDetails } from "../../store/slices/navigationSlice";
 import LinearGradient from "../../mocks/LinearGradient";
 import { semantic, primary, gradients, special } from "../../utils/colors";
-import { poppinsWeights, typography } from "../../utils/fonts";
+import { useResponsiveFontUtils } from "../../hooks";
 import PrimaryButton from "../shared/PrimaryButton";
 import { Section } from "..";
 import {
@@ -84,6 +84,7 @@ const additionalFeatures = [
 
 const NucleotideSelectionSection: React.FC<{ isBackground?: boolean }> =
   React.memo(({ isBackground = false }) => {
+    const { getResponsiveStyle } = useResponsiveFontUtils();
     const dispatch = useAppDispatch();
     const memoizedPlans = useMemo(() => plans, []);
     const memoizedFeatures = useMemo(() => additionalFeatures, []);
@@ -100,18 +101,33 @@ const NucleotideSelectionSection: React.FC<{ isBackground?: boolean }> =
       >
         <View style={styles.header}>
           <View style={styles.couponBanner}>
-            <Text style={styles.couponText}>🎁 Use code :</Text>
+            <Text
+              style={[styles.couponText, getResponsiveStyle("regular", 16)]}
+            >
+              🎁 Use code :
+            </Text>
             <LinearGradient
               colors={gradients.pinkOrange}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 0 }}
               style={styles.couponCodeWrap}
             >
-              <Text style={styles.couponCode}>NUCLEO</Text>
+              <Text
+                style={[styles.couponCode, getResponsiveStyle("regular", 12)]}
+              >
+                NUCLEO
+              </Text>
             </LinearGradient>
-            <Text style={styles.couponText}>
+            <Text
+              style={[styles.couponText, getResponsiveStyle("regular", 16)]}
+            >
               at checkout to unlock up to{" "}
-              <Text style={styles.couponTextBold}>45% off </Text> launch pricing
+              <Text
+                style={[styles.couponTextBold, getResponsiveStyle("bold", 16)]}
+              >
+                45% off{" "}
+              </Text>{" "}
+              launch pricing
             </Text>
           </View>
         </View>
@@ -121,7 +137,11 @@ const NucleotideSelectionSection: React.FC<{ isBackground?: boolean }> =
             <View key={`${idx}-${plan.title}`} style={[styles.card]}>
               <View style={styles.cardTopRow}>
                 <View style={styles.badge}>
-                  <Text style={styles.badgeText}>{plan.badge}</Text>
+                  <Text
+                    style={[styles.badgeText, getResponsiveStyle("medium", 12)]}
+                  >
+                    {plan.badge}
+                  </Text>
                 </View>
                 {plan.secondBadge ? (
                   <View style={styles.tagBadgeContainer}>
@@ -133,7 +153,12 @@ const NucleotideSelectionSection: React.FC<{ isBackground?: boolean }> =
                       end={{ x: 0, y: 1 }}
                       style={styles.tagBadgeGradient}
                     >
-                      <Text style={styles.tagBadgeGradientText}>
+                      <Text
+                        style={[
+                          styles.tagBadgeGradientText,
+                          getResponsiveStyle("medium", 12),
+                        ]}
+                      >
                         {plan.secondBadge}
                       </Text>
                     </LinearGradient>
@@ -142,14 +167,28 @@ const NucleotideSelectionSection: React.FC<{ isBackground?: boolean }> =
               </View>
 
               <View style={styles.cardContent}>
-                <Text style={styles.planTitle}>{plan.title}</Text>
-                <Text style={styles.mrp}>MRP {plan.originalPrice}</Text>
+                <Text
+                  style={[styles.planTitle, getResponsiveStyle("semiBold", 20)]}
+                >
+                  {plan.title}
+                </Text>
+                <Text style={[styles.mrp, getResponsiveStyle("regular", 14)]}>
+                  MRP {plan.originalPrice}
+                </Text>
                 <View style={styles.priceLine}>
-                  <Text style={styles.price}>{plan.price}</Text>
-                  <Text style={styles.perTest}>{plan.perTest}</Text>
+                  <Text
+                    style={[styles.price, getResponsiveStyle("semiBold", 20)]}
+                  >
+                    {plan.price}
+                  </Text>
+                  <Text
+                    style={[styles.perTest, getResponsiveStyle("regular", 16)]}
+                  >
+                    {plan.perTest}
+                  </Text>
                 </View>
                 <Text
-                  style={styles.planDesc}
+                  style={[styles.planDesc, getResponsiveStyle("regular", 14)]}
                   numberOfLines={2}
                   ellipsizeMode="tail"
                   lineBreakMode="tail"
@@ -169,7 +208,9 @@ const NucleotideSelectionSection: React.FC<{ isBackground?: boolean }> =
 
         <View style={styles.centerRow}>
           <View style={styles.pillBanner}>
-            <Text style={styles.pillBannerText}>
+            <Text
+              style={[styles.pillBannerText, getResponsiveStyle("regular", 16)]}
+            >
               Future‑Ready Platform – Buy once, upgrade anytime.
             </Text>
           </View>
@@ -180,9 +221,20 @@ const NucleotideSelectionSection: React.FC<{ isBackground?: boolean }> =
             <View key={`${idx}-${f.title}`} style={styles.featureCard}>
               <View style={styles.featureHeader}>
                 <View style={styles.featureIcon}>{f.icon}</View>
-                <Text style={styles.featureTitle}>{f.title}</Text>
+                <Text
+                  style={[
+                    styles.featureTitle,
+                    getResponsiveStyle("semiBold", 16),
+                  ]}
+                >
+                  {f.title}
+                </Text>
               </View>
-              <Text style={styles.featureDesc}>{f.description}</Text>
+              <Text
+                style={[styles.featureDesc, getResponsiveStyle("regular", 14)]}
+              >
+                {f.description}
+              </Text>
             </View>
           ))}
         </View>
@@ -199,12 +251,10 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   title: {
-    ...typography.h3,
     color: semantic.text.primary,
     textAlign: "center",
   },
   subtitle: {
-    ...typography.body,
     color: semantic.text.secondary,
     textAlign: "center",
     marginTop: 4,
@@ -222,21 +272,15 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   couponText: {
-    // ...typography.caption,
     color: special.coupon,
-    fontSize: 16,
-    fontFamily: poppinsWeights.regular,
   },
-  couponTextBold: {
-    fontFamily: poppinsWeights.bold,
-  },
+  couponTextBold: {},
   couponCodeWrap: {
     paddingHorizontal: 10,
     paddingVertical: 6,
     borderRadius: 6,
   },
   couponCode: {
-    ...typography.caption,
     color: semantic.text.inverse,
     fontWeight: "700",
   },
@@ -278,8 +322,6 @@ const styles = StyleSheet.create({
     borderRadius: 999,
   },
   badgeText: {
-    fontSize: 12,
-    fontFamily: poppinsWeights.medium,
     color: special.teal,
   },
   tagBadgeContainer: {
@@ -291,19 +333,13 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
   },
   tagBadgeGradientText: {
-    fontSize: 14,
-    fontFamily: poppinsWeights.regular,
     color: semantic.text.inverse,
   },
   planTitle: {
-    fontSize: 20,
-    fontFamily: poppinsWeights.semiBold,
     color: semantic.text.primary,
     marginTop: 6,
   },
   mrp: {
-    fontSize: 14,
-    fontFamily: poppinsWeights.regular,
     color: semantic.text.light,
     textDecorationLine: "line-through",
     marginTop: 6,
@@ -316,18 +352,12 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   price: {
-    fontSize: 20,
-    fontFamily: poppinsWeights.semiBold,
     color: semantic.text.primary,
   },
   perTest: {
-    fontSize: 14,
-    fontFamily: poppinsWeights.regular,
     color: semantic.text.secondary,
   },
   planDesc: {
-    fontSize: 14,
-    fontFamily: poppinsWeights.regular,
     color: semantic.text.secondary,
     lineHeight: 18,
     maxHeight: 36, // 2 lines * 18 lineHeight
@@ -351,8 +381,6 @@ const styles = StyleSheet.create({
   },
   pillBannerText: {
     color: special.green,
-    fontSize: 16,
-    fontFamily: poppinsWeights.regular,
   },
   grid3: {
     flexDirection: "row",
@@ -384,13 +412,9 @@ const styles = StyleSheet.create({
   featureTitle: {
     color: semantic.text.primary,
     flex: 1,
-    fontFamily: poppinsWeights.semiBold,
-    fontSize: 16,
   },
   featureDesc: {
     color: semantic.text.secondary,
-    fontFamily: poppinsWeights.regular,
-    fontSize: 14,
   },
 });
 
